@@ -12,7 +12,7 @@ profile:
 
 news: false # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
-social: false # includes social icons at the bottom of the page
+social: true # includes social icons at the bottom of the page
 ---
 
 Hello! I am a data scientist based in Sacramento, California with an interest in improving understanding of Earth system processes and stewarding ecosystems. My research focus is climate-informed modeling for ecosystem management with a particular emphasis on applied solutions in mitigating the impacts of hydroclimate variability. 
