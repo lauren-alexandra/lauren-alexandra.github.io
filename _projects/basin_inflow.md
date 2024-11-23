@@ -10,7 +10,7 @@ related_publications: true
 
 
 [Basin Inflow](https://github.com/lauren-alexandra/basin-inflow-dnn) is an implementation of a deep neural network for forecasting reservoir inflow in the American River Basin. The proposal model is composed of stacked LSTM layers, with regularization applied to both (L2, dropout, and recurrent dropout), followed by a densely connected layer. Model application and evaluation uses river basin data with temporal coverage from 2008-2022 from the California Data Exchange Center. Across the basin and along forks of the river, daily precipitation, temperature, snow water content and depth, and river discharge and stage are employed to predict local reservoir inflow. Data was pre-processed with a 30-day exponential moving average to give recent weather events more weight in the forecast, normalized, and made stationary for training. 14 years of data were separated into three sets: training set (2008-2017), validation set (2018–2020), and test set (2020-2022). The model achieves a lower MAE score (0.036) in inflow prediction than the baseline model. 
-
+<br>
 
 ## Land Acknowledgement
 
@@ -23,6 +23,7 @@ The basin’s Nisenan Tribal entities include the Nevada City Rancheria, the Col
 <img width="600" height="500" alt="gerjuoy-north-fork-preserve" src="https://github.com/lauren-alexandra/basin-inflow/assets/56773938/9f08279c-70cd-4cd2-83ba-bd1944b90ec6">
 
 *Note*. From left: Colfax-Todds Valley Consolidated Tribe chairman Clyde Prout III and Placer Land Trust executive director Jeff Darlington at Yo’ Dok’im Pakan. Placer Land Trust transferred ownership of the preserve to the tribe in 2022. From “California Ancestral Homelands Returned to Colfax-Todds Valley Consolidated Tribe,” by K. Ferguson, 2022, https://landtrustalliance.org/blog/california-ancestral-homelands-returned-to-colfax-todds-valley-consolidated-tribe. Copyright 2024 by Land Trust Alliance.
+<br>
 
 ## Data
 
@@ -30,16 +31,19 @@ California Data Exchange Center: California Department of Water Resources
 
 - Window: Daily and hourly records from 01-01-2008 to 12-31-2022 
 - Source: California Data Exchange Center. (n.d.). *CDEC Webservice JSON and CSV*. https://cdec.water.ca.gov/dynamicapp/wsSensorData
+<br>
 
 #### American River Basin Stations
 
 <img width="800" height="550" alt="american-river-basin-stations" src="https://github.com/lauren-alexandra/basin-inflow-lstm/assets/56773938/00de5d65-eab5-4f0f-b54a-55d0a4c86484">
 
 Google. (n.d.). [River Basin Stations]. Retrieved February 9, 2024, from https://maps.app.goo.gl/5ACnKE3bT1TMQ15J8
+<br>
 
 ## Background
 
 The Department of Interior’s Bureau of Reclamation (BOR) employs river basin observations including streamflow, snowpack, temperature, and precipitation in addition to projected water demand to operate reservoirs in California’s Central Valley Project. Water managers must optimize storage during dry periods while allocating space for flood control. In 2019, BOR approved a water control manual for the Folsom Reservoir north of Sacramento that relies on weather forecasts to make more accurate release decisions and engage the auxiliary spillway for flood management (BOR, 2021). 
+<br>
 
 ### History 
 
@@ -58,6 +62,7 @@ The extensive destruction of the 1861-1862 floods in Sacramento and across the s
 <img width="600" height="700" alt="1861-sacramento-flooded" src="https://github.com/lauren-alexandra/basin-inflow-lstm/assets/56773938/cf959be5-9321-44a1-94f1-2a1d73c90dca">
 
 *Note*. From "The Untamed River", by Sacramento Public Library Authority, *Images of America: Lower American River*, (pp. 109-127), 2021, Arcadia Publishing. 
+<br>
 
 #### Legacy of the Gold Rush
 
@@ -84,7 +89,7 @@ Ecological destruction coincided with the prospector invasion. Mining practices 
 <img width="550" height="575" alt="hydraulic_mining" src="https://github.com/lauren-alexandra/basin-inflow/assets/56773938/859cdbc5-030a-479b-bd5e-bf73f6f5650b">
 
 *Note*. Mining on the American River. Adapted from "The Early Years", by Sacramento Public Library Authority, *Images of America: Lower American River*, (pp. 11-38), 2021, Arcadia Publishing.
-
+<br>
 
 ### Reservoir 
 
@@ -95,6 +100,7 @@ Folsom Reservoir (1956) was constructed by the U.S. Army Corps of Engineers for 
 <img width="900" height="550" alt="folsom-dam-2023" src="https://github.com/lauren-alexandra/basin-inflow-lstm/assets/56773938/4f7495be-8d0b-45c8-af9a-5c2836c1b160">
 
 *Note*. Picture of Folsom Dam as viewed from Beal’s Point in August 2023.
+<br>
 
 ### Adaptation 
 
@@ -117,6 +123,7 @@ Preparation for annual variability of both wetter and drier years should be thou
 *Note*. The California Department of Fish and Wildlife released a family of seven beavers into Plumas County, in the valley Tásmam Koyóm. CDFW database. Copyright 2024 by the State of California.
 
 In summary, the state frequently issues executive orders to manage hydroclimate variability, but more substantial planning, practices, regulations, policies, and infrastructure are required to meet current and future water challenges. 
+<br>
 
 #### References
 
