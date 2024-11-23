@@ -1,10 +1,10 @@
 {
   "basics": {
     "name": "Lauren Alexandra",
-    "label": "Data Scientist",
+    "title": "Data Scientist",
     "image": "",
     "email": "lauren@laurenalexandra.io",
-    "url": "https://www.linkedin.com/in/lauren-alexandra/",
+    "LinkedIn": "https://www.linkedin.com/in/lauren-alexandra/",
     "summary": "A data scientist with a research focus in climate-informed modeling for ecosystem management with a particular emphasis on applied solutions in mitigating the impacts of hydroclimate variability."
   },
   "work": [
@@ -53,7 +53,7 @@
     },
     {
       "institution": "Colorado State University",
-      "location": "Remote",
+      "location": "Fort Collins, Colorado",
       "url": "https://www.colostate.edu/",
       "area": "Artificial Intelligence and Machine Learning",
       "studyType": "Master of Science",
