@@ -4,7 +4,7 @@
     "title": "Data Scientist",
     "image": "",
     "email": "lauren@laurenalexandra.io",
-    "LinkedIn": "https://www.linkedin.com/in/lauren-alexandra/",
+    "LinkedIn": "https://www.linkedin.com/in/lauren-alexandra",
     "summary": "A data scientist with a research focus in climate-informed modeling for ecosystem management with a particular emphasis on applied solutions in mitigating the impacts of hydroclimate variability."
   },
   "work": [
@@ -14,7 +14,7 @@
       "url": "https://www.emsl.pnnl.gov/",
       "startDate": "2023-04-01",
       "endDate": "",
-      "summary": "At the EMSL (Environmental Molecular Sciences Laboratory) user facility I have primarily developed a data and project platform designed for environmental researchers, but within the lab at PNNL I have collaborated with earth scientists on applied research, leveraging machine learning models to understand climate security risk.",
+      "summary": "At the Environmental Molecular Sciences Laboratory user facility in PNNL I have primarily developed a data and project platform designed for environmental researchers, but within the broader lab I have collaborated with earth scientists on applied research, leveraging machine learning models to understand climate security risk.",
       "highlights": ["Machine Learning", "Applied Research"]
     },
     {
@@ -24,7 +24,7 @@
       "startDate": "2022-06-01",
       "endDate": "2023-04-01",
       "summary": "Implemented machine learning infrastructure for efficient experiment tracking on high-performance computing systems to support reproducibility.",
-      "highlights": ["Machine Learning Infrastructure"]
+      "highlights": ["Machine Learning Infrastructure", "HPC"]
     }
   ],
   "volunteer": [
