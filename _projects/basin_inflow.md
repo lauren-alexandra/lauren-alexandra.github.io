@@ -8,7 +8,10 @@ category: work
 related_publications: true
 ---
 
-<img src="/assets/img/basin_inflow/folsom-dam-spillway.jpeg" alt="Folsom Dam Spillway" width="900" height="600" /> 
+
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img src="/assets/img/basin_inflow/folsom-dam-spillway.jpeg" alt="Folsom Dam Spillway" width="100%" height="60%" /> 
+</div>
 
 [Basin Inflow](https://github.com/lauren-alexandra/basin-inflow-dnn) is an implementation of a deep neural network for forecasting reservoir inflow in the American River Basin. The proposal model is composed of stacked LSTM layers, with regularization applied to both (L2, dropout, and recurrent dropout), followed by a densely connected layer. Model application and evaluation uses river basin data with temporal coverage from 2008-2022. Across the basin and along forks of the river, daily precipitation, temperature, snow water content and depth, and river discharge and stage are employed to predict local reservoir inflow. Data was pre-processed with a 30-day exponential moving average to give recent weather events more weight in the forecast, normalized, and made stationary for training. 14 years of data were separated into three sets: training set (2008-2017), validation set (2018–2020), and test set (2020-2022). The model achieves a lower MAE score (0.036) in inflow prediction than the baseline model. 
 <br>
@@ -21,7 +24,9 @@ The basin’s Nisenan Tribal entities include the Nevada City Rancheria, the Col
 
 ***Yo’ Dok’im Pakan (Gerjuoy North Fork Preserve), 2022***
 
-<img width="600" height="500" alt="gerjuoy-north-fork-preserve" src="https://github.com/lauren-alexandra/basin-inflow/assets/56773938/9f08279c-70cd-4cd2-83ba-bd1944b90ec6">
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img width="70%" height="80%" alt="gerjuoy-north-fork-preserve" src="https://github.com/lauren-alexandra/basin-inflow/assets/56773938/9f08279c-70cd-4cd2-83ba-bd1944b90ec6">
+</div>
 
 *Note*. From left: Colfax-Todds Valley Consolidated Tribe chairman Clyde Prout III and Placer Land Trust executive director Jeff Darlington at Yo’ Dok’im Pakan. Placer Land Trust transferred ownership of the preserve to the tribe in 2022. From “California Ancestral Homelands Returned to Colfax-Todds Valley Consolidated Tribe,” by K. Ferguson, 2022, https://landtrustalliance.org/blog/california-ancestral-homelands-returned-to-colfax-todds-valley-consolidated-tribe. Copyright 2024 by Land Trust Alliance.
 <br>
@@ -36,7 +41,9 @@ California Data Exchange Center: California Department of Water Resources
 
 #### American River Basin Stations
 
-<img width="800" height="550" alt="american-river-basin-stations" src="https://github.com/lauren-alexandra/basin-inflow-lstm/assets/56773938/00de5d65-eab5-4f0f-b54a-55d0a4c86484">
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img width="90%" height="70%" alt="american-river-basin-stations" src="https://github.com/lauren-alexandra/basin-inflow-lstm/assets/56773938/00de5d65-eab5-4f0f-b54a-55d0a4c86484">
+</div>
 
 Google. (n.d.). [River Basin Stations]. Retrieved February 9, 2024, from https://maps.app.goo.gl/5ACnKE3bT1TMQ15J8
 <br>
@@ -52,7 +59,9 @@ Sacramento and surrounding municipalities exist on a floodplain. The area receiv
 
 ***Gold Rush Mining Camps on the American River, 1849***
 
-<img width="900" height="550" alt="1849-mining-camps-on-the-american-river" src="https://github.com/lauren-alexandra/basin-inflow-lstm/assets/56773938/bf99dac3-55a3-4fd7-9d85-e6d208b21871">
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img width="95%" height="70%" alt="1849-mining-camps-on-the-american-river" src="https://github.com/lauren-alexandra/basin-inflow-lstm/assets/56773938/bf99dac3-55a3-4fd7-9d85-e6d208b21871">
+</div>
 
 *Note*. Many of the mining camps above Beal's Bar on the North Fork are beneath the Folsom Reservoir. Adapted from "The Early Years", by Sacramento Public Library Authority, *Images of America: Lower American River*, (pp. 11-38), 2021, Arcadia Publishing.
 
@@ -60,7 +69,9 @@ The extensive destruction of the 1861-1862 floods in Sacramento and across the s
 
 ***Sacramento, December 1861***
 
-<img width="600" height="700" alt="1861-sacramento-flooded" src="https://github.com/lauren-alexandra/basin-inflow-lstm/assets/56773938/cf959be5-9321-44a1-94f1-2a1d73c90dca">
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img width="70%" height="100%" alt="1861-sacramento-flooded" src="https://github.com/lauren-alexandra/basin-inflow-lstm/assets/56773938/cf959be5-9321-44a1-94f1-2a1d73c90dca">
+</div>
 
 *Note*. From "The Untamed River", by Sacramento Public Library Authority, *Images of America: Lower American River*, (pp. 109-127), 2021, Arcadia Publishing. 
 <br>
@@ -71,7 +82,9 @@ Before the discovery of gold (1848) by American and Indigenous workers in the Am
 
 ***Watershed Spawning Range***
 
-<img width="700" height="500" alt="salmon-spawning-range-historical-striped-current-orange" src="https://github.com/lauren-alexandra/basin-inflow/assets/56773938/f37efd9d-52b0-4648-91b0-b233442185e0">
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img width="80%" height="60%" alt="salmon-spawning-range-historical-striped-current-orange" src="https://github.com/lauren-alexandra/basin-inflow/assets/56773938/f37efd9d-52b0-4648-91b0-b233442185e0">
+</div>
 
 *Note*. Snapshot of the American River Watershed. Current salmon spawning range (23 miles) is highlighted in orange and the historical range (125 miles) is shown in the stripe overlay. From “Salmon Rivers,” by State of Salmon in California, n.d., https://casalmon.org/salmon-rivers/#american-river. Copyright 2024 by The Nature Conservancy.
 
@@ -79,7 +92,9 @@ In 1839, John Sutter established the New Helvetia colony in the Mexican Alta Cal
 
 ***For All the Gold in the World***
 
-<img width="375" height="550" alt="For_All_the_Gold_in_the_World" src="https://github.com/lauren-alexandra/basin-inflow/assets/56773938/4d8071a1-33f4-4d46-aa8f-f00544cc13ad">
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img width="60%" height="60%" alt="For_All_the_Gold_in_the_World" src="https://github.com/lauren-alexandra/basin-inflow/assets/56773938/4d8071a1-33f4-4d46-aa8f-f00544cc13ad">
+</div>
 
 *Note*. Brianna French. (2022). For All the Gold in the World. [Watercolor and gold leaf on clay board]. Uba Seo Gallery. Nevada City, California. Exhibited at Visibility Through Art (October 8 2022–April 15 2023).
 
@@ -87,7 +102,9 @@ Ecological destruction coincided with the prospector invasion. Mining practices 
 
 ***Hydraulic Mining***
 
-<img width="550" height="575" alt="hydraulic_mining" src="https://github.com/lauren-alexandra/basin-inflow/assets/56773938/859cdbc5-030a-479b-bd5e-bf73f6f5650b">
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img width="60%" height="65%" alt="hydraulic_mining" src="https://github.com/lauren-alexandra/basin-inflow/assets/56773938/859cdbc5-030a-479b-bd5e-bf73f6f5650b">
+</div>
 
 *Note*. Mining on the American River. Adapted from "The Early Years", by Sacramento Public Library Authority, *Images of America: Lower American River*, (pp. 11-38), 2021, Arcadia Publishing.
 <br>
@@ -98,7 +115,9 @@ Folsom Reservoir (1956) was constructed by the U.S. Army Corps of Engineers for 
 
 ***Folsom Dam, 2023***
 
-<img width="900" height="550" alt="folsom-dam-2023" src="https://github.com/lauren-alexandra/basin-inflow-lstm/assets/56773938/4f7495be-8d0b-45c8-af9a-5c2836c1b160">
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img width="100%" height="60%" alt="folsom-dam-2023" src="https://github.com/lauren-alexandra/basin-inflow-lstm/assets/56773938/4f7495be-8d0b-45c8-af9a-5c2836c1b160">
+</div>
 
 *Note*. Picture of Folsom Dam as viewed from Beal’s Point in August 2023.
 <br>
@@ -119,7 +138,9 @@ Preparation for annual variability of both wetter and drier years should be thou
 
 ***Beaver Conservation Release, 2023***
 
-<img width="900" height="600" alt="beaver-conservation-release" src="https://github.com/lauren-alexandra/basin-inflow-lstm/assets/56773938/b737c1dc-9293-4688-b2bf-0ceb142804ab">
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img width="100%" height="60%" alt="beaver-conservation-release" src="https://github.com/lauren-alexandra/basin-inflow-lstm/assets/56773938/b737c1dc-9293-4688-b2bf-0ceb142804ab">
+</div>
 
 *Note*. The California Department of Fish and Wildlife released a family of seven beavers into Plumas County, in the valley Tásmam Koyóm. CDFW database. Copyright 2024 by the State of California.
 
