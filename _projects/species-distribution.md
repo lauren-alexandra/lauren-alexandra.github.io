@@ -9,7 +9,9 @@ related_publications: true
 ---
 
 
-<img src="/assets/img/species_distribution/willow-flycatcher.png" alt="Willow Flycatcher" width="850" height="600" longdesc="https://macaulaylibrary.org/asset/451259001" /> 
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img src="/assets/img/species_distribution/willow-flycatcher.png" alt="Willow Flycatcher" width="100%" height="20%" longdesc="https://macaulaylibrary.org/asset/451259001" /> 
+</div>
 
 #### Species Description
 Willow Flycatchers (*Empidonax traillii*) specialize in areas with willows and other shrubs [near running and still water](https://www.audubon.org/field-guide/bird/willow-flycatcher). They are about 6 inches in length with brown, gray, and white plumage, a rounded wing, and a square-tipped tail. Calls are in the form of a chirp, buzz, or trill and match an undulating pattern. Nests are placed 4-15 feet above water or damp ground and constructed as an open cup of grass, bark, and plant fibers. The species migrates long distances, breeding in the U.S. and Canada and wintering in Mexico, Central America, and northern South America. They are common in most locations in their range despite a [25% decline](https://www.allaboutbirds.org/guide/Willow_Flycatcher/lifehistory) in population between 1966 to 2019. The loss of wet marshes, wet meadows, and riparian vegetation has contributed to [declining species abundance](https://www.fs.usda.gov/detail/tahoe/landmanagement/resourcemanagement/?cid=stelprdb5357314#:~:text=The%20scientific%20name%20for%20willow,t). According to the Bird Genoscape Project, there are seven geneticially [distinct populations](https://www.birdgenoscape.org/willow-flycatcher/) of Willow Flycatcher in North America: the Pacific Northwest, Kern, California, southern California, White Mountain, Arizona, Interior West, Southwest, and Eastern. However, there are only four recognized subspecies: *E. t. brewsteri*, *E. t. adastus*, *E. t. extimus*, and *E. t. traillii*. 
@@ -36,7 +38,9 @@ Data for ecoregions were gathered from a [RESOLVE](https://www.resolve.ngo/proje
 
 For visualization, the GeoDataFrame was simplified to a Mercator projection from the [Cartopy](https://scitools.org.uk/cartopy/docs/latest/) library which is compatible with the [hvplot API](https://hvplot.holoviz.org/) and [GeoViews](https://geoviews.org/). The GeoDataFrame was also joined with the normalized occurrences data. The plot produced highlights monthly migration patterns and is interactive due to the sliding widget from the HoloViews [panel](https://panel.holoviz.org/reference/panes/HoloViews.html) library.
 
-<img src="/assets/img/species_distribution/willow-flycatcher-migration-plot.png" alt="Willow Flycatcher Migration Plot" width="500" height="700" /> 
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img src="/assets/img/species_distribution/willow-flycatcher-migration-plot.png" alt="Willow Flycatcher Plot" width="50%" /> 
+</div>
 
 
 #### Species Distribution
