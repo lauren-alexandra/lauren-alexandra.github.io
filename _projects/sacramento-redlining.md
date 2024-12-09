@@ -2,14 +2,14 @@
 layout: page
 title: Sacramento Redlining
 description: Greenspace Analysis
-img: /assets/img/sac_redlining/sac-aerial.png
+img: /assets/img/sac_redlining/sac-aerial-post.png
 importance: 2
 category: work
 related_publications: true
 ---
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/sac_redlining/sac-aerial.png" alt="Sacramento Aerial Landscape" width="80%" height="60%" longdesc="https://www.photopilot.com/blog/downtown-sacramento-california-state-capital" /> 
+    <img src="/assets/img/sac_redlining/sac-aerial.png" alt="Sacramento Aerial Landscape" width="100%" height="100%" longdesc="https://www.photopilot.com/blog/downtown-sacramento-california-state-capital" /> 
 </div>
 
 
@@ -130,7 +130,7 @@ grade_gdf.hvplot(
 )
 ```
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/sac_redlining/holc_redlining.png" alt="HOLC Sacramento Redlining" width="600px" height="650px" /> 
+    <img src="/assets/img/sac_redlining/holc_redlining.png" alt="HOLC Sacramento Redlining" width="70%" height="70%" /> 
 </div>
 
 
@@ -366,7 +366,7 @@ city_green_plt
 ```
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/sac_redlining/city-green-reflectance.png" alt="Sacramento Green Reflectance" width="800px" height="600px" /> 
+    <img src="/assets/img/sac_redlining/city-green-reflectance.png" alt="Sacramento Green Reflectance" width="90%" height="90%" /> 
 </div>
 
 Explore relationship between Normalized Difference Vegetation Index and HOLC grades
@@ -454,7 +454,7 @@ sac_ndvi_gdf = sac_ndvi_gdf.dropna(subset=["grade"])
 )
 ```
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/sac_redlining/ndvi_holc_grades.png" alt="NDVI and HOLC Grades" height="500px" width="1000px" /> 
+    <img src="/assets/img/sac_redlining/ndvi_holc_grades.png" alt="NDVI and HOLC Grades" width="100%" height="100%" /> 
 </div>
 
 ```python
@@ -490,7 +490,7 @@ sac_ndvi_gdf.hvplot(
 )
 ```
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/sac_redlining/holc_grade_prediction_error.png" alt="HOLC Grade Prediction Error" width="550px" height="580px" /> 
+    <img src="/assets/img/sac_redlining/holc_grade_prediction_error.png" alt="HOLC Grade Prediction Error" width="70%" height="70%" /> 
 </div>
 
 ```python
