@@ -3,7 +3,7 @@ layout: page
 title: Basin Inflow
 description: Regional Hydroclimate Deep Neural Network
 img: assets/img/basin_inflow/Sacramento-River-Bend-Outstanding-Natural-Area-BLM.jpeg
-importance: 2
+importance: 3
 category: work
 related_publications: true
 ---
