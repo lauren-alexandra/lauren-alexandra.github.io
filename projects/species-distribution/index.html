@@ -102,7 +102,7 @@
     <span class="n">on_bad_lines</span><span class="o">=</span><span class="sh">'</span><span class="s">skip</span><span class="sh">'</span><span class="p">,</span>
     <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">gbifID</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">month</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">year</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">countryCode</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">stateProvince</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">decimalLatitude</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">decimalLongitude</span><span class="sh">'</span><span class="p">]</span>
 <span class="p">)</span>
-</code></pre></div></div> <p>Breeding locations</p> <p><strong>Canada</strong></p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf_CA</span> <span class="o">=</span> <span class="n">gbif_df_2023</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">gbif_df_2023</span><span class="p">[</span><span class="sh">'</span><span class="s">countryCode</span><span class="sh">'</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">CA</span><span class="sh">'</span><span class="p">]</span>
+</code></pre></div></div> <p>Breeding locations</p> <p>Canada</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf_CA</span> <span class="o">=</span> <span class="n">gbif_df_2023</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">gbif_df_2023</span><span class="p">[</span><span class="sh">'</span><span class="s">countryCode</span><span class="sh">'</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">CA</span><span class="sh">'</span><span class="p">]</span>
 <span class="n">wf_CA</span><span class="p">.</span><span class="nf">value_counts</span><span class="p">()</span>
 </code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>countryCode  stateProvince     decimalLatitude  decimalLongitude  month  year
 CA           Ontario           43.628270        -79.32917         5      2023    160
@@ -135,7 +135,7 @@ CA           Ontario           43.628270        -79.329170        5      2023   
                                47.051140        -70.815550        5      2023      1
                                47.078094        -70.785550        5      2023      1
 Name: count, Length: 1364, dtype: int64
-</code></pre></div></div> <p><strong>United States</strong></p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf_US</span> <span class="o">=</span> <span class="n">gbif_df_2023</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">gbif_df_2023</span><span class="p">[</span><span class="sh">'</span><span class="s">countryCode</span><span class="sh">'</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">US</span><span class="sh">'</span><span class="p">]</span>
+</code></pre></div></div> <p>United States</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf_US</span> <span class="o">=</span> <span class="n">gbif_df_2023</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">gbif_df_2023</span><span class="p">[</span><span class="sh">'</span><span class="s">countryCode</span><span class="sh">'</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">US</span><span class="sh">'</span><span class="p">]</span>
 <span class="n">wf_US</span><span class="p">.</span><span class="nf">value_counts</span><span class="p">()</span>
 </code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>countryCode  stateProvince  decimalLatitude  decimalLongitude  month  year
 US           Pennsylvania   39.889350        -75.260150        5      2023    227
@@ -210,8 +210,9 @@ US           Pennsylvania   39.889350        -75.260150        5      2023    22
 Name: count, Length: 9415, dtype: int64
 </code></pre></div></div> <p>Convert the GBIF data to a GeoDataFrame</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sh">"""</span><span class="s">
 Coordinate reference system:
-EPSG:4326, also known as the WGS84 projection, is a coordinate system that represents the Earth as a 3D ellipsoid. 
-It</span><span class="sh">'</span><span class="s">s used in Google Earth, GPS systems, and by organizations that provide GIS data for the entire globe or many countries.
+
+EPSG:4326, also known as the WGS84 projection, is a coordinate system that represents the Earth 
+as a 3D ellipsoid.
 </span><span class="sh">"""</span>
 
 <span class="n">gdf_monthly</span> <span class="o">=</span> <span class="p">(</span>
@@ -224,7 +225,7 @@ It</span><span class="sh">'</span><span class="s">s used in Google Earth, GPS sy
     <span class="c1"># Select the desired columns
 </span>    <span class="p">[[</span><span class="sh">'</span><span class="s">month</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">geometry</span><span class="sh">'</span><span class="p">]]</span>
 <span class="p">)</span>
-</code></pre></div></div> <p>Download and save ecoregion boundaries</p> <p>Ecoregions represent boundaries formed by biotic and abiotic conditions: geology, landforms, soils, vegetation, land use, wildlife, climate, and hydrology.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Set up the ecoregion boundary URL
+</code></pre></div></div> <p>Download and save ecoregion boundaries</p> <p><em>Ecoregions represent boundaries formed by biotic and abiotic conditions: geology, landforms, soils, vegetation, land use, wildlife, climate, and hydrology.</em></p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Set up the ecoregion boundary URL
 </span><span class="n">ecoregions_url</span> <span class="o">=</span> <span class="sh">"</span><span class="s">https://storage.googleapis.com/teow2016/Ecoregions2017.zip</span><span class="sh">"</span>
 
 <span class="c1"># Set up a path to save the data on your machine
@@ -303,8 +304,8 @@ It</span><span class="sh">'</span><span class="s">s used in Google Earth, GPS sy
     <span class="k">return</span> <span class="n">occurrence_df</span>
 </code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">occurrence_df</span> <span class="o">=</span> <span class="nf">get_monthly_regional_observations</span><span class="p">(</span><span class="n">gbif_ecoregion_gdf</span><span class="p">,</span> <span class="sh">'</span><span class="s">ecoregion</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div> <p>Create a simplified GeoDataFrame for plot</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sh">"""</span><span class="s">
-Streamlining plotting with hvplot by simplifying the geometry, projecting it to a Mercator projection that is compatible with
-geoviews, and cropping off areas in the Arctic.
+Streamlining plotting with hvplot by simplifying the geometry, projecting it to a Mercator projection 
+that is compatible with geoviews, and cropping off areas in the Arctic.
 </span><span class="sh">"""</span>
 
 <span class="c1"># Speed up processing
