@@ -178,7 +178,7 @@ gbif_df_2023 = pd.read_csv(
 
 Breeding locations
 
-**Canada**
+Canada
 
 
 ```python
@@ -243,7 +243,7 @@ may_CA.value_counts()
 
 
 
-**United States**
+United States
 
 
 ```python
@@ -354,8 +354,9 @@ Convert the GBIF data to a GeoDataFrame
 ```python
 """
 Coordinate reference system:
-EPSG:4326, also known as the WGS84 projection, is a coordinate system that represents the Earth as a 3D ellipsoid. 
-It's used in Google Earth, GPS systems, and by organizations that provide GIS data for the entire globe or many countries.
+
+EPSG:4326, also known as the WGS84 projection, is a coordinate system that represents the Earth 
+as a 3D ellipsoid.
 """
 
 gdf_monthly = (
@@ -373,7 +374,7 @@ gdf_monthly = (
 
 Download and save ecoregion boundaries
 
-Ecoregions represent boundaries formed by biotic and abiotic conditions: geology, landforms, soils, vegetation, land use, wildlife, climate, and hydrology.
+*Ecoregions represent boundaries formed by biotic and abiotic conditions: geology, landforms, soils, vegetation, land use, wildlife, climate, and hydrology.*
 
 
 ```python
@@ -480,8 +481,8 @@ Create a simplified GeoDataFrame for plot
 
 ```python
 """
-Streamlining plotting with hvplot by simplifying the geometry, projecting it to a Mercator projection that is compatible with
-geoviews, and cropping off areas in the Arctic.
+Streamlining plotting with hvplot by simplifying the geometry, projecting it to a Mercator projection 
+that is compatible with geoviews, and cropping off areas in the Arctic.
 """
 
 # Speed up processing
