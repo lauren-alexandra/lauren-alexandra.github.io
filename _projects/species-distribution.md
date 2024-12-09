@@ -45,9 +45,6 @@ For visualization, the GeoDataFrame was simplified to a Mercator projection from
 Import Libraries
 
 ```python
-import warnings
-warnings.simplefilter(action='ignore', category=FutureWarning)
-
 import os
 import pathlib
 import time
@@ -176,7 +173,7 @@ gbif_df_2023 = pd.read_csv(
 ```
 
 
-Breeding locations
+Breeding Locations
 
 Canada
 
@@ -532,7 +529,7 @@ migration_plot = (
 migration_plot.save('willow-flycatcher-migration.html', embed=True)
 ```
 
-**April Observations**
+April Observations
 
 
 ```python
@@ -635,7 +632,7 @@ april_occ_top_5
   </tbody>
 </table>
 </div>
-
+<div style="margin-top: 60px"></div>
 
 
 
@@ -729,10 +726,10 @@ april_occ_bottom_5
   </tbody>
 </table>
 </div>
+<div style="margin-top: 60px"></div>
 
 
-
-**May Observations**
+May Observations
 
 
 ```python
@@ -833,7 +830,7 @@ may_occ_top_5
   </tbody>
 </table>
 </div>
-
+<div style="margin-top: 60px"></div>
 
 
 
@@ -927,7 +924,7 @@ may_occ_bottom_5
   </tbody>
 </table>
 </div>
-
+<div style="margin-top: 60px"></div>
 
 #### Species Distribution
 
