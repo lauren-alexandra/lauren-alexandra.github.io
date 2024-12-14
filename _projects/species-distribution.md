@@ -3,7 +3,7 @@ layout: page
 title: Willow Flycatcher
 description: Species Distribution
 img: assets/img/species_distribution/willow-flycatcher-project.png
-importance: 1
+importance: 2
 category: work
 related_publications: true
 ---
@@ -24,7 +24,7 @@ The [GBIF Occurrence dataset](https://doi.org/10.15468/dl.jqrwjf) was retrived f
 
 The [RESOLVE Ecoregions dataset](https://developers.google.com/earth-engine/datasets/catalog/RESOLVE_ECOREGIONS_2017) (2017) depicts Earth's 846 terrestrial ecoregions and was obtained as a shapefile. Ecoregions represent boundaries formed by biotic and abiotic conditions: geology, landforms, soils, vegetation, land use, wildlife, climate, and hydrology.
 
-#### Data Citations
+#### Data Citation
 
 Global Biodiversity Information Facility. (2024). *GBIF Occurrence Download* [Data set]. https://doi.org/10.15468/dl.jqrwjf
 
