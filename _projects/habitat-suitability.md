@@ -2,14 +2,14 @@
 layout: page
 title: Habitat Suitability
 description: Blue Oak
-img: assets/img/habitat_suitability/Blue-Oak-Profile.jpeg
+img: assets/img/habitat_suitability/blue-oak-profile.jpeg
 importance: 1
 category: work
 related_publications: true
 ---
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/habitat_suitability/Blue-Oak-Woodland.png" alt="Blue Oak Woodland" width="100%" height="100%" longdesc="https://calscape.org/storage/app/species_images/calphotos/images/0000_0000_0113_0949.jpeg" /> 
+    <img src="/assets/img/habitat_suitability/blue-oak-woodland.png" alt="Blue Oak Woodland" width="100%" height="100%" longdesc="https://calscape.org/storage/app/species_images/calphotos/images/0000_0000_0113_0949.jpeg" /> 
 </div>
 
 #### *Quercus douglasii*
@@ -403,7 +403,7 @@ los_padres_soil_plt
 ```
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Soil.png" alt="Los Padres National Forest Soil" width="70%" height="70%" /> 
+    <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Soil.png" alt="Los Padres National Forest Soil" width="100%" height="100%" /> 
 </div>
 
 ```python
@@ -419,7 +419,7 @@ eldorado_soil_plt = plot_site(
 eldorado_soil_plt
 ```
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Soil.png" alt="Eldorado National Forest Soil" width="70%" height="70%" /> 
+    <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Soil.png" alt="Eldorado National Forest Soil" width="100%" height="100%" /> 
 </div>
 
 
@@ -474,7 +474,7 @@ eldorado_elev_plt = plot_site(
 eldorado_elev_plt
 ```
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Elevation.png" alt="Eldorado National Forest Elevation" width="70%" height="70%" /> 
+    <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Elevation.png" alt="Eldorado National Forest Elevation" width="100%" height="100%" /> 
 </div>
 
 
@@ -499,7 +499,7 @@ los_padres_elev_plt = plot_site(
 los_padres_elev_plt
 ```
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Elevation.png" alt="Los Padres National Forest Elevation" width="70%" height="70%" /> 
+    <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Elevation.png" alt="Los Padres National Forest Elevation" width="100%" height="100%" /> 
 </div>
 
 
@@ -542,7 +542,7 @@ eldorado_aspect_plt
 ```
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Aspect.png" alt="Eldorado National Forest Aspect" width="70%" height="70%" /> 
+    <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Aspect.png" alt="Eldorado National Forest Aspect" width="100%" height="100%" /> 
 </div>
 
 
@@ -559,7 +559,7 @@ los_padres_aspect_plt = plot_site(
 los_padres_aspect_plt
 ```
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Aspect.png" alt="Los Padres National Forest Aspect" width="70%" height="70%" /> 
+    <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Aspect.png" alt="Los Padres National Forest Aspect" width="100%" height="100%" /> 
 </div>
 
 
