@@ -50,9 +50,6 @@ Import Libraries
 
 
 ```python
-import warnings
-warnings.simplefilter(action='ignore', category=FutureWarning)
-
 import os
 import pathlib
 import zipfile
@@ -63,13 +60,11 @@ import pandas as pd
 import numpy as np
 import geopandas as gpd
 import rioxarray as rxr
-# Merge rasters
 from rioxarray.merge import merge_arrays
 import xarray as xr
 import xrspatial
 
 import matplotlib.pyplot as plt
-# interactive plots of vector data
 import hvplot.pandas
 import hvplot.xarray
 
