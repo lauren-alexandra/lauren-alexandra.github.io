@@ -490,7 +490,7 @@ export_raster(los_padres_elev_da, "los_padres_elevation.tif")
 
 los_padres_elev_plt = plot_site(
     los_padres_elev_da, los_padres_gdf, 
-    'Los-Padres-Forest-Elevation', 
+    'Los-Padres-National-Forest-Elevation', 
     'Los Padres National Forest Elevation', 
     'Meters', 'terrain', 'black'
 )
@@ -532,7 +532,7 @@ export_raster(los_padres_aspect_da, "los_padres_aspect.tif")
 
 eldorado_aspect_plt = plot_site(
     eldorado_aspect_da, eldorado_gdf, 
-    'Eldorado-Forest-Aspect', 
+    'Eldorado-National-Forest-Aspect', 
     'Eldorado National Forest Aspect', 
     'Degrees', 'terrain', 'black'
 )
@@ -550,7 +550,7 @@ eldorado_aspect_plt
 
 los_padres_aspect_plt = plot_site(
     los_padres_aspect_da, los_padres_gdf,
-    'Los-Padres-Forest-Aspect', 
+    'Los-Padres-National-Forest-Aspect', 
     'Los Padres National Forest Aspect', 
     'Degrees', 'terrain', 'black'
 )
