@@ -43,6 +43,8 @@ The land units [shapefile](https://data.fs.usda.gov/geodata/edw/edw_resources/sh
 
 Data granules were processed into soil and elevation rasters through masking, scaling, cropping, and merging. The [xarray-spatial](https://docs.xarray.dev/en/stable/index.html) aspect function calculated aspect in degrees for each cell in a site elevation raster. Projected climate scenarios (medium and high emissions) for a monthly average of daily maximum near-surface air temperature in 2096-2099 were obtained from [MACAV2]((https://climate.northwestknowledge.net/MACA/index.php)), scoped to site boundaries, assigned a longitude coordinate range aligned with existing rasters, and converted from Kelvin to Fahrenheit. Sites and corresponding attributes were plotted using the [hvplot API](https://hvplot.holoviz.org/) and exported to rasters.
 
+Given optimal characteristics for each site variable, a habitat suitability score was identified for each site leveraging a fuzzy Gaussian function to assign scores for each raster cell based on proximity to ideal site values. For each site and medium emissions scenario, variable rasters were harmonized across resolution and projection, suitability layers calculated and multiplied, and then combined into a final raster. 
+
 #### Analysis
 
 Import Libraries
