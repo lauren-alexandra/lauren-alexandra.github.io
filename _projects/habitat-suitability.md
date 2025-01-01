@@ -120,7 +120,16 @@ Load Utility Functions
 
 ```python
 def build_da(urls, bounds):
-    """Build a DataArray from a list of urls"""
+    """
+    Build a DataArray from a list of urls.
+    
+    Args:
+    urls (list): Input list of URLs.
+    bounds (tuple): Site boundaries.
+
+    Returns:
+    xarray.DataArray: A merged DataArray.
+    """
     
     all_das = []
 
@@ -148,7 +157,15 @@ def build_da(urls, bounds):
 
 ```python
 def convert_longitude(longitude):
-    """Convert longitude values from a range of 0 to 360 to -180 to 180"""
+    """
+    Convert longitude values from a range of 0 to 360 to -180 to 180.
+    
+    Args:
+    longitude (float): Input longitude value.
+
+    Returns:
+    float: A value in the specified range.
+    """
     
     return (longitude - 360) if longitude > 180 else longitude
 ```
@@ -156,7 +173,15 @@ def convert_longitude(longitude):
 
 ```python
 def export_raster(da, raster_path):
-    """Export raster DataArray to a raster file"""
+    """
+    Export raster DataArray to a raster file.
+    
+    Args:
+    raster (xarray.DataArray): Input raster layer.
+    raster_path (str): Output raster directory.
+
+    Returns: None
+    """
     
     output_file = os.path.join(data_dir, os.path.basename(raster_path))
     da.rio.to_raster(output_file)
@@ -167,12 +192,22 @@ def export_raster(da, raster_path):
 def harmonize_raster_layers(reference_raster, input_rasters, output_dir):
     """
     Harmonize raster layers to ensure consistent spatial resolution 
-    and projection
+    and projection.
+
+    Args:
+    reference_raster (xarray.DataArray): Input reference raster.
+    input_rasters (list): List of site rasters.
+    output_dir (str): Path of raster directory.
+
+    Returns:
+    list: A list of harmonized rasters.
     """
-    
+    harmonized_files = []
+
+    harmonized_files.append(reference_raster)
     # Load the reference raster
     ref_raster = rxr.open_rasterio(reference_raster, masked=True)
-    harmonized_files = []
+
     for raster_path in input_rasters:
         # Load the input raster
         input_raster = rxr.open_rasterio(raster_path, masked=True)
@@ -183,20 +218,38 @@ def harmonize_raster_layers(reference_raster, input_rasters, output_dir):
         # Save the harmonized raster to the output directory
         output_file = os.path.join(output_dir, os.path.basename(raster_path))
         harmonized_raster.rio.to_raster(output_file)
-
-        print(f"Harmonized raster saved to: {output_file}")
         harmonized_files.append(output_file)
-        return harmonized_files
+
+    print('Harmonized rasters: ', len(harmonized_files))
+    return harmonized_files
 ```
 
 
 ```python
 def plot_site(site_da, site_gdf, site_fig_name, plot_title, 
-              bar_label, plot_cmap, boundary_clr):
-    """Create custom site plot"""
+              bar_label, plot_cmap, boundary_clr, tif_file=False):
+    """
+    Create custom site plot.
+    
+    Args:
+    site_da (xarray.DataArray): Input site raster.
+    site_gdf (geopandas.GeoDataFrame): Input site GeoDataFrame.
+    site_fig_name (str): Site figure name.
+    plot_title (str): Plot title. 
+    bar_label (str): Plot bar variable name.
+    plot_cmap (str): Plot colormap name.
+    boundary_clr (str): Plot site boundary color.
+    tif_file (boolean): Indicates a site file.
+
+    Returns:
+    matplotlib.pyplot.plot: A plot of site values.
+    """
     
     fig = plt.figure(figsize=(8, 6)) 
     ax = plt.axes()
+
+    if tif_file:
+        site_da = rxr.open_rasterio(site_da, masked=True)
 
     # Plot DataArray values
     site_plot = site_da.plot(
@@ -211,7 +264,7 @@ def plot_site(site_da, site_gdf, site_fig_name, plot_title,
     ax.set_xlabel('Longitude')
     ax.set_ylabel('Latitude')
 
-    fig.savefig(f"{data_dir}/{site_fig_name}.png") 
+    fig.savefig(f"{images_dir}/{site_fig_name}.png") 
 
     return site_plot
 ```
@@ -317,7 +370,18 @@ Identify Soil Metric
 
 ```python
 def create_polaris_urls(soil_prop, stat, soil_depth, gdf_bounds):
-    """Create POLARIS dataset urls using site bounds"""
+    """
+    Create POLARIS dataset URLs using site bounds.
+
+    Args:
+    soil_prop (str): Soil property.
+    stat (str): Summary statistic. 
+    soil_depth (str): Soil depth (cm).
+    gdf_bounds (numpy.ndarray): Array of site boundaries.
+
+    Returns:
+    list: A list of POLARIS datset URLs. 
+    """
 
     # Get latitude and longitude bounds from site
     min_lon, min_lat, max_lon, max_lat = gdf_bounds
@@ -428,7 +492,15 @@ Select Digital Elevation Model
 ```python
 def select_dem(bounds, site_gdf, download_dir):
     """
-    Create elevation DataArray from NASA Shuttle Radar Topography Mission data
+    Create elevation DataArray from NASA Shuttle Radar Topography Mission data.
+
+    Args:
+    bounds (tuple): Input site boundaries.
+    site_gdf (geopandas.GeoDataFrame): Land unit GeoDataFrame.
+    download_dir (str): Path of download directory.
+
+    Returns:
+    xarray.DataArray: A site elevation raster.
     """
 
     # Returns data granules for given bounds
@@ -448,7 +520,7 @@ def select_dem(bounds, site_gdf, download_dir):
     # Build merged elevation DataArray
     strm_da = build_da(glob(strm_pattern), tuple(site_gdf.total_bounds))
 
-    return strm_da    
+    return strm_da  
 ```
 
 
@@ -507,10 +579,19 @@ Calculate Aspect
 
 ```python
 def calculate_aspect(elev_da):
-    """Create aspect DataArray from site elevation"""
+    """
+    Create aspect DataArray from site elevation.
+    
+    Args:
+    elev_da (xarray.DataArray): Input raster layer.
+
+    Returns:
+    xarray.DataArray: A raster of site aspect. 
+    """
 
     # Calculate aspect (degrees)
     aspect_da = xrspatial.aspect(elev_da)
+    aspect_da = aspect_da.where(aspect_da >= 0)
 
     return aspect_da
 ```
@@ -532,7 +613,7 @@ export_raster(los_padres_aspect_da, "los_padres_aspect.tif")
 
 eldorado_aspect_plt = plot_site(
     eldorado_aspect_da, eldorado_gdf, 
-    'Eldorado-National-Forest-Aspect', 
+    'Eldorado-National-Forest-Aspect-Degrees', 
     'Eldorado National Forest Aspect', 
     'Degrees', 'terrain', 'black'
 )
@@ -541,7 +622,7 @@ eldorado_aspect_plt
 ```
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Aspect.png" alt="Eldorado National Forest Aspect" width="100%" height="100%" /> 
+    <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Aspect-Degrees.png" alt="Eldorado National Forest Aspect" width="100%" height="100%" /> 
 </div>
 
 
@@ -550,7 +631,7 @@ eldorado_aspect_plt
 
 los_padres_aspect_plt = plot_site(
     los_padres_aspect_da, los_padres_gdf,
-    'Los-Padres-National-Forest-Aspect', 
+    'Los-Padres-National-Forest-Aspect-Degrees', 
     'Los Padres National Forest Aspect', 
     'Degrees', 'terrain', 'black'
 )
@@ -558,7 +639,7 @@ los_padres_aspect_plt = plot_site(
 los_padres_aspect_plt
 ```
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Aspect.png" alt="Los Padres National Forest Aspect" width="100%" height="100%" /> 
+    <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Aspect-Degrees.png" alt="Los Padres National Forest Aspect" width="100%" height="100%" /> 
 </div>
 
 
@@ -570,7 +651,18 @@ Projected Climate
 ```python
 def get_projected_climate(site_gdf_dict, emissions_scenarios, 
                           start_year, end_year):
-    """Create DataFrame of projected site climate"""
+    """
+    Create DataFrame of projected site climate.
+    
+    Args:
+    site_gdf_dict (dict): Input dictionary of site scenario temperatures.
+    emissions_scenarios (list): List of climate scenarios.
+    start_year (str): Projected start year.
+    end_year (str): Projected end year. 
+
+    Returns:
+    pandas.DataFrame: Projected site average max temperatures.
+    """
 
     maca_da_list = []
 
@@ -703,6 +795,193 @@ air_lp_85 = los_padres_rcp85_da.sel(
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
     <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Climate-Scenarios.png" alt="Los Padres National Forest Climate Scenarios" width="100%" height="100%" /> 
+</div>
+
+Select Annual Average Max Temperature (2099)
+
+```python
+def select_annual_temp(year, da, raster_name):
+    """
+    Obtain annual temperature average and export raster.
+    
+    Args:
+    year (str): Target year for temperature selection. 
+    da (xarray.DataArray): DataArray of projected temperature values.
+    raster_name (str): The name of model raster.
+
+    Returns: None
+    """
+    da_annual = (
+        da
+        # select year 
+        .sel(time=year)
+        # take annual average
+        .mean('time')
+        # write projection EPSG:4326
+        .rio.write_crs(4326)
+    )
+
+    export_raster(da_annual, raster_name)
+```
+
+```python
+# Eldorado projected temperature
+select_annual_temp('2099', eldorado_rcp45_da, 'air_eld_45_2099.tif')
+
+# Los Padres projected temperature 
+select_annual_temp('2099', los_padres_rcp45_da, 'air_lp_45_2099.tif')
+```
+
+For a given site/climate scenario combination, identify and plot suitability
+
+```python
+def calculate_suitability_score(raster, optimal_value, tolerance_range):
+    """ 
+    Calculate a fuzzy suitability score (0–1) for each raster cell based on 
+    proximity to the optimal value.
+
+    Args:
+    raster (xarray.DataArray): Input raster layer. 
+    optimal_value (float): Optimal value for the variable.
+    tolerance_range (float): Suitable values range. 
+
+    Returns:
+    xarray.DataArray: A raster of suitability scores (0-1).
+    """
+
+    # Calculate using a fuzzy Gaussian function to assign scores 
+    # between 0 and 1
+    suitability = np.exp(
+                    -((raster - optimal_value) ** 2) 
+                    / (2 * tolerance_range ** 2)
+                )
+
+    # Suitability scores (0–1) 
+    return suitability
+```
+
+```python
+def build_habitat_suitability_model(input_rasters, optimal_values, 
+                                    tolerance_ranges, output_dir, raster_name):
+    """ 
+    Build a habitat suitability model by combining fuzzy suitability scores 
+    for each variable. 
+
+    Args:
+    input_rasters (list): List of input rasters.
+    optimal_values (list): List of optimal values for variables.
+    tolerance_ranges (list): List of tolerance values for variables.
+    output_dir (str): The model output directory.
+    raster_name (str): The name of model raster.
+
+    Returns:
+    str: The path of the suitability raster.
+    """
+    
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Load and calculate suitability scores for each raster
+    suitability_layers = []
+    suit_zip = zip(input_rasters, optimal_values, tolerance_ranges)
+    for raster_path, optimal_value, tolerance_range in suit_zip:
+        raster = rxr.open_rasterio(raster_path, masked=True).squeeze()
+        suitability_layer = calculate_suitability_score(
+                                raster, optimal_value, tolerance_range
+                            )
+        suitability_layers.append(suitability_layer)
+
+    # Combine suitability scores by multiplying across all layers
+    combined_suitability = suitability_layers[0]
+    for layer in suitability_layers[1:]:
+        combined_suitability *= layer
+
+    # Save the combined suitability raster
+    output_file = os.path.join(output_dir, f"{raster_name}.tif")
+    combined_suitability.rio.to_raster(output_file)
+    print(f"Combined suitability raster saved to: {raster_name}.tif")
+
+    # Path to the final combined suitability raster
+    return output_file
+```
+
+```python
+# Optimal values for species for each variable
+# Variables: elevation, temperature, aspect, soil pH
+optimal_values = [1500.0, 90.0, 0.0, 6.75]
+
+# Tolerance ranges (acceptable deviation) for each variable
+tolerance_ranges = [1500.0, 20.0, 65.0, 0.75]
+```
+
+Eldorado National Forest Suitability (RCP 4.5 Scenario)
+
+```python
+eldorado_45_input_rasters = [
+    f"{data_dir}/air_eld_45_2099.tif",
+    f"{data_dir}/eldorado_aspect.tif",
+    f"{data_dir}/eldorado_soil_ph.tif"
+]
+
+# Ensure consistent spatial resolution and projection
+eldorado_rcp45_rasters = harmonize_raster_layers(
+                            f"{data_dir}/eldorado_elevation.tif", 
+                            eldorado_45_input_rasters, data_dir
+                        )
+```
+```python
+eldorado_rcp45_combined_suitability = build_habitat_suitability_model(
+    eldorado_rcp45_rasters, optimal_values, tolerance_ranges, 
+    data_dir, 'eldorado_rcp45_suitability'
+)
+```
+```python
+eldorado_rcp45_suitability_plt = plot_site(
+    f"{data_dir}/eldorado_rcp45_suitability.tif", eldorado_gdf, 
+    'Eldorado-National-Forest-Suitability', 
+    'Eldorado National Forest Suitability: RCP 4.5 (2099)', 
+    'Suitability', 'YlGn', 'black', tif_file=True
+)
+
+eldorado_rcp45_suitability_plt
+```
+
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Suitability.png" alt="Eldorado National Forest Suitability" width="100%" height="100%" /> 
+</div>
+
+Los Padres National Forest Suitability (RCP 4.5 Scenario)
+
+```python
+los_padres_45_input_rasters = [
+    f"{data_dir}/air_lp_45_2099.tif",
+    f"{data_dir}/los_padres_aspect.tif",
+    f"{data_dir}/los_padres_soil_ph.tif"
+]
+
+los_padres_rcp45_rasters = harmonize_raster_layers(
+                            f"{data_dir}/los_padres_elevation.tif", 
+                            los_padres_45_input_rasters, data_dir
+                        )
+```
+```python
+los_padres_rcp45_combined_suitability = build_habitat_suitability_model(
+    los_padres_rcp45_rasters, optimal_values, tolerance_ranges, 
+    data_dir, 'los_padres_rcp45_suitability'
+)
+```
+```python
+los_padres_rcp45_combined_suitability_plt = plot_site(
+    f"{data_dir}/los_padres_rcp45_suitability.tif", los_padres_gdf, 
+    'Los-Padres-National-Forest-Suitability', 
+    'Los Padres National Forest Suitability: RCP 4.5 (2099)', 
+    'Suitability', 'YlGn', 'black', tif_file=True
+)
+
+los_padres_rcp45_combined_suitability_plt
+```
+
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Suitability.png" alt="Los Padres National Forest Suitability" width="100%" height="100%" /> 
 </div>
 
 
