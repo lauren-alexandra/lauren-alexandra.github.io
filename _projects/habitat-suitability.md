@@ -21,7 +21,7 @@ Across North America, oaks support more life than any other tree due to their ca
 
 [National Forest System Land Units](https://data.fs.usda.gov/geodata/edw/datasets.php?xmlKeyword=forest) includes proclaimed national forest, purchase unit, national grassland, land utilization project, research and experimental area, national preserve, and other land area. An NFS Land Unit is nationally significant classification of Federally owned forest, range, and related lands that are administered by the USDA Forest Service or designated for administration through the Forest Service. 
 
-[MACAv2-METDATA](https://climate.northwestknowledge.net/MACA/index.php) is a downscaled climate dataset that covers CONUS at 4 kilometers (1/24 degree) resolution. Temporal coverage encompasses historical model output (1950-2005) and projections (2006-2099) for climate normals represented as monthly values. Climate variables are from the Canadian Centre for Climate Modeling and Analysis ([CanESM2](https://nccasc.colorado.edu/project/canesm2-downscaled-climate-projections-800m-spatial-resolution-north-central-united-states)) model with simulations from two emissions scenarios (RCP 4.5 and 8.5). 
+[MACAV2-METDATA DAILY/MONTHLY](https://www.reacchpna.org/thredds/reacch_climate_CMIP5_macav2_catalog2.html) is a downscaled climate dataset that covers CONUS at 4 kilometers (1/24 degree) resolution. Temporal coverage encompasses historical model output (1950-2005) and projections (2006-2099) for climate normals represented as monthly averages of daily values. 
 
 Probabilistic Remapping of SSURGO ([POLARIS](https://www.usgs.gov/publications/polaris-properties-30-meter-probabilistic-maps-soil-properties-over-contiguous-united)) soil properties is a dataset of 30‐m probabilistic soil property maps over the contiguous United States (CONUS). The mapped variables over CONUS include soil texture, organic matter, pH, saturated hydraulic conductivity, Brooks‐Corey and Van Genuchten water retention curve parameters, bulk density, and saturated water content.
 
@@ -29,7 +29,7 @@ The [SRTM 1 Arc-Second Global](https://doi.org/10.5066/F7PR7TFT) product offers 
 
 #### Data Citation
 
-Abatzoglou, J. T. & Brown, T. J. (2012). *MACAv2-METDATA* [Data set]. http://thredds.northwestknowledge.net:8080/thredds/reacch_climate_CMIP5_macav2_catalog2.html
+Abatzoglou, J. T. (2017). *REACCH Climatic Modeling CMIP5 MACAV2-METDATA DAILY/MONTHLY Catalog* [Data set]. https://www.reacchpna.org/thredds/reacch_climate_CMIP5_macav2_catalog2.html
 
 Chaney, N. W., Minasny, B., Herman, J. D., Nauman, T. W., Brungard, C. W., Morgan, C. L. S., McBratney, A. B., Wood, E. F., & Yimam, Y. (2019, February 5). POLARIS soil properties: 30-m probabilistic maps of soil properties over the contiguous United States. *Water Resources Research, 55*(4). https://doi.org/10.1029/2018WR022797
 
@@ -39,23 +39,26 @@ USDA Forest Service. (2024). *National Forest System Land Units* [Data set]. htt
 
 #### Methods
 
-The land units [shapefile](https://data.fs.usda.gov/geodata/edw/edw_resources/shp/S_USA.NFSLandUnit.zip) was extracted and read into a GeoDataFrame with geopandas and subset for site locations. [earthaccess](https://earthaccess.readthedocs.io/en/latest/) (a library for NASA's Search API) retrieved digital elevation models by dataset ([SRTMGL1](https://doi.org/10.5066/F7PR7TFT)) which were scoped to spatial bounds collected from the unit sites. Mean soil data was selected for pH, depth, and location through [POLARIS](https://www.usgs.gov/publications/polaris-properties-30-meter-probabilistic-maps-soil-properties-over-contiguous-united). 
+Downscaled climate models were compared by site under the RCP 4.5 emissions [scenario](https://climatetoolbox.org/tool/Future-Climate-Scenarios), examining winter and summer mean temperatures (and change relative to historical by °F) as well as winter precipitation (and percent change relative to the historical value). The land units [shapefile](https://data.fs.usda.gov/geodata/edw/edw_resources/shp/S_USA.NFSLandUnit.zip) was extracted and read into a GeoDataFrame with geopandas and subset for site locations. [earthaccess](https://earthaccess.readthedocs.io/en/latest/) (a library for NASA's Search API) retrieved digital elevation models by dataset ([SRTMGL1](https://doi.org/10.5066/F7PR7TFT)) which were scoped to spatial bounds collected from the unit sites. Mean soil data was selected for pH, depth, and location through [POLARIS](https://www.usgs.gov/publications/polaris-properties-30-meter-probabilistic-maps-soil-properties-over-contiguous-united).
 
-Data granules were processed into soil and elevation rasters through masking, scaling, cropping, and merging. The [xarray-spatial](https://docs.xarray.dev/en/stable/index.html) aspect function calculated aspect in degrees for each cell in a site elevation raster. Projected climate scenarios (medium and high emissions) for a monthly average of daily maximum near-surface air temperature in 2096-2099 were obtained from [MACAV2]((https://climate.northwestknowledge.net/MACA/index.php)), scoped to site boundaries, assigned a longitude coordinate range aligned with existing rasters, and converted from Kelvin to Fahrenheit. Sites and corresponding attributes were plotted using the [hvplot API](https://hvplot.holoviz.org/) and exported to rasters.
+Data granules were processed into soil and elevation rasters through masking, scaling, cropping, and merging. The [xarray-spatial](https://docs.xarray.dev/en/stable/index.html) aspect function calculated aspect in degrees for each cell in a site elevation raster. Projected climate scenarios (medium and high emissions) for a monthly average of daily maximum near-surface air temperature in 2096-2099 were obtained from [MACAV2]((https://climate.northwestknowledge.net/MACA/index.php)), scoped to site boundaries, assigned a longitude coordinate range aligned with existing rasters, and converted from Kelvin to Fahrenheit. Sites and corresponding attributes were subsequently plotted using the [hvplot API](https://hvplot.holoviz.org/) and exported to rasters.
 
-Given optimal characteristics for each site variable, a habitat suitability score was identified for each site leveraging a fuzzy Gaussian function to assign scores for each raster cell based on proximity to ideal site values. For each site and medium emissions scenario, variable rasters were harmonized across resolution and projection, suitability layers calculated and multiplied, and then combined into a final raster. 
+Given optimal characteristics for each site variable, a habitat suitability score was identified for each site leveraging a fuzzy Gaussian function to assign scores for each raster cell based on proximity to ideal site values. For each site and medium emissions scenario, variable rasters were harmonized across resolution and projection, suitability layers calculated and multiplied, and then combined into a final raster.
 
 #### Analysis
 
-Import Libraries
+Imports
 
 
 ```python
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
 import os
 import pathlib
 import zipfile
 from glob import glob
-from math import floor, ceil
+import tqdm as notebook_tqdm
 
 import pandas as pd
 import numpy as np
@@ -68,21 +71,25 @@ import xrspatial
 import matplotlib.pyplot as plt
 import hvplot.pandas
 import hvplot.xarray
+import cartopy.crs as ccrs
+import geoviews as gv
 
 import earthaccess
+
+from utils import *
 ```
 
 Set Paths
 
 ```python
-# Images
-images_dir = os.path.join(
+# Plots
+plots_dir = os.path.join(
     # Home directory
     pathlib.Path.home(),
     'Projects',
     # Project directory
     'habitat-suitability',
-    'images'
+    'plots'
 )
 
 # Datasets
@@ -110,168 +117,14 @@ land_units_dir = os.path.join(data_dir, 'usfs-national-lands')
 eldorado_elevation_dir = os.path.join(data_dir, 'srtm', 'eldorado')
 los_padres_elevation_dir = os.path.join(data_dir, 'srtm', 'los_padres')
 
-os.makedirs(images_dir, exist_ok=True)
+os.makedirs(plots_dir, exist_ok=True)
 os.makedirs(datasets_dir, exist_ok=True)
 os.makedirs(data_dir, exist_ok=True)
 os.makedirs(eldorado_elevation_dir, exist_ok=True)
 os.makedirs(los_padres_elevation_dir, exist_ok=True)
 ```
 
-Load Utility Functions
-
-
-```python
-def build_da(urls, bounds):
-    """
-    Build a DataArray from a list of urls.
-    
-    Args:
-    urls (list): Input list of URLs.
-    bounds (tuple): Site boundaries.
-
-    Returns:
-    xarray.DataArray: A merged DataArray.
-    """
-    
-    all_das = []
-
-    # Add buffer to bounds for plotting
-    buffer = .025
-    xmin, ymin, xmax, ymax = bounds
-    bounds_buffer = (xmin-buffer, ymin-buffer, xmax+buffer, ymax+buffer)
-
-    for url in urls:
-        # Open data granule, mask missing data, scale data, 
-        # and remove dimensions of length 1
-        tile_da = rxr.open_rasterio(
-                url,
-                # For the fill/missing value
-                mask_and_scale=True
-            ).squeeze()
-        # Unpack the bounds and crop tile
-        cropped_da = tile_da.rio.clip_box(*bounds_buffer)
-        all_das.append(cropped_da)
-
-    merged = merge_arrays(all_das)
-    return merged
-```
-
-
-```python
-def convert_longitude(longitude):
-    """
-    Convert longitude values from a range of 0 to 360 to -180 to 180.
-    
-    Args:
-    longitude (float): Input longitude value.
-
-    Returns:
-    float: A value in the specified range.
-    """
-    
-    return (longitude - 360) if longitude > 180 else longitude
-```
-
-
-```python
-def export_raster(da, raster_path):
-    """
-    Export raster DataArray to a raster file.
-    
-    Args:
-    raster (xarray.DataArray): Input raster layer.
-    raster_path (str): Output raster directory.
-
-    Returns: None
-    """
-    
-    output_file = os.path.join(data_dir, os.path.basename(raster_path))
-    da.rio.to_raster(output_file)
-```
-
-
-```python
-def harmonize_raster_layers(reference_raster, input_rasters, output_dir):
-    """
-    Harmonize raster layers to ensure consistent spatial resolution 
-    and projection.
-
-    Args:
-    reference_raster (xarray.DataArray): Input reference raster.
-    input_rasters (list): List of site rasters.
-    output_dir (str): Path of raster directory.
-
-    Returns:
-    list: A list of harmonized rasters.
-    """
-    harmonized_files = []
-
-    harmonized_files.append(reference_raster)
-    # Load the reference raster
-    ref_raster = rxr.open_rasterio(reference_raster, masked=True)
-
-    for raster_path in input_rasters:
-        # Load the input raster
-        input_raster = rxr.open_rasterio(raster_path, masked=True)
-
-        # Reproject and align the input raster to match the reference raster
-        harmonized_raster = input_raster.rio.reproject_match(ref_raster)
-
-        # Save the harmonized raster to the output directory
-        output_file = os.path.join(output_dir, os.path.basename(raster_path))
-        harmonized_raster.rio.to_raster(output_file)
-        harmonized_files.append(output_file)
-
-    print('Harmonized rasters: ', len(harmonized_files))
-    return harmonized_files
-```
-
-
-```python
-def plot_site(site_da, site_gdf, site_fig_name, plot_title, 
-              bar_label, plot_cmap, boundary_clr, tif_file=False):
-    """
-    Create custom site plot.
-    
-    Args:
-    site_da (xarray.DataArray): Input site raster.
-    site_gdf (geopandas.GeoDataFrame): Input site GeoDataFrame.
-    site_fig_name (str): Site figure name.
-    plot_title (str): Plot title. 
-    bar_label (str): Plot bar variable name.
-    plot_cmap (str): Plot colormap name.
-    boundary_clr (str): Plot site boundary color.
-    tif_file (boolean): Indicates a site file.
-
-    Returns:
-    matplotlib.pyplot.plot: A plot of site values.
-    """
-    
-    fig = plt.figure(figsize=(8, 6)) 
-    ax = plt.axes()
-
-    if tif_file:
-        site_da = rxr.open_rasterio(site_da, masked=True)
-
-    # Plot DataArray values
-    site_plot = site_da.plot(
-                            cmap=plot_cmap, 
-                            cbar_kwargs={'label': bar_label}
-                        )
-
-    # Plot site boundary
-    site_gdf.boundary.plot(ax=plt.gca(), color=boundary_clr)
-
-    plt.title(f'{plot_title}')
-    ax.set_xlabel('Longitude')
-    ax.set_ylabel('Latitude')
-
-    fig.savefig(f"{images_dir}/{site_fig_name}.png") 
-
-    return site_plot
-```
-
-Load Data
+Load Sites
 
 ```python
 # Only extract once
@@ -328,21 +181,14 @@ for dataset in ea_dem:
     CMS_AGB_NW_USA_1719 Annual Aboveground Biomass Maps for Forests in the Northwestern USA, 2000-2016
 
 
-Explore Sites
-
 ```python
 # Los Padres National Forest
+
 los_padres_gdf = all_ca_units.loc[
     all_ca_units['NFSLANDU_2'] == 'Los Padres National Forest'
 ]
-
-# plot with EsriImagery basemap  
-los_padres_gdf.hvplot(
-    geo=True, tiles='EsriImagery',
-    title='Los Padres National Forest',
-    fill_color=None, line_color='lightblue', line_width=3,
-    frame_width=600, frame_height=600
-)
+# Create folium map instance
+los_padres_gdf.explore()
 ```
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
@@ -352,294 +198,82 @@ los_padres_gdf.hvplot(
 
 ```python
 # Eldorado National Forest
+
 eldorado_gdf = all_ca_units.loc[
     all_ca_units['NFSLANDU_2'] == 'Eldorado National Forest'
 ]
 
-# plot with EsriImagery basemap  
-eldorado_gdf.hvplot(
-    geo=True, tiles='EsriImagery',
-    title='Eldorado National Forest',
-    fill_color=None, line_color='lightblue', line_width=3,
-    frame_width=600, frame_height=600
-)
+eldorado_gdf.explore()
 ```
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
     <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Boundary.png" alt="Eldorado National Forest" width="70%" height="70%" /> 
 </div>
 
-Identify Soil Metric
 
-```python
-def create_polaris_urls(soil_prop, stat, soil_depth, gdf_bounds):
-    """
-    Create POLARIS dataset URLs using site bounds.
-
-    Args:
-    soil_prop (str): Soil property.
-    stat (str): Summary statistic. 
-    soil_depth (str): Soil depth (cm).
-    gdf_bounds (numpy.ndarray): Array of site boundaries.
-
-    Returns:
-    list: A list of POLARIS datset URLs. 
-    """
-
-    # Get latitude and longitude bounds from site
-    min_lon, min_lat, max_lon, max_lat = gdf_bounds
-
-    site_min_lon = floor(min_lon) 
-    site_min_lat = floor(min_lat)  
-    site_max_lon = ceil(max_lon)  
-    site_max_lat = ceil(max_lat)
-
-    all_soil_urls = []
-
-    for lon in range(site_min_lon, site_max_lon): 
-        for lat in range(site_min_lat, site_max_lat):
-            current_max_lon = lon + 1
-            current_max_lat = lat + 1
-
-            soil_template = (
-                "http://hydrology.cee.duke.edu/POLARIS/PROPERTIES/v1.0/"
-                "{soil_prop}/"
-                "{stat}/"
-                "{soil_depth}/"
-                "lat{min_lat}{max_lat}_lon{min_lon}{max_lon}.tif"
-            )
-
-            soil_url = soil_template.format(
-                soil_prop=soil_prop, stat=stat, soil_depth=soil_depth,
-                min_lat=lat, max_lat=current_max_lat, 
-                min_lon=lon, max_lon=current_max_lon
-            )
-
-            all_soil_urls.append(soil_url)
-
-    return all_soil_urls
-```
-
+Retrieve Soils
 
 ```python
 # Set site parameters
+
 soil_prop = 'ph'
 soil_prop_stat = 'mean'
 # cm (the minimum depth for blue oaks is 1-2 ft)
 soil_depth = '30_60'
-
-# Build soil DataArrays 
-
-# Eldorado site
-ed_polaris_urls = create_polaris_urls(
-                    soil_prop, soil_prop_stat, soil_depth, 
-                    eldorado_gdf.total_bounds
-                  )
-eldorado_soil_da = build_da(
-                    ed_polaris_urls, 
-                    tuple(eldorado_gdf.total_bounds)
-                  )
-export_raster(eldorado_soil_da, "eldorado_soil_ph.tif")
-
-# Los Padres site
-lp_polaris_urls = create_polaris_urls(
-                    soil_prop, soil_prop_stat, soil_depth, 
-                    los_padres_gdf.total_bounds
-                  )
-los_padres_soil_da = build_da(
-                      lp_polaris_urls, 
-                      tuple(los_padres_gdf.total_bounds)
-                    )
-export_raster(los_padres_soil_da, "los_padres_soil_ph.tif")
-
 ```
 
+```python
+eldorado_soil_da = download_polaris('eldorado', eldorado_gdf, soil_prop, 
+                                    soil_prop_stat, soil_depth,
+                                    'Eldorado-National-Forest',
+                                    'Eldorado National Forest',
+                                    data_dir, plots_dir)
+```
+
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Soil.png" alt="Eldorado National Forest Soil" width="100%" height="100%" /> 
+</div>
 
 ```python
-# Plot Los Padres soils
-
-los_padres_soil_plt = plot_site(
-    los_padres_soil_da, los_padres_gdf, 
-    'Los-Padres-National-Forest-Soil', 
-    'Los Padres National Forest Soil', 
-    'pH', 'viridis', 'lightblue'
-)
-
-los_padres_soil_plt
+los_padres_soil_da = download_polaris('los_padres', los_padres_gdf, soil_prop, 
+                                      soil_prop_stat, soil_depth,
+                                      'Los-Padres-National-Forest',
+                                      'Los Padres National Forest',
+                                      data_dir, plots_dir)
 ```
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
     <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Soil.png" alt="Los Padres National Forest Soil" width="100%" height="100%" /> 
 </div>
 
-```python
-# Plot Eldorado soils
 
-eldorado_soil_plt = plot_site(
-    eldorado_soil_da, eldorado_gdf, 
-    'Eldorado-National-Forest-Soil', 
-    'Eldorado National Forest Soil', 
-    'pH', 'viridis', 'lightblue'
-)
-
-eldorado_soil_plt
-```
-<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Soil.png" alt="Eldorado National Forest Soil" width="100%" height="100%" /> 
-</div>
-
-
-Select Digital Elevation Model
-
+Select Digital Elevation Model and Calculate Aspect
 
 ```python
-def select_dem(bounds, site_gdf, download_dir):
-    """
-    Create elevation DataArray from NASA Shuttle Radar Topography Mission data.
-
-    Args:
-    bounds (tuple): Input site boundaries.
-    site_gdf (geopandas.GeoDataFrame): Land unit GeoDataFrame.
-    download_dir (str): Path of download directory.
-
-    Returns:
-    xarray.DataArray: A site elevation raster.
-    """
-
-    # Returns data granules for given bounds
-    strm_granules = earthaccess.search_data(
-        # SRTMGL1: NASA Shuttle Radar Topography Mission 
-        # Global 1 arc second V003
-        short_name="SRTMGL1",
-        bounding_box=bounds
-    )
-
-    # Download data granules
-    earthaccess.download(strm_granules, download_dir)
-
-    # Set SRTM data dir. hgt = height 
-    strm_pattern = os.path.join(download_dir, '*.hgt.zip')
-
-    # Build merged elevation DataArray
-    strm_da = build_da(glob(strm_pattern), tuple(site_gdf.total_bounds))
-
-    return strm_da  
-```
-
-
-```python
-eldorado_elev_da = select_dem(
-                        tuple(eldorado_gdf.total_bounds), eldorado_gdf, 
-                        eldorado_elevation_dir
+eldorado_elev_da = download_topography(
+                        'eldorado', eldorado_gdf,
+                        'Eldorado-National-Forest', 
+                        'Eldorado National Forest',
+                        eldorado_elevation_dir, data_dir, plots_dir
                     )
-export_raster(eldorado_elev_da, "eldorado_elevation.tif")
-```
-
-```python
-# Plot Eldorado elevation
-
-eldorado_elev_plt = plot_site(
-    eldorado_elev_da, eldorado_gdf, 
-    'Eldorado-National-Forest-Elevation', 
-    'Eldorado National Forest Elevation', 
-    'Meters', 'terrain', 'black'
-)
-
-eldorado_elev_plt
 ```
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
     <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Elevation.png" alt="Eldorado National Forest Elevation" width="100%" height="100%" /> 
 </div>
-
-
-```python
-los_padres_elev_da = select_dem(
-                        tuple(los_padres_gdf.total_bounds), los_padres_gdf, 
-                        los_padres_elevation_dir
-                    )
-export_raster(los_padres_elev_da, "los_padres_elevation.tif")
-```
-
-```python
-# Plot Los Padres elevation
-
-los_padres_elev_plt = plot_site(
-    los_padres_elev_da, los_padres_gdf, 
-    'Los-Padres-National-Forest-Elevation', 
-    'Los Padres National Forest Elevation', 
-    'Meters', 'terrain', 'black'
-)
-
-los_padres_elev_plt
-```
-<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Elevation.png" alt="Los Padres National Forest Elevation" width="100%" height="100%" /> 
-</div>
-
-
-Calculate Aspect
-
-
-```python
-def calculate_aspect(elev_da):
-    """
-    Create aspect DataArray from site elevation.
-    
-    Args:
-    elev_da (xarray.DataArray): Input raster layer.
-
-    Returns:
-    xarray.DataArray: A raster of site aspect. 
-    """
-
-    # Calculate aspect (degrees)
-    aspect_da = xrspatial.aspect(elev_da)
-    aspect_da = aspect_da.where(aspect_da >= 0)
-
-    return aspect_da
-```
-
-
-```python
-# Calculate aspect
-
-eldorado_aspect_da = calculate_aspect(eldorado_elev_da)
-export_raster(eldorado_aspect_da, "eldorado_aspect.tif")
-
-los_padres_aspect_da = calculate_aspect(los_padres_elev_da)
-export_raster(los_padres_aspect_da, "los_padres_aspect.tif")
-```
-
-
-```python
-# Plot Eldorado aspect
-
-eldorado_aspect_plt = plot_site(
-    eldorado_aspect_da, eldorado_gdf, 
-    'Eldorado-National-Forest-Aspect-Degrees', 
-    'Eldorado National Forest Aspect', 
-    'Degrees', 'terrain', 'black'
-)
-
-eldorado_aspect_plt
-```
-
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
     <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Aspect-Degrees.png" alt="Eldorado National Forest Aspect" width="100%" height="100%" /> 
 </div>
 
-
 ```python
-# Plot Los Padres aspect
-
-los_padres_aspect_plt = plot_site(
-    los_padres_aspect_da, los_padres_gdf,
-    'Los-Padres-National-Forest-Aspect-Degrees', 
-    'Los Padres National Forest Aspect', 
-    'Degrees', 'terrain', 'black'
-)
-
-los_padres_aspect_plt
+los_padres_elev_da = download_topography(
+                        'los_padres', los_padres_gdf, 
+                        'Los-Padres-National-Forest',
+                        'Los Padres National Forest',
+                        los_padres_elevation_dir, data_dir, plots_dir
+                    )
 ```
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Elevation.png" alt="Los Padres National Forest Elevation" width="100%" height="100%" /> 
+</div>
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
     <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Aspect-Degrees.png" alt="Los Padres National Forest Aspect" width="100%" height="100%" /> 
 </div>
@@ -647,264 +281,49 @@ los_padres_aspect_plt
 
 Projected Climate
 
-*Multivariate Adaptive Constructed Analogs (MACA) is a statistical method for downscaling Global Climate Models (GCMs) from their native coarse resolution to a higher spatial resolution.*
-
-
 ```python
-def get_projected_climate(site_gdf_dict, emissions_scenarios, 
-                          start_year, end_year):
-    """
-    Create DataFrame of projected site climate.
-    
-    Args:
-    site_gdf_dict (dict): Input dictionary of site scenario temperatures.
-    emissions_scenarios (list): List of climate scenarios.
-    start_year (str): Projected start year.
-    end_year (str): Projected end year. 
+# Set climate parameters
 
-    Returns:
-    pandas.DataFrame: Projected site average max temperatures.
-    """
-
-    maca_da_list = []
-
-    for site_name, site_gdf in site_gdf_dict.items():
-        for scenario in emissions_scenarios:
-            
-            MACA_URL = (
-                'http://thredds.northwestknowledge.net:8080/thredds/dodsC' 
-                '/MACAV2/CanESM2/macav2metdata_tasmax_CanESM2_r1i1p1_'
-                f'{scenario}_{start_year}_{end_year}_CONUS_monthly.nc'
-            )
-
-            maca_da = xr.open_dataset(MACA_URL).squeeze()
-
-            bounds = site_gdf.to_crs(maca_da.rio.crs).total_bounds
-
-            # update coordinate range
-            maca_da = maca_da.assign_coords(
-                lon=("lon", [convert_longitude(l) for l in maca_da.lon.values])
-            )
-
-            maca_da = maca_da.rio.set_spatial_dims(x_dim='lon', y_dim='lat')
-
-            maca_da = maca_da.rio.clip_box(*bounds)
-
-            maca_da_list.append(dict(
-                site_name=site_name,
-                climate_scenario=scenario,
-                da=maca_da)
-            )
-
-    maca_df = pd.DataFrame(maca_da_list)
-    return maca_df 
+emissions_scenario = 'rcp45'
+climate_models = ['CanESM2', 'MIROC-ESM-CHEM', 'CNRM-CM5', 'GFDL-ESM2M']
+mid_century = [2036, 2041, 2046, 2051, 2056, 2061] # 2036-2066 
+late_century = [2066, 2071, 2076, 2081, 2086, 2091] # 2066-2096 
+time_periods = [mid_century, late_century]
 ```
 
+Eldorado Projected Climate (RCP 4.5)
 
 ```python
-# RCP 4.5 (Medium Emissions Scenario) and 8.5 (High Emissions Scenario)
-emissions_scenarios = ['rcp45', 'rcp85']
-site_gdf_dict = {'eldorado': eldorado_gdf, 'los padres': los_padres_gdf}
-start_year = '2096'
-end_year = '2099'
+# Mid century 
 
-site_proj_temp = get_projected_climate(
-                    site_gdf_dict, emissions_scenarios, 
-                    start_year, end_year
-                )
+download_climate('eldorado', eldorado_gdf,
+                emissions_scenario, climate_models, mid_century,
+                'eldorado_mid_century', data_dir)
+
+# Late century
+
+download_climate('eldorado', eldorado_gdf,
+                emissions_scenario, climate_models, late_century,
+                'eldorado_late_century', data_dir) 
 ```
+
+Los Padres Projected Climate (RCP 4.5)
 
 ```python
-# Convert temperature from Kelvin to Fahrenheit
+# Mid century 
 
-converted_das = []
+download_climate('los padres', los_padres_gdf,
+                emissions_scenario, climate_models, mid_century,
+                'los_padres_mid_century', data_dir)
 
-rcp_rasters = [
-    'eldorado_rcp45.tif','eldorado_rcp85.tif',
-    'los_padres_rcp45.tif','los_padres_rcp85.tif'
-]
+# Late century
 
-for da, raster_name in zip(site_proj_temp.da.values, rcp_rasters): 
-    da = da.assign(fahrenheit=da["air_temperature"] * 1.8 - 459.67)
-    da = da.rio.write_crs(eldorado_soil_da.rio.crs)
-
-    da = da.rename({'lon': 'x','lat': 'y'})
-
-    da = da.fahrenheit
-    converted_das.append(da)
-    export_raster(da, raster_name)
-
-[eldorado_rcp45_da, eldorado_rcp85_da, 
- los_padres_rcp45_da, los_padres_rcp85_da] = converted_das
+download_climate('los padres', los_padres_gdf,
+                emissions_scenario, climate_models, late_century,
+                'los_padres_late_century', data_dir)
 ```
 
-
-```python
-# Select monthly average of daily maximum near-surface air temperature
-
-air_eld_45 = eldorado_rcp45_da.sel(
-                x=-120.9,y=38.4, method='nearest'
-            )
-air_eld_85 = eldorado_rcp85_da.sel(
-                x=-120.9,y=38.4, method='nearest'
-            )
-
-air_lp_45 = los_padres_rcp45_da.sel(
-                x=-118.7,y=36.4, method='nearest'
-            )
-air_lp_85 = los_padres_rcp85_da.sel(
-                x=-118.7,y=36.4, method='nearest'
-            )
-
-```
-
-
-```python
-# Plot Eldorado monthly mean max temperature data (2096-2099)
-
-(
-    air_eld_45.hvplot.line(
-        title='Eldorado RCP 4.5 Average Max Temperature (2096-2099)',
-        frame_width=550, frame_height=320
-    )
-    +
-    air_eld_85.hvplot.line(
-        title='Eldorado RCP 8.5 Average Max Temperature (2096-2099)',
-        frame_width=550, frame_height=320, line_color='orange'
-    )
-)
-```
-<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Climate-Scenarios.png" alt="Eldorado National Forest Climate Scenarios" width="100%" height="100%" /> 
-</div>
-
-
-```python
-# Plot Los Padres monthly mean max temperature data (2096-2099)
-
-(
-    air_lp_45.hvplot.line(
-        title='Los Padres RCP 4.5 Average Max Temperature (2096-2099)',
-        frame_width=550, frame_height=320
-    )
-    +
-    air_lp_85.hvplot.line(
-        title='Los Padres RCP 8.5 Average Max Temperature (2096-2099)',
-        frame_width=550, frame_height=320, line_color='orange'
-    )
-)
-```
-
-<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Climate-Scenarios.png" alt="Los Padres National Forest Climate Scenarios" width="100%" height="100%" /> 
-</div>
-
-Select Annual Average Max Temperature (2099)
-
-```python
-def select_annual_temp(year, da, raster_name):
-    """
-    Obtain annual temperature average and export raster.
-    
-    Args:
-    year (str): Target year for temperature selection. 
-    da (xarray.DataArray): DataArray of projected temperature values.
-    raster_name (str): The name of model raster.
-
-    Returns: None
-    """
-    da_annual = (
-        da
-        # select year 
-        .sel(time=year)
-        # take annual average
-        .mean('time')
-        # write projection EPSG:4326
-        .rio.write_crs(4326)
-    )
-
-    export_raster(da_annual, raster_name)
-```
-
-```python
-# Eldorado projected temperature
-select_annual_temp('2099', eldorado_rcp45_da, 'air_eld_45_2099.tif')
-
-# Los Padres projected temperature 
-select_annual_temp('2099', los_padres_rcp45_da, 'air_lp_45_2099.tif')
-```
-
-For a given site/climate scenario combination, identify and plot suitability
-
-```python
-def calculate_suitability_score(raster, optimal_value, tolerance_range):
-    """ 
-    Calculate a fuzzy suitability score (0–1) for each raster cell based on 
-    proximity to the optimal value.
-
-    Args:
-    raster (xarray.DataArray): Input raster layer. 
-    optimal_value (float): Optimal value for the variable.
-    tolerance_range (float): Suitable values range. 
-
-    Returns:
-    xarray.DataArray: A raster of suitability scores (0-1).
-    """
-
-    # Calculate using a fuzzy Gaussian function to assign scores 
-    # between 0 and 1
-    suitability = np.exp(
-                    -((raster - optimal_value) ** 2) 
-                    / (2 * tolerance_range ** 2)
-                )
-
-    # Suitability scores (0–1) 
-    return suitability
-```
-
-```python
-def build_habitat_suitability_model(input_rasters, optimal_values, 
-                                    tolerance_ranges, output_dir, raster_name):
-    """ 
-    Build a habitat suitability model by combining fuzzy suitability scores 
-    for each variable. 
-
-    Args:
-    input_rasters (list): List of input rasters.
-    optimal_values (list): List of optimal values for variables.
-    tolerance_ranges (list): List of tolerance values for variables.
-    output_dir (str): The model output directory.
-    raster_name (str): The name of model raster.
-
-    Returns:
-    str: The path of the suitability raster.
-    """
-    
-    os.makedirs(output_dir, exist_ok=True)
-
-    # Load and calculate suitability scores for each raster
-    suitability_layers = []
-    suit_zip = zip(input_rasters, optimal_values, tolerance_ranges)
-    for raster_path, optimal_value, tolerance_range in suit_zip:
-        raster = rxr.open_rasterio(raster_path, masked=True).squeeze()
-        suitability_layer = calculate_suitability_score(
-                                raster, optimal_value, tolerance_range
-                            )
-        suitability_layers.append(suitability_layer)
-
-    # Combine suitability scores by multiplying across all layers
-    combined_suitability = suitability_layers[0]
-    for layer in suitability_layers[1:]:
-        combined_suitability *= layer
-
-    # Save the combined suitability raster
-    output_file = os.path.join(output_dir, f"{raster_name}.tif")
-    combined_suitability.rio.to_raster(output_file)
-    print(f"Combined suitability raster saved to: {raster_name}.tif")
-
-    # Path to the final combined suitability raster
-    return output_file
-```
+Identify Suitability
 
 ```python
 # Optimal values for species for each variable
@@ -915,86 +334,112 @@ optimal_values = [1500.0, 90.0, 0.0, 6.75]
 tolerance_ranges = [1500.0, 20.0, 65.0, 0.75]
 ```
 
-Eldorado National Forest Suitability (RCP 4.5 Scenario)
+Eldorado National Forest Suitability 
 
-```python
-eldorado_45_input_rasters = [
-    f"{data_dir}/air_eld_45_2099.tif",
-    f"{data_dir}/eldorado_aspect.tif",
-    f"{data_dir}/eldorado_soil_ph.tif"
-]
-
-# Ensure consistent spatial resolution and projection
-eldorado_rcp45_rasters = harmonize_raster_layers(
-                            f"{data_dir}/eldorado_elevation.tif", 
-                            eldorado_45_input_rasters, data_dir
-                        )
 ```
-```python
-eldorado_rcp45_combined_suitability = build_habitat_suitability_model(
-    eldorado_rcp45_rasters, optimal_values, tolerance_ranges, 
-    data_dir, 'eldorado_rcp45_suitability'
-)
-```
-```python
-eldorado_rcp45_suitability_plt = plot_site(
-    f"{data_dir}/eldorado_rcp45_suitability.tif", eldorado_gdf, 
-    'Eldorado-National-Forest-Suitability', 
-    'Eldorado National Forest Suitability: RCP 4.5 (2099)', 
-    'Suitability', 'YlGn', 'black', tif_file=True
-)
+# CanESM2 (Warm and wet)
 
-eldorado_rcp45_suitability_plt
+build_habitat_suitability_model('eldorado', 'mid_century', 'CanESM2',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'eld_mc_CanESM2_suitability')
+
+build_habitat_suitability_model('eldorado', 'late_century', 'CanESM2',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'eld_lc_CanESM2_suitability')
+
+# MIROC-ESM-CHEM (Warm and dry)
+
+build_habitat_suitability_model('eldorado', 'mid_century', 'MIROC-ESM-CHEM',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'eld_mc_MIROC-ESM-CHEM_suitability')
+
+build_habitat_suitability_model('eldorado', 'late_century', 'MIROC-ESM-CHEM',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'eld_lc_MIROC-ESM-CHEM_suitability')
+
+# CNRM-CM5 (Cool and wet)
+
+build_habitat_suitability_model('eldorado', 'mid_century', 'CNRM-CM5',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'eld_mc_CNRM-CM5_suitability')
+
+build_habitat_suitability_model('eldorado', 'late_century', 'CNRM-CM5',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'eld_lc_CNRM-CM5_suitability')
+
+# GFDL-ESM2M (Cool and dry)
+
+build_habitat_suitability_model('eldorado', 'mid_century', 'GFDL-ESM2M',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'eld_mc_GFDL-ESM2M_suitability')
+
+build_habitat_suitability_model('eldorado', 'late_century', 'GFDL-ESM2M',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'eld_lc_GFDL-ESM2M_suitability')
 ```
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Suitability.png" alt="Eldorado National Forest Suitability" width="100%" height="100%" /> 
+    <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Suitability-Late-Century-CanESM2.png" alt="Eldorado National Forest Suitability Late Century CanESM2" width="100%" height="100%" /> 
 </div>
 
-Los Padres National Forest Suitability (RCP 4.5 Scenario)
+Los Padres National Forest Suitability
 
 ```python
-los_padres_45_input_rasters = [
-    f"{data_dir}/air_lp_45_2099.tif",
-    f"{data_dir}/los_padres_aspect.tif",
-    f"{data_dir}/los_padres_soil_ph.tif"
-]
+# CanESM2 (Warm and wet)
 
-los_padres_rcp45_rasters = harmonize_raster_layers(
-                            f"{data_dir}/los_padres_elevation.tif", 
-                            los_padres_45_input_rasters, data_dir
-                        )
-```
-```python
-los_padres_rcp45_combined_suitability = build_habitat_suitability_model(
-    los_padres_rcp45_rasters, optimal_values, tolerance_ranges, 
-    data_dir, 'los_padres_rcp45_suitability'
-)
-```
-```python
-los_padres_rcp45_combined_suitability_plt = plot_site(
-    f"{data_dir}/los_padres_rcp45_suitability.tif", los_padres_gdf, 
-    'Los-Padres-National-Forest-Suitability', 
-    'Los Padres National Forest Suitability: RCP 4.5 (2099)', 
-    'Suitability', 'YlGn', 'black', tif_file=True
-)
+build_habitat_suitability_model('los_padres', 'mid_century', 'CanESM2',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'lp_mc_CanESM2_suitability')
 
-los_padres_rcp45_combined_suitability_plt
+build_habitat_suitability_model('los_padres', 'late_century', 'CanESM2',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'lp_lc_CanESM2_suitability')
+
+# MIROC-ESM-CHEM (Warm and dry)
+
+build_habitat_suitability_model('los_padres', 'mid_century', 'MIROC-ESM-CHEM',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'lp_mc_MIROC-ESM-CHEM_suitability')
+
+build_habitat_suitability_model('los_padres', 'late_century', 'MIROC-ESM-CHEM',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'lp_lc_MIROC-ESM-CHEM_suitability')
+
+# CNRM-CM5 (Cool and wet)
+
+build_habitat_suitability_model('los_padres', 'mid_century', 'CNRM-CM5',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'lp_mc_CNRM-CM5_suitability')
+
+build_habitat_suitability_model('los_padres', 'late_century', 'CNRM-CM5',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'lp_lc_CNRM-CM5_suitability')
+
+# GFDL-ESM2M (Cool and dry)
+
+build_habitat_suitability_model('los_padres', 'mid_century', 'GFDL-ESM2M',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'lp_mc_GFDL-ESM2M_suitability')
+
+build_habitat_suitability_model('los_padres', 'late_century', 'GFDL-ESM2M',
+                                optimal_values, tolerance_ranges, data_dir, 
+                                'lp_lc_GFDL-ESM2M_suitability')
 ```
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Suitability.png" alt="Los Padres National Forest Suitability" width="100%" height="100%" /> 
+    <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Suitability-Late-Century-CanESM2.png" alt="Los Padres National Forest Suitability Late Century CanESM2" width="100%" height="100%" /> 
 </div>
 
 
 #### Discussion
 
-Under both medium and high emissions scenarios, the average annual maximum temperatures are [projected to grow by 7.5°F to 10.9°F](https://www.fs.usda.gov/Internet/FSE_DOCUMENTS/fseprd985002.pdf) at the end of the century (see RCP 4.5 vs. 8.5 Average Max Temperature plots). Intense precipitation events are projected as well, with the frequencies of [pronounced dry seasons and whiplash events](https://doi.org/10.1038/s41558-018-0140-y) expanding by over 50% across the state with a notable change in Southern California: a ~200% increase in extreme dry seasons, a ~150% increase in extreme wet seasons, and a ~75% increase in year-to-year whiplash. Blue oaks are equipped to withstand drier conditions compared to other native trees, abundant in areas with less conducive soils where they often cohabitate with pines. Nonetheless, the onset of a [severe drought diminishes the threshold of site tolerance](https://oaks.cnr.berkeley.edu/wp-content/uploads/2020/04/Swiecki-Bernhardt-Oak-Mortality-4.2-2020.pdf). Historically blue oak mortality has been generally attributed to decay fungi such as canker rots and root-rotting decay fungi. Pathogens like *Phytophthora ramorum*, the cause for sudden oak death, respond faster than trees to drought followed by high precipitation events, accelerating disintegration. The combination of disease and long-term climate stress contributes to raised levels of mortality years after drought. Additionally, although blue oaks have evolved in an environment where fires occur regularly and can survive low-to-moderate intensity fires, the threat of [conifer encroachment](https://oaks.cnr.berkeley.edu/conifer-encroachment/) subjects oaks to more canopy fire risk.
+Habitat suitability for mid and late 21st century was assessed for a medium emissions scenario (RCP 4.5) using four diverging climate models: CanESM2 (Warm/Wet), MIROC-ESM-CHEM (Warm/Dry), CNRM-CM5 (Cool/Wet), and GFDL-ESM2M (Cool/Dry). Species tolerance and optimal ranges for elevation (1,500 ± 1,500 meters), temperature (90 ± 20 °F), aspect (0 ± 65 degrees), and soil (6.75 ± 0.75 pH) were evaluated in site suitability scores. Given the oak's accommodating tolerance for maximum temperature fluctations, model differences were minimal between plots and 30-year periods. However, this flexibility does not indicate a robustness to extreme seasonal changes. Blue oaks are generally equipped to withstand drier conditions compared to other native trees, abundant in areas with less conducive soils where they often cohabitate with pines. Nonetheless, the onset of a [severe drought diminishes the threshold of site tolerance](https://oaks.cnr.berkeley.edu/wp-content/uploads/2020/04/Swiecki-Bernhardt-Oak-Mortality-4.2-2020.pdf). 
 
-Los Padres National Forest is [vulnerable to floods](https://www.fs.usda.gov/Internet/FSE_DOCUMENTS/fseprd497638.pdf) and debris flows after extreme precipitation events, in particular after recurrent wildfires, due to the forest’s position of the Coast and Transverse mountain ranges in relation to the coast. Sediment flow in Southern California has a history of high variability under El Niño Southern Oscillation (ENSO) events and has led to the destruction of oak riparian habitat. Future climate neutral scenarios predict higher nighttime minimum temperatures and subsequently an [expansion of mixed woodland](https://www.fs.usda.gov/Internet/FSE_DOCUMENTS/fseprd497638.pdf) with oaks replacing conifer-dominated areas. 
+By the end of the century, the average annual maximum temperatures are [projected to grow by 7.5°F to 10.9°F](https://www.fs.usda.gov/Internet/FSE_DOCUMENTS/fseprd985002.pdf). Intense precipitation events are projected as well, with frequencies of [pronounced dry seasons and whiplash events](https://doi.org/10.1038/s41558-018-0140-y) expanding by over 50% across the state with a notable change in Southern California: a ~200% increase in extreme dry seasons, a ~150% increase in extreme wet seasons, and a ~75% increase in year-to-year whiplash. Historically blue oak mortality has been typically attributed to decay fungi such as canker rots and root-rotting decay fungi. Pathogens like *Phytophthora ramorum*, the cause for sudden oak death, respond faster than trees to drought followed by high precipitation events, accelerating disintegration. The combination of disease and long-term climate stress contributes to raised levels of mortality years after drought. Futhermore, although blue oaks have evolved in an environment where fires occur regularly and can survive low-to-moderate intensity fires, the threat of [conifer encroachment](https://oaks.cnr.berkeley.edu/conifer-encroachment/) subjects oaks to more canopy fire risk in a warmer climate.
 
-Eldorado National Forest is similarly projected to experience extreme climate variability between wet and dry years. Toward the end of the century at the lowest and highest elevations in the Sierra Nevada, warming temperatures will lead to greater evaporation and a [projected ~15% reduction in fuel and soil moisture](https://www.fs.usda.gov/Internet/FSE_DOCUMENTS/fseprd985002.pdf). This scenario indicates greater drought likelihood and impacts across native plant communities. Heightened fire weather conditions will generate [shifts in blue oak mortality rates](https://www.fs.usda.gov/Internet/FSE_DOCUMENTS/fseprd985002.pdf) as well as post-fire germination. Moreover a shift in oak mortality affects fire activity. Blue oak sites with [south-facing aspects](https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/ecs2.3558) in particular demonstrate lower potential for accumulated drainage and thus the highest level of mortality compared to other aspects. These sites are especially at risk for greater dead woody surface fuels, enhancing the probability of larger fires over longer periods.
+**Sites**
 
+Los Padres National Forest is [vulnerable to floods](https://www.fs.usda.gov/Internet/FSE_DOCUMENTS/fseprd497638.pdf) and debris flows after extreme precipitation events, in particular after recurrent wildfires, due to the forest’s position in the Coast and Transverse mountain ranges in relation to the coast. Sediment flow in Southern California has a history of high variability under El Niño Southern Oscillation (ENSO) events and has led to the destruction of oak riparian habitat. Eldorado National Forest is similarly projected to experience extreme climate variability between wet and dry years. Toward the end of the century at the lowest and highest elevations in the Sierra Nevada, warming temperatures will lead to greater evaporation and a [projected ~15% reduction in fuel and soil moisture](https://www.fs.usda.gov/Internet/FSE_DOCUMENTS/fseprd985002.pdf). This scenario indicates greater drought likelihood and impacts across native plant communities. Heightened fire weather conditions will generate [shifts in blue oak mortality rates](https://www.fs.usda.gov/Internet/FSE_DOCUMENTS/fseprd985002.pdf) as well as post-fire germination. Moreover a shift in oak mortality affects fire activity. Blue oak sites with [south-facing aspects](https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/ecs2.3558) in particular demonstrate lower potential for accumulated drainage and thus the highest level of mortality compared to other aspects. Sites like these are especially at risk for greater dead woody surface fuels, enhancing the probability of larger fires over longer periods.
 
 #### References
 
@@ -1040,6 +485,8 @@ UC Oaks. (n.d.). *Coastal oak woodland & wildlife habitat.* https://oaks.cnr.ber
 UC Oaks. (n.d.). *Conifer encroachment.* https://oaks.cnr.berkeley.edu/conifer-encroachment/
 
 UC Oaks. (2024, July 1). *Oak tree species ID & ecology.* https://oaks.cnr.berkeley.edu/oak-tree-species-id-ecology
+
+University of California Merced (n.d.). *Future Climate Scenarios*. The Climate Toolbox. https://climatetoolbox.org/tool/Future-Climate-Scenarios
 
 USDA Forest Service. (n.d.). *About the area*. https://www.fs.usda.gov/main/eldorado/about-forest/about-area
 
