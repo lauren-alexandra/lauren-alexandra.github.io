@@ -3,7 +3,7 @@ layout: page
 title: Sacramento Redlining
 description: Greenspace Analysis
 img: /assets/img/sac_redlining/sac-aerial-post.png
-importance: 3
+importance: 4
 category: work
 related_publications: true
 ---
