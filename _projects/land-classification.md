@@ -2,7 +2,7 @@
 layout: page
 title: Land Classification
 description: Putah Creek Watershed
-img: assets/img/land_classification/Yolo_Bypass_Wildlife_Area.jpg
+img: assets/img/land_classification/South_Fork_Putah_Creek.png
 importance: 2
 category: work
 related_publications: true
@@ -17,11 +17,14 @@ related_publications: true
 
 #### Data Description
 
+The [HLSL30 v002](doi:10.5067/HLS/HLSL30.002) product provides 30-m Nadir Bidirectional Reflectance Distribution Function (BRDF)-Adjusted Reflectance (NBAR) and is derived from Landsat 8/9 Operational Land Imager (OLI) data products through the Harmonized Landsat Sentinel-2 (HLS) project. The sensor resolution is 30m, imagery resolution is 30m, and the temporal resolution is daily with an 8 day revisit time. 
 
 #### Data Citation
 
+NASA. (2024). *HLSL30 v002* [Data set]. http://doi.org/10.5067/HLS/HLSL30.002
 
 #### Methods
+
 
 
 #### Analysis
