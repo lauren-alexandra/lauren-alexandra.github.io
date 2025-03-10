@@ -9,7 +9,7 @@ related_publications: true
 ---
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/land_classification/Putah_Creek_through_Yolo_Bypass_Wildlife_Area.png" alt="Putah Creek Watershed" width="100%" height="100%" longdesc="https://www.alltrails.com/trail/us/california/yolo-bypass-nature-trail" /> 
+    <img src="/assets/img/land_classification/South_Fork_Putah_Creek.png" alt="South Fork Putah Creek Watershed" width="100%" height="100%" longdesc="https://i0.wp.com/californiawaterblog.com/wp-content/uploads/2023/07/Putah1.jpg" /> 
 </div>
 
 #### Introduction
