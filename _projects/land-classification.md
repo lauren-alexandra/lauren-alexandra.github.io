@@ -1,18 +1,19 @@
 ---
 layout: page
 title: Land Classification
-description: Putah Creek Watershed
-img: assets/img/land_classification/South_Fork_Putah_Creek.png
+description: Lower Putah Creek Watershed
+img: assets/img/land_classification/lower_putah_creek.png
 importance: 2
 category: work
 related_publications: true
 ---
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/land_classification/South_Fork_Putah_Creek.png" alt="South Fork Putah Creek Watershed" width="100%" height="100%" longdesc="https://i0.wp.com/californiawaterblog.com/wp-content/uploads/2023/07/Putah1.jpg" /> 
+    <img src="/assets/img/land_classification/lower_putah_creek.png" alt="Lower Putah Creek Watershed" width="100%" height="100%" longdesc="https://i0.wp.com/californiawaterblog.com/wp-content/uploads/2023/07/Putah1.jpg" /> 
 </div>
 
 #### Introduction
+
 
 
 #### Data Description
@@ -181,12 +182,12 @@ wbd_gdf = download_watershed_bounds(boundary_filename, huc)
 ```python
 # Select watershed 
 
-# Putah Creek-South Fork Putah Creek 
+# Putah Creek-Lower Putah Creek 
 watershed = '180201620504'
 
 sf_putah_gdf = (
     wbd_gdf[wbd_gdf[f'huc{huc}'] # select HU12 subregion
-    .isin([watershed])] # subset for South Fork Putah Creek
+    .isin([watershed])] # subset for Lower Putah Creek
     .dissolve() # dissolve geometries into single observation
 )
 ```
@@ -204,7 +205,7 @@ sf_putah_gdf = (
 ```
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/land_classification/watershed_boundary.png" alt="South Fork Putah Creek Watershed Boundary" width="70%" height="70%" /> 
+    <img src="/assets/img/land_classification/watershed_boundary.png" alt="Lower Putah Creek Watershed Boundary" width="70%" height="70%" /> 
 </div>
 
 Retrieve Multispectral Data
@@ -977,11 +978,11 @@ sf_putah_reflectance_df.cluster.to_xarray().sortby(['x', 'y']).hvplot(
 ```
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/land_classification/watershed_aerial.png" alt="South Fork Putah Creek Watershed" width="100%" height="70%" /> 
+    <img src="/assets/img/land_classification/watershed_aerial.png" alt="Lower Putah Creek Watershed" width="100%" height="70%" /> 
 </div>
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/land_classification/watershed_spectral_clusters.png" alt="South Fork Putah Creek Watershed Spectral Clusters" width="100%" height="70%" /> 
+    <img src="/assets/img/land_classification/watershed_spectral_clusters.png" alt="Lower Putah Creek Watershed Spectral Clusters" width="100%" height="70%" /> 
 </div>
 
 
