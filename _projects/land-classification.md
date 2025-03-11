@@ -1004,6 +1004,8 @@ Borchers, J. (2018, November 25). *Case Study: Solano County Water Agency.* Sier
 
 da Costa-Luis, C., Larroque, S., Altendorf, K., Mary, H., Sheridan, R., Korobov, M., … McCracken, J. (2024). *tqdm: A fast, Extensible Progress Bar for Python and CLI* (Version 4.67.1) [Computer software]. Zenodo. https://zenodo.org/records/14231923
 
+Delta Stewardship Council. (2025, January 28). *Yolo Bypass inundation.* https://viewperformance.deltacouncil.ca.gov/pm/yolo-bypass-inundation
+
 Gillies, S., van der Wel, C., Van den Bossche, J., Taves, M. W., Arnott, J., & Ward, B. C. (2025). *Shapely* (Version 2.0.7) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.14776272 
 
 Harris, C. R., Millman, K. J., J. van der Walt, S., Gommers, R., Virtanen, P., Cournapeau, D., … Oliphant, T. E. (2020). Array programming with NumPy. *Nature, 585*, 357–362. https://doi.org/10.1038/s41586-020-2649-2
@@ -1015,6 +1017,8 @@ Hunter, J. D. (2024). *Matplotlib: A 2D graphics environment* (Version 3.9.2) [C
 Jordahl, K., Van den Bossche, J., Fleischmann, M., Wasserman, J., McBride, J., Gerard, J., … Leblanc, F. (2024). *geopandas/geopandas: v1.0.1* (Version 1.0.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.12625316 
 
 Met Office. (2024). *Cartopy: a cartographic python library with a Matplotlib interface* (Version 0.24.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13905945
+
+Pottinger, L. (2019, July 29). *The Yolo Bypass: It’s a floodplain! It’s farmland! It’s an ecosystem!* Public Policy Institute of California. https://www.ppic.org/blog/the-yolo-bypass-its-a-floodplain-its-farmland-its-an-ecosystem 
 
 Putah Creek Council. (n.d.). *The Putah Creek Watershed.* https://putahcreekcouncil.org/who-we-are/putah-creek-watershed 
 
@@ -1033,6 +1037,8 @@ Snow, A. D., Scott, R., Raspaud, M., Brochart, D., Kouzoubov, K., Henderson, S.,
 The pandas development team. (2024). *pandas-dev/pandas: Pandas* (Version 2.2.2) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.3509134
 
 The scikit-learn developers. (2024). scikit-learn (1.5.2). [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13749328
+
+US Army Corps of Engineers. (n.d.). *Yolo Bypass comprehensive study.* https://www.spk.usace.army.mil/Missions/Civil-Works/Yolo-Bypass
 
 Wasser, L., Max, J., McGlinchy, J., Palomino, J., Holdgraf, C., & Head, T. (2021). *earthlab/earthpy: Soft release of earthpy* (Version 0.9.4) [Computer software]. Zenodo. https://zenodo.org/records/5544946
 
