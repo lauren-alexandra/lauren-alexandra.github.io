@@ -20,9 +20,13 @@ related_publications: true
 
 The [HLSL30 v002](doi:10.5067/HLS/HLSL30.002) product provides 30-m Nadir Bidirectional Reflectance Distribution Function (BRDF)-Adjusted Reflectance (NBAR) and is derived from Landsat 8/9 Operational Land Imager (OLI) data products through the Harmonized Landsat Sentinel-2 (HLS) project. The sensor resolution is 30m, imagery resolution is 30m, and the temporal resolution is daily with an 8 day revisit time. 
 
+[USGS Watershed Boundary Dataset (WBD) for 2-digit Hydrologic Unit - 18](https://www.sciencebase.gov/catalog/item/5a1632bae4b09fc93dd1721d) is a dataset of hydrologic unit polygons and corresponding lines that define the boundary of each polygon. Polygon attributes include hydrologic unit codes (HUC), size (in the form of acres and square kilometers), name, downstream hydrologic unit code, type of watershed, non-contributing areas, and flow modifications.
+
 #### Data Citation
 
 NASA. (2024). *HLSL30 v002* [Data set]. http://doi.org/10.5067/HLS/HLSL30.002
+
+USGS. (2025). *USGS Watershed Boundary Dataset (WBD) for 2-digit Hydrologic Unit - 18 (published 20250108) Shapefile* [Data set]. https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/WBD/HU2/Shape/WBD_18_HU2_Shape.zip
 
 #### Methods
 
