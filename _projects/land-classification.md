@@ -1000,6 +1000,8 @@ sf_putah_reflectance_df.cluster.to_xarray().sortby(['x', 'y']).hvplot(
 
 Barrett, A., Battisto, C., J. Bourbeau, J., Fisher, M., Kaufman, D., Kennedy, J., … Steiker, A. (2024). *earthaccess* (Version 0.12.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.8365009
 
+Borchers, J. (2018, November 25). *Case Study: Solano County Water Agency.* Sierra Institute. https://sierrainstitute.us/new/wp-content/uploads/2021/10/Solano-County-Water-Agency-Summary-Report-11-25-18-NO-RESPONDENT-FOOTNOTES.pdf
+
 da Costa-Luis, C., Larroque, S., Altendorf, K., Mary, H., Sheridan, R., Korobov, M., … McCracken, J. (2024). *tqdm: A fast, Extensible Progress Bar for Python and CLI* (Version 4.67.1) [Computer software]. Zenodo. https://zenodo.org/records/14231923
 
 Gillies, S., van der Wel, C., Van den Bossche, J., Taves, M. W., Arnott, J., & Ward, B. C. (2025). *Shapely* (Version 2.0.7) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.14776272 
@@ -1014,11 +1016,17 @@ Jordahl, K., Van den Bossche, J., Fleischmann, M., Wasserman, J., McBride, J., G
 
 Met Office. (2024). *Cartopy: a cartographic python library with a Matplotlib interface* (Version 0.24.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13905945
 
+Putah Creek Council. (n.d.). *The Putah Creek Watershed.* https://putahcreekcouncil.org/who-we-are/putah-creek-watershed 
+
 Python Software Foundation. (2024). *Python* (Version 3.12.8) [Computer software]. https://docs.python.org/release/3.12.6 
 
 Rudiger, P., Hansen, S. H., Bednar, J. A., Steven, J., Liquet, M., Little, B., … Bampton, J. (2024). *holoviz/geoviews: Version 1.13.0* (Version 1.13.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13782761
 
 Rudiger, P., Liquet, M., Signell, J., Hansen, S. H., Bednar, J. A., Madsen, M. S., … Hilton, T. W. (2024). *holoviz/hvplot: Version 0.11.0* (Version 0.11.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13851295 
+
+Rypel, A. (2023, July 8). *Putah Creek’s rebirth: A model for reconciling other degraded streams?* UC Davis Center for Watershed Sciences. https://californiawaterblog.com/2023/07/08/putah-creeks-rebirth-a-model-for-reconciling-other-degraded-streams 
+
+Sacramento River Watershed Program. (n.d.). *Putah Creek Watershed.* https://sacriver.org/explore-watersheds/westside-subregion/putah-creek-watershed 
 
 Snow, A. D., Scott, R., Raspaud, M., Brochart, D., Kouzoubov, K., Henderson, S., … Weidenholzer, L. (2024). *corteva/rioxarray: 0.18.1 Release* (Version 0.18.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.4570456
 
@@ -1027,3 +1035,5 @@ The pandas development team. (2024). *pandas-dev/pandas: Pandas* (Version 2.2.2)
 The scikit-learn developers. (2024). scikit-learn (1.5.2). [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13749328
 
 Wasser, L., Max, J., McGlinchy, J., Palomino, J., Holdgraf, C., & Head, T. (2021). *earthlab/earthpy: Soft release of earthpy* (Version 0.9.4) [Computer software]. Zenodo. https://zenodo.org/records/5544946
+
+Yolo Basin Foundation. (n.d.). *About the Yolo Bypass Wildlife Area.* https://yolobasin.org/yolobypasswildlifearea
