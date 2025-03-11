@@ -30,7 +30,9 @@ USGS. (2025). *USGS Watershed Boundary Dataset (WBD) for 2-digit Hydrologic Unit
 
 #### Methods
 
+The HU12 subwatershed within Hydrologic Unit Region 18 was loaded into a GeoDataFrame with [geopandas](https://geopandas.org/). The watershed boundary dataset (WBD) was subset for Lower Putah Creek and geometries were dissolved into a single observation. [earthaccess](https://earthaccess.readthedocs.io/en/latest/) (a library for NASA's Search API) retrieved data granules by dataset (HLSL30) and scoped the data to late 2023 (October to December) and the spatial bounds collected from the WBD GeoDataFrame. 
 
+Granule metadata was compiled cropped, scaled, masked, and merged into a spectral reflectance DataFrame of processed DataArrays. The DataFrame was grouped by band to concatenate across dates and produce a composite DataArray. Finally, with bands ranging across varying wavelengths, the Elbow Method was applied to select the optimal number of clusters. Data was clustered by spectral signature using the scikit-learn k-means algorithm. 
 
 #### Analysis
 
@@ -145,7 +147,7 @@ def download_watershed_bounds(boundary_filename, huc):
     Download a USGS watershed boundary dataset.
 
     Args:
-    boundary_filename (str): USGS National Map regional shapefile name.
+    boundary_filename (str): USGS WBD shapefile name.
     huc (int): USGS Hydrologic Unit Code.
 
     Returns:
