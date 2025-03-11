@@ -14,7 +14,9 @@ related_publications: true
 
 #### Introduction
 
+Putah Creek Watershed is located in west-central California, covering 638 square miles at a length of about 70 miles. [Creek headwaters](https://sacriver.org/explore-watersheds/westside-subregion/putah-creek-watershed) are nested in the Mayacamas Mountains, part of the Coast Range near 4,7000 ft. elevation, flowing east to the Berryessa Reservoir. Monticello Dam releases water from the lake to another dam, Putah Diversion Dam (PDD). The watershed is segmented into [upper and lower watersheds](https://putahcreekcouncil.org/who-we-are/putah-creek-watershed), with lower Putah Creek residing below PDD consisting of 32 miles of creek ending in the [Yolo Bypass](https://yolobasin.org/yolobypasswildlifearea/), a tributary of the Sacramento River. Most of the annual flow in this subwatershed (~90%) can be attributed to the upper watershed hydrology. 
 
+Lower Putah Creek has a decades long history of legal conflict (Borchers, 2018) beginning with the Bureau of Reclamation Solano Project forming PDD and Berryessa Reservoir (1957). The project allocated water for agricultural, industrial, and municipal use and soon led to the drying of the creek (1989). The consequential impact on riparian wildlife catalyzed a local response from the non-profit Putah Creek Council (PCC) which moved to file a lawsuit against both Solano County Water Agency and Solano Irrigation District. PCC was joined in the lawsuit by the Regents of the University of California and many municipalities. In 1996, the case went to trial and the California Superior Court ordered a 50% increase in the PDD minimum release schedule. Thereafter the Putah Creek Accord (2000) established a flow regime more closely aligned with the creek's historic flow regime and ensured seasonal pulse flows for anadromous fish.
 
 #### Data Description
 
