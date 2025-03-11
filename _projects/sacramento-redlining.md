@@ -536,9 +536,9 @@ Harris, C. R., Millman, K. J., J. van der Walt, S., Gommers, R., Virtanen, P., C
 
 Hauser, M., Spring, A., Busecke, J., van Driel, M., & Lorenz, R. (2024). *regionmask/regionmask: version 0.12.1* (Version 0.12.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.3585542
 
-Hunter, J. D. (2024). *Matplotlib: A 2D graphics environment* (Version 3.9.2) [Computer software]. Zenodo. https://zenodo.org/records/13308876
-
 Hoyer, S. & Hamman, J., (2017). xarray: N-D labeled arrays and datasets in Python. *Journal of Open Research Software. 5*(1), 10. https://doi.org/10.5334/jors.148
+
+Hunter, J. D. (2024). *Matplotlib: A 2D graphics environment* (Version 3.9.2) [Computer software]. Zenodo. https://zenodo.org/records/13308876
 
 Jordahl, K., Van den Bossche, J., Fleischmann, M., Wasserman, J., McBride, J., Gerard, J., … Leblanc, F. (2024). *geopandas/geopandas: v1.0.1* (Version 1.0.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.12625316 
 

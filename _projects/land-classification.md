@@ -45,11 +45,11 @@ import re
 import pathlib
 import warnings
 
-import cartopy.crs as ccrs
 import earthaccess
 from earthaccess import results
-import earthpy as et
+import earthpy as et 
 import geopandas as gpd
+import cartopy.crs as ccrs
 import geoviews as gv
 import hvplot.pandas
 import hvplot.xarray
@@ -57,7 +57,7 @@ import numpy as np
 import pandas as pd
 import rioxarray as rxr
 import rioxarray.merge as rxrmerge
-from tqdm.notebook import tqdm
+from tqdm.notebook import tqdm 
 import xarray as xr
 from shapely.geometry import Polygon
 from sklearn.cluster import KMeans
@@ -995,8 +995,35 @@ sf_putah_reflectance_df.cluster.to_xarray().sortby(['x', 'y']).hvplot(
 #### Discussion
 
 
+
 #### References
 
+Barrett, A., Battisto, C., J. Bourbeau, J., Fisher, M., Kaufman, D., Kennedy, J., … Steiker, A. (2024). *earthaccess* (Version 0.12.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.8365009
 
+da Costa-Luis, C., Larroque, S., Altendorf, K., Mary, H., Sheridan, R., Korobov, M., … McCracken, J. (2024). *tqdm: A fast, Extensible Progress Bar for Python and CLI* (Version 4.67.1) [Computer software]. Zenodo. https://zenodo.org/records/14231923
 
+Gillies, S., van der Wel, C., Van den Bossche, J., Taves, M. W., Arnott, J., & Ward, B. C. (2025). *Shapely* (Version 2.0.7) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.14776272 
 
+Harris, C. R., Millman, K. J., J. van der Walt, S., Gommers, R., Virtanen, P., Cournapeau, D., … Oliphant, T. E. (2020). Array programming with NumPy. *Nature, 585*, 357–362. https://doi.org/10.1038/s41586-020-2649-2
+
+Hoyer, S. & Hamman, J., (2017). xarray: N-D labeled arrays and datasets in Python. *Journal of Open Research Software. 5*(1), 10. https://doi.org/10.5334/jors.148
+
+Hunter, J. D. (2024). *Matplotlib: A 2D graphics environment* (Version 3.9.2) [Computer software]. Zenodo. https://zenodo.org/records/13308876
+
+Jordahl, K., Van den Bossche, J., Fleischmann, M., Wasserman, J., McBride, J., Gerard, J., … Leblanc, F. (2024). *geopandas/geopandas: v1.0.1* (Version 1.0.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.12625316 
+
+Met Office. (2024). *Cartopy: a cartographic python library with a Matplotlib interface* (Version 0.24.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13905945
+
+Python Software Foundation. (2024). *Python* (Version 3.12.8) [Computer software]. https://docs.python.org/release/3.12.6 
+
+Rudiger, P., Hansen, S. H., Bednar, J. A., Steven, J., Liquet, M., Little, B., … Bampton, J. (2024). *holoviz/geoviews: Version 1.13.0* (Version 1.13.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13782761
+
+Rudiger, P., Liquet, M., Signell, J., Hansen, S. H., Bednar, J. A., Madsen, M. S., … Hilton, T. W. (2024). *holoviz/hvplot: Version 0.11.0* (Version 0.11.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13851295 
+
+Snow, A. D., Scott, R., Raspaud, M., Brochart, D., Kouzoubov, K., Henderson, S., … Weidenholzer, L. (2024). *corteva/rioxarray: 0.18.1 Release* (Version 0.18.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.4570456
+
+The pandas development team. (2024). *pandas-dev/pandas: Pandas* (Version 2.2.2) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.3509134
+
+The scikit-learn developers. (2024). scikit-learn (1.5.2). [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13749328
+
+Wasser, L., Max, J., McGlinchy, J., Palomino, J., Holdgraf, C., & Head, T. (2021). *earthlab/earthpy: Soft release of earthpy* (Version 0.9.4) [Computer software]. Zenodo. https://zenodo.org/records/5544946
