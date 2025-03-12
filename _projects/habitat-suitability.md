@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Habitat Suitability
-description: Blue Oak
+title: Blue Oak
+description: Habitat Suitability
 img: assets/img/habitat_suitability/blue-oak-profile.jpeg
 importance: 1
 category: work
