@@ -1,0 +1,504 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Land Classification | Lauren Alexandra </title> <meta name="author" content="Lauren Alexandra"> <meta name="description" content="Lower Putah Creek Watershed"> <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website"> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%AA&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://lauren-alexandra.github.io/projects/land-classification/"> <script src="/assets/js/theme.js?9a0c749ec5240d9cda97bc72359a72c0"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>initTheme();</script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">cv </a> </li> <li class="nav-item"> <button id="search-toggle" title="Search" onclick="openSearchModal()"> <span class="nav-link">ctrl k <i class="ti ti-search"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="ti ti-sun-moon" id="light-toggle-system"></i> <i class="ti ti-moon-filled" id="light-toggle-dark"></i> <i class="ti ti-sun-filled" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Land Classification</h1> <p class="post-description">Lower Putah Creek Watershed</p> </header> <article> <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;"> <img src="/assets/img/land_classification/lower_putah_creek.png" alt="Lower Putah Creek Watershed" width="100%" height="100%" longdesc="https://i0.wp.com/californiawaterblog.com/wp-content/uploads/2023/07/Putah1.jpg"> </div> <h4 id="introduction">Introduction</h4> <p>Putah Creek Watershed is located in west-central California, covering 638 square miles at a length of about 70 miles. <a href="https://sacriver.org/explore-watersheds/westside-subregion/putah-creek-watershed" rel="external nofollow noopener" target="_blank">Creek headwaters</a> are nested in the Mayacamas Mountains, part of the Coast Range near 4,7000 ft. elevation, flowing east to the Berryessa Reservoir. Monticello Dam releases water from the lake to another dam, Putah Diversion Dam (PDD). The watershed is segmented into <a href="https://putahcreekcouncil.org/who-we-are/putah-creek-watershed" rel="external nofollow noopener" target="_blank">upper and lower watersheds</a>, with lower Putah Creek residing below PDD consisting of 32 miles of creek ending in the <a href="https://yolobasin.org/yolobypasswildlifearea/" rel="external nofollow noopener" target="_blank">Yolo Bypass</a>, a tributary of the Sacramento River. Most of the annual flow in this subwatershed (~90%) can be attributed to the upper watershed hydrology.</p> <p>Lower Putah Creek has a decades long history of legal conflict (Borchers, 2018) beginning with the Bureau of Reclamation Solano Project forming PDD and Berryessa Reservoir (1957). The project allocated water for agricultural, industrial, and municipal use and soon led to the drying of the creek (1989). The consequential impact on riparian wildlife catalyzed a local response from the non-profit Putah Creek Council (PCC) which moved to file a lawsuit against both Solano County Water Agency and Solano Irrigation District. PCC was joined in the lawsuit by the Regents of the University of California and many municipalities. In 1996, the case went to trial and the California Superior Court ordered a 50% increase in the PDD minimum release schedule. Thereafter the Putah Creek Accord (2000) established a flow regime more closely aligned with the creek’s historic flow regime and ensured seasonal pulse flows for anadromous fish.</p> <h4 id="data-description">Data Description</h4> <p>The <a href="doi:10.5067/HLS/HLSL30.002">HLSL30 v002</a> product provides 30-m Nadir Bidirectional Reflectance Distribution Function (BRDF)-Adjusted Reflectance (NBAR) and is derived from Landsat 8/9 Operational Land Imager (OLI) data products through the Harmonized Landsat Sentinel-2 (HLS) project. The sensor resolution is 30m, imagery resolution is 30m, and the temporal resolution is daily with an 8 day revisit time.</p> <p><a href="https://www.sciencebase.gov/catalog/item/5a1632bae4b09fc93dd1721d" rel="external nofollow noopener" target="_blank">USGS Watershed Boundary Dataset (WBD) for 2-digit Hydrologic Unit - 18</a> is a dataset of hydrologic unit polygons and corresponding lines that define the boundary of each polygon. Polygon attributes include hydrologic unit codes (HUC), size (in the form of acres and square kilometers), name, downstream hydrologic unit code, type of watershed, non-contributing areas, and flow modifications.</p> <h4 id="data-citation">Data Citation</h4> <p>NASA. (2024). <em>HLSL30 v002</em> [Data set]. http://doi.org/10.5067/HLS/HLSL30.002</p> <p>USGS. (2025). <em>USGS Watershed Boundary Dataset (WBD) for 2-digit Hydrologic Unit - 18 (published 20250108) Shapefile</em> [Data set]. https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/WBD/HU2/Shape/WBD_18_HU2_Shape.zip</p> <h4 id="methods">Methods</h4> <p>The HU12 subwatershed within Hydrologic Unit Region 18 was loaded into a GeoDataFrame with <a href="https://geopandas.org/" rel="external nofollow noopener" target="_blank">geopandas</a>. The watershed boundary dataset (WBD) was subset for Lower Putah Creek and geometries were dissolved into a single observation. <a href="https://earthaccess.readthedocs.io/en/latest/" rel="external nofollow noopener" target="_blank">earthaccess</a> (a library for NASA’s Search API) retrieved data granules by dataset (HLSL30) and scoped the data to late 2023 (October to December) and the spatial bounds collected from the WBD GeoDataFrame.</p> <p>Granule metadata was compiled cropped, scaled, masked, and merged into a spectral reflectance DataFrame of processed DataArrays. The DataFrame was grouped by band to concatenate across dates and produce a composite DataArray. Finally, with bands ranging across varying wavelengths, the Elbow Method was applied to select the optimal number of clusters. Data was clustered by spectral signature using the scikit-learn k-means algorithm.</p> <h4 id="analysis">Analysis</h4> <p>Imports</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
+<span class="kn">import</span> <span class="n">pickle</span>
+<span class="kn">import</span> <span class="n">re</span>
+<span class="kn">import</span> <span class="n">pathlib</span>
+<span class="kn">import</span> <span class="n">warnings</span>
+
+<span class="kn">import</span> <span class="n">earthaccess</span>
+<span class="kn">from</span> <span class="n">earthaccess</span> <span class="kn">import</span> <span class="n">results</span>
+<span class="kn">import</span> <span class="n">earthpy</span> <span class="k">as</span> <span class="n">et</span> 
+<span class="kn">import</span> <span class="n">geopandas</span> <span class="k">as</span> <span class="n">gpd</span>
+<span class="kn">import</span> <span class="n">cartopy.crs</span> <span class="k">as</span> <span class="n">ccrs</span>
+<span class="kn">import</span> <span class="n">geoviews</span> <span class="k">as</span> <span class="n">gv</span>
+<span class="kn">import</span> <span class="n">hvplot.pandas</span>
+<span class="kn">import</span> <span class="n">hvplot.xarray</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="n">rioxarray</span> <span class="k">as</span> <span class="n">rxr</span>
+<span class="kn">import</span> <span class="n">rioxarray.merge</span> <span class="k">as</span> <span class="n">rxrmerge</span>
+<span class="kn">from</span> <span class="n">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span> 
+<span class="kn">import</span> <span class="n">xarray</span> <span class="k">as</span> <span class="n">xr</span>
+<span class="kn">from</span> <span class="n">shapely.geometry</span> <span class="kn">import</span> <span class="n">Polygon</span>
+<span class="kn">from</span> <span class="n">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">warnings</span><span class="p">.</span><span class="nf">simplefilter</span><span class="p">(</span><span class="sh">'</span><span class="s">ignore</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Prevent Geospatial Data Abstraction Library (GDAL) from quitting due to momentary disruptions
+</span><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">"</span><span class="s">GDAL_HTTP_MAX_RETRY</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">5</span><span class="sh">"</span>
+<span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">"</span><span class="s">GDAL_HTTP_RETRY_DELAY</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">1</span><span class="sh">"</span>
+</code></pre></div></div> <p>Include Cache Decorator</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">cached</span><span class="p">(</span><span class="n">func_key</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    A decorator to cache function results
+    
+    Parameters
+    ==========
+    key: str
+      File basename used to save pickled results
+    override: bool
+      When True, re-compute even if the results are already stored
+    </span><span class="sh">"""</span>
+    <span class="k">def</span> <span class="nf">compute_and_cache_decorator</span><span class="p">(</span><span class="n">compute_function</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        Wrap the caching function
+        
+        Parameters
+        ==========
+        compute_function: function
+          The function to run and cache results
+        </span><span class="sh">"""</span>
+        <span class="k">def</span> <span class="nf">compute_and_cache</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="sh">"""</span><span class="s">
+            Perform a computation and cache, or load cached result.
+            
+            Parameters
+            ==========
+            args
+              Positional arguments for the compute function
+            kwargs
+              Keyword arguments for the compute function
+            </span><span class="sh">"""</span>
+            <span class="c1"># Add an identifier from the particular function call
+</span>            <span class="k">if</span> <span class="sh">'</span><span class="s">cache_key</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">((</span><span class="n">func_key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="sh">'</span><span class="s">cache_key</span><span class="sh">'</span><span class="p">]))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">func_key</span>
+
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span>
+                <span class="n">et</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">HOME</span><span class="p">,</span> <span class="n">et</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">DATA_NAME</span><span class="p">,</span> <span class="sh">'</span><span class="s">jars</span><span class="sh">'</span><span class="p">,</span> <span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s">.pickle</span><span class="sh">'</span><span class="p">)</span>
+            
+            <span class="c1"># Check if the cache exists already or override caching
+</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">or</span> <span class="n">override</span><span class="p">:</span>
+                <span class="c1"># Make jars directory if needed
+</span>                <span class="n">os</span><span class="p">.</span><span class="nf">makedirs</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">dirname</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                
+                <span class="c1"># Run the compute function as the user did
+</span>                <span class="n">result</span> <span class="o">=</span> <span class="nf">compute_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                
+                <span class="c1"># Pickle the object
+</span>                <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="sh">'</span><span class="s">wb</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+                    <span class="n">pickle</span><span class="p">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Unpickle the object
+</span>                <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="sh">'</span><span class="s">rb</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">pickle</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+                    
+            <span class="k">return</span> <span class="n">result</span>
+        
+        <span class="k">return</span> <span class="n">compute_and_cache</span>
+    
+    <span class="k">return</span> <span class="n">compute_and_cache_decorator</span>
+</code></pre></div></div> <p>Download Watershed Boundary</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@cached</span><span class="p">(</span><span class="sh">'</span><span class="s">region_18</span><span class="sh">'</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">download_watershed_bounds</span><span class="p">(</span><span class="n">boundary_filename</span><span class="p">,</span> <span class="n">huc</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Download a USGS watershed boundary dataset.
+
+    Args:
+    boundary_filename (str): USGS WBD shapefile name.
+    huc (int): USGS Hydrologic Unit Code.
+
+    Returns:
+    geopandas.GeoDataFrame: Regional watershed boundary.  
+    </span><span class="sh">"""</span>
+    <span class="n">water_boundary_url</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sh">"</span><span class="s">https://prd-tnm.s3.amazonaws.com/StagedProducts/Hydrography/WBD/</span><span class="sh">"</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="s">HU2/Shape/</span><span class="si">{</span><span class="n">boundary_filename</span><span class="si">}</span><span class="s">.zip</span><span class="sh">"</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Download data 
+</span>    <span class="n">wbd_dir</span> <span class="o">=</span> <span class="n">et</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="nf">get_data</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">water_boundary_url</span><span class="p">)</span>
+
+    <span class="c1"># Join shapefile path
+</span>    <span class="n">hu12_shape_path</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">wbd_dir</span><span class="p">,</span> <span class="sh">'</span><span class="s">Shape</span><span class="sh">'</span><span class="p">,</span> <span class="sa">f</span><span class="sh">'</span><span class="s">WBDHU</span><span class="si">{</span><span class="n">huc</span><span class="si">}</span><span class="s">.shp</span><span class="sh">'</span><span class="p">)</span>
+
+    <span class="c1"># Load dataset
+</span>
+    <span class="c1"># Pyogrio provides fast, bulk-oriented read and write access to GDAL 
+</span>    <span class="c1"># vector data sources, such as ESRI Shapefile
+</span>    <span class="n">hu12_gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="p">.</span><span class="nf">read_file</span><span class="p">(</span><span class="n">hu12_shape_path</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="sh">'</span><span class="s">pyogrio</span><span class="sh">'</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">hu12_gdf</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Hydrologic Unit level "HU2" indicates a large region 
+</span><span class="n">region</span> <span class="o">=</span> <span class="sh">'</span><span class="s">18</span><span class="sh">'</span>
+
+<span class="n">boundary_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">'</span><span class="s">WBD_</span><span class="si">{</span><span class="n">region</span><span class="si">}</span><span class="s">_HU2_Shape</span><span class="sh">'</span>
+
+<span class="c1"># HU12: a very small subwatershed within a HU2 region
+</span><span class="n">huc</span> <span class="o">=</span> <span class="mi">12</span> 
+
+<span class="n">wbd_gdf</span> <span class="o">=</span> <span class="nf">download_watershed_bounds</span><span class="p">(</span><span class="n">boundary_filename</span><span class="p">,</span> <span class="n">huc</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Select watershed 
+</span>
+<span class="c1"># Putah Creek-Lower Putah Creek 
+</span><span class="n">watershed</span> <span class="o">=</span> <span class="sh">'</span><span class="s">180201620504</span><span class="sh">'</span>
+
+<span class="n">sf_putah_gdf</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">wbd_gdf</span><span class="p">[</span><span class="n">wbd_gdf</span><span class="p">[</span><span class="sa">f</span><span class="sh">'</span><span class="s">huc</span><span class="si">{</span><span class="n">huc</span><span class="si">}</span><span class="sh">'</span><span class="p">]</span> <span class="c1"># select HU12 subregion
+</span>    <span class="p">.</span><span class="nf">isin</span><span class="p">([</span><span class="n">watershed</span><span class="p">])]</span> <span class="c1"># subset for Lower Putah Creek
+</span>    <span class="p">.</span><span class="nf">dissolve</span><span class="p">()</span> <span class="c1"># dissolve geometries into single observation
+</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Plot watershed 
+</span>
+<span class="p">(</span>
+    <span class="n">sf_putah_gdf</span><span class="p">.</span><span class="nf">to_crs</span><span class="p">(</span><span class="n">ccrs</span><span class="p">.</span><span class="nc">Mercator</span><span class="p">())</span>
+    <span class="p">.</span><span class="nf">hvplot</span><span class="p">(</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="p">.</span><span class="mi">2</span><span class="p">,</span> <span class="n">fill_color</span><span class="o">=</span><span class="sh">'</span><span class="s">white</span><span class="sh">'</span><span class="p">,</span> <span class="n">tiles</span><span class="o">=</span><span class="sh">'</span><span class="s">EsriImagery</span><span class="sh">'</span><span class="p">,</span>
+        <span class="n">crs</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="nc">Mercator</span><span class="p">())</span>
+    <span class="p">.</span><span class="nf">opts</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div> <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;"> <img src="/assets/img/land_classification/watershed_boundary.png" alt="Lower Putah Creek Watershed Boundary" width="70%" height="70%"> </div> <p>Retrieve Multispectral Data</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">earthaccess</span><span class="p">.</span><span class="nf">login</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="sh">"</span><span class="s">interactive</span><span class="sh">"</span><span class="p">,</span> <span class="n">persist</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Search for HLS tiles
+</span><span class="n">sf_putah_gdf_results</span> <span class="o">=</span> <span class="n">earthaccess</span><span class="p">.</span><span class="nf">search_data</span><span class="p">(</span>
+    <span class="n">short_name</span><span class="o">=</span><span class="sh">"</span><span class="s">HLSL30</span><span class="sh">"</span><span class="p">,</span> <span class="c1"># Harmonized Sentinal/Landsat multispectral dataset
+</span>    <span class="n">cloud_hosted</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">bounding_box</span><span class="o">=</span><span class="nf">tuple</span><span class="p">(</span><span class="n">sf_putah_gdf</span><span class="p">.</span><span class="n">total_bounds</span><span class="p">),</span>
+    <span class="n">temporal</span><span class="o">=</span><span class="p">(</span><span class="sh">"</span><span class="s">2023-10-01</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">2023-12-01</span><span class="sh">"</span><span class="p">))</span>
+</code></pre></div></div> <p>Compile Granule Metadata</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@cached</span><span class="p">(</span><span class="sh">'</span><span class="s">granule_metadata</span><span class="sh">'</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">build_granule_metadata</span><span class="p">(</span><span class="n">hls_results</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Collect granule metadata from HLS tiles.
+
+    Args:
+    hls_results (List[DataGranule]): HLS search results list.
+
+    Returns:
+    granule_metadata (list): List of granule metadata dictionaries.
+    </span><span class="sh">"""</span>
+
+    <span class="c1"># Find all the metadata in the file
+</span>    <span class="n">granule_metadata</span> <span class="o">=</span> <span class="p">[]</span> 
+
+    <span class="c1"># Loop through each granule
+</span>    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="nf">tqdm</span><span class="p">(</span><span class="n">hls_results</span><span class="p">):</span>
+
+        <span class="c1"># Granule ID
+</span>        <span class="n">granule_id</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="sh">'</span><span class="s">umm</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">GranuleUR</span><span class="sh">'</span><span class="p">]</span>
+
+        <span class="c1"># Get datetime 
+</span>        <span class="n">temporal_coverage</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="n">DataCollection</span><span class="p">.</span><span class="nf">get_umm</span><span class="p">(</span>
+            <span class="n">result</span><span class="p">,</span> <span class="sh">'</span><span class="s">TemporalExtent</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">granule_date</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="p">.</span><span class="nf">to_datetime</span><span class="p">(</span>
+            <span class="n">temporal_coverage</span><span class="p">[</span><span class="sh">'</span><span class="s">RangeDateTime</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">BeginningDateTime</span><span class="sh">'</span><span class="p">]</span>
+        <span class="p">).</span><span class="nf">strftime</span><span class="p">(</span><span class="sh">'</span><span class="s">%Y-%m-%d</span><span class="sh">'</span><span class="p">))</span>
+
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">Processing date </span><span class="si">{</span><span class="n">granule_date</span><span class="si">}</span><span class="s">. Granule ID: </span><span class="si">{</span><span class="n">granule_id</span><span class="si">}</span><span class="s">.</span><span class="sh">'</span><span class="p">)</span>
+
+        <span class="c1"># Assemble granule polygon 
+</span>        <span class="n">spatial_ext</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="n">DataCollection</span><span class="p">.</span><span class="nf">get_umm</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="sh">'</span><span class="s">SpatialExtent</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">granule_geo</span> <span class="o">=</span> <span class="n">spatial_ext</span><span class="p">[</span><span class="sh">'</span><span class="s">HorizontalSpatialDomain</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">Geometry</span><span class="sh">'</span><span class="p">]</span>
+        <span class="n">granule_points</span> <span class="o">=</span> <span class="n">granule_geo</span><span class="p">[</span><span class="sh">'</span><span class="s">GPolygons</span><span class="sh">'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="sh">'</span><span class="s">Boundary</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">Points</span><span class="sh">'</span><span class="p">]</span>
+        <span class="n">granule_coords</span> <span class="o">=</span> <span class="p">[</span><span class="nf">tuple</span><span class="p">(</span><span class="n">point</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span> <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">granule_points</span><span class="p">]</span>
+        <span class="n">granule_polygon</span> <span class="o">=</span> <span class="nc">Polygon</span><span class="p">(</span><span class="n">granule_coords</span><span class="p">)</span>
+
+        <span class="c1"># Open granule files
+</span>        <span class="n">granule_files</span> <span class="o">=</span> <span class="n">earthaccess</span><span class="p">.</span><span class="nf">open</span><span class="p">([</span><span class="n">result</span><span class="p">])</span>
+
+        <span class="c1"># Use () to select the desired name and only output that name
+</span>        <span class="n">uri_re</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span>
+            <span class="sa">r</span><span class="sh">"</span><span class="s">v2.0/(HLS.L30.*.tif)</span><span class="sh">"</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Select unique tiles
+</span>        <span class="n">tile_id_re</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span>
+            <span class="sa">r</span><span class="sh">"</span><span class="s">HLSL30.020/(HLS.L30..*.v2.0)/HLS</span><span class="sh">"</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Grab band IDs
+</span>        <span class="n">band_id_re</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span>
+            <span class="sa">r</span><span class="sh">"</span><span class="s">HLS.L30..*v2.0.(\D{1}.*).tif</span><span class="sh">"</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Collect file metadata
+</span>        <span class="k">for</span> <span class="n">uri</span> <span class="ow">in</span> <span class="n">granule_files</span><span class="p">:</span>
+
+            <span class="c1"># Make sure uri has full_name property first
+</span>            <span class="nf">if </span><span class="p">(</span><span class="nf">hasattr</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="sh">'</span><span class="s">full_name</span><span class="sh">'</span><span class="p">)):</span>
+                <span class="n">file_name</span> <span class="o">=</span> <span class="n">uri_re</span><span class="p">.</span><span class="nf">findall</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="n">full_name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">tile_id</span> <span class="o">=</span> <span class="n">tile_id_re</span><span class="p">.</span><span class="nf">findall</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="n">full_name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">band_id</span> <span class="o">=</span> <span class="n">band_id_re</span><span class="p">.</span><span class="nf">findall</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="n">full_name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="c1"># Only keep spectral bands and cloud Fmask
+</span>                <span class="c1"># Exclude sun and view angles
+</span>                <span class="n">exclude_files</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">SAA</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">SZA</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">VAA</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">VZA</span><span class="sh">'</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">band_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">exclude_files</span><span class="p">:</span>
+                    <span class="n">granule_metadata</span><span class="p">.</span><span class="nf">append</span><span class="p">({</span>
+                        <span class="sh">'</span><span class="s">filename</span><span class="sh">'</span><span class="p">:</span> <span class="n">file_name</span><span class="p">,</span>
+                        <span class="sh">'</span><span class="s">tile_id</span><span class="sh">'</span><span class="p">:</span> <span class="n">tile_id</span><span class="p">,</span>
+                        <span class="sh">'</span><span class="s">band_id</span><span class="sh">'</span><span class="p">:</span> <span class="n">band_id</span><span class="p">,</span>
+                        <span class="sh">'</span><span class="s">granule_id</span><span class="sh">'</span><span class="p">:</span> <span class="n">granule_id</span><span class="p">,</span>
+                        <span class="sh">'</span><span class="s">granule_date</span><span class="sh">'</span><span class="p">:</span> <span class="n">granule_date</span><span class="p">,</span>
+                        <span class="sh">'</span><span class="s">granule_polygon</span><span class="sh">'</span><span class="p">:</span> <span class="n">granule_polygon</span><span class="p">,</span>
+                        <span class="sh">'</span><span class="s">uri</span><span class="sh">'</span><span class="p">:</span> <span class="n">uri</span>
+                    <span class="p">})</span>
+
+    <span class="c1"># Concatenate granule metadata 
+</span>    <span class="n">granule_metadata_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">granule_metadata</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
+            <span class="sh">'</span><span class="s">filename</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">tile_id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">band_id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">granule_id</span><span class="sh">'</span><span class="p">,</span> 
+            <span class="sh">'</span><span class="s">granule_date</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">granule_polygon</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">uri</span><span class="sh">'</span><span class="p">])</span>
+
+    <span class="n">granule_results_gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="p">.</span><span class="nc">GeoDataFrame</span><span class="p">(</span>
+            <span class="n">granule_metadata_df</span><span class="p">,</span> 
+            <span class="n">geometry</span><span class="o">=</span><span class="n">granule_metadata_df</span><span class="p">[</span><span class="sh">'</span><span class="s">granule_polygon</span><span class="sh">'</span><span class="p">],</span> 
+            <span class="n">crs</span><span class="o">=</span><span class="sh">"</span><span class="s">EPSG:4326</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">granule_results_gdf</span> 
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sf_putah_gdf_metadata</span> <span class="o">=</span> <span class="nf">build_granule_metadata</span><span class="p">(</span><span class="n">sf_putah_gdf_results</span><span class="p">)</span>
+</code></pre></div></div> <p>Open, Crop, and Mask Data</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">process_image</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">bounds_gdf</span><span class="p">,</span> <span class="n">masked</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Load, crop, and scale a raster image
+
+    Parameters
+    ----------
+    uri: file-like or path-like
+      File accessor 
+    bounds_gdf: gpd.GeoDataFrame
+      Area of interest 
+
+    Returns
+    -------
+    cropped_da: rxr.DataArray
+      Processed raster
+    </span><span class="sh">"""</span>
+    <span class="c1"># Load and scale
+</span>    <span class="n">da</span> <span class="o">=</span> <span class="n">rxr</span><span class="p">.</span><span class="nf">open_rasterio</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">masked</span><span class="o">=</span><span class="n">masked</span><span class="p">).</span><span class="nf">squeeze</span><span class="p">()</span> <span class="o">*</span> <span class="n">scale</span>
+
+    <span class="c1"># Obtain crs from raster
+</span>    <span class="n">raster_crs</span> <span class="o">=</span> <span class="n">da</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="n">crs</span>
+
+    <span class="c1"># Match coordinate reference systems
+</span>    <span class="n">bounds_gdf</span> <span class="o">=</span> <span class="n">bounds_gdf</span><span class="p">.</span><span class="nf">to_crs</span><span class="p">(</span><span class="n">raster_crs</span><span class="p">)</span>
+
+    <span class="c1"># Crop to site boundaries
+</span>    <span class="n">cropped_da</span> <span class="o">=</span> <span class="n">da</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="nf">clip_box</span><span class="p">(</span><span class="o">*</span><span class="n">bounds_gdf</span><span class="p">.</span><span class="n">total_bounds</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">cropped_da</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">process_mask</span><span class="p">(</span><span class="n">da</span><span class="p">,</span> <span class="n">bits_to_mask</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Load a DataArray and process to a boolean mask
+
+    Parameters
+    ----------
+    da: DataArray
+      The input DataArray 
+    bits_to_mask: list of int
+      The indices of the bits to mask if set
+
+    Returns
+    -------
+    mask: np.array
+      Boolean mask
+    </span><span class="sh">"""</span>
+    <span class="c1"># Get the mask as bits
+</span>    <span class="n">bits</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">np</span><span class="p">.</span><span class="nf">unpackbits</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="c1"># Get the mask as an array
+</span>                <span class="n">da</span><span class="p">.</span><span class="n">values</span>
+                <span class="c1"># of 8-bit integers
+</span>                <span class="p">.</span><span class="nf">astype</span><span class="p">(</span><span class="sh">'</span><span class="s">uint8</span><span class="sh">'</span><span class="p">)</span>
+                <span class="c1"># with an extra axis to unpack the bits into
+</span>                <span class="p">.</span><span class="nf">reshape</span><span class="p">(</span><span class="n">da</span><span class="p">.</span><span class="n">shape</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,))</span>
+            <span class="p">),</span> 
+            <span class="c1"># List the least significant bit first to match the user guide
+</span>            <span class="n">bitorder</span><span class="o">=</span><span class="sh">'</span><span class="s">little</span><span class="sh">'</span><span class="p">,</span>
+            <span class="c1"># Expand the array in a new dimension
+</span>            <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># Calculate the product of the mask and bits to mask
+</span>    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">prod</span><span class="p">(</span>
+        <span class="c1"># Multiply bits and check if flagged
+</span>        <span class="n">bits</span><span class="p">[...,</span> <span class="n">bits_to_mask</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span>
+        <span class="c1"># From the last to the first axis
+</span>        <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">mask</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Harmonized Landsat Sentinel-2 (HLS) band code name L8
+</span><span class="n">bands</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">B01</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">aerosol</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">B02</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">red</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">B03</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">green</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">B04</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">blue</span><span class="sh">'</span><span class="p">,</span>
+    <span class="c1"># Near-infrared narrow (0.85 – 0.88 micrometers)
+</span>    <span class="sh">'</span><span class="s">B05</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">nir</span><span class="sh">'</span><span class="p">,</span>
+    <span class="c1"># Short-wave infrared (SWIR) wavelength 1.57 – 1.65 µm
+</span>    <span class="sh">'</span><span class="s">B06</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">swir1</span><span class="sh">'</span><span class="p">,</span>
+    <span class="c1"># SWIR (2.11 – 2.29 µm)
+</span>    <span class="sh">'</span><span class="s">B07</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">swir2</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">B09</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">cirrus</span><span class="sh">'</span><span class="p">,</span>
+    <span class="c1"># Thermal infrared 1 (10.60 – 11.19 µm)
+</span>    <span class="sh">'</span><span class="s">B10</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">thermalir1</span><span class="sh">'</span><span class="p">,</span>
+    <span class="c1"># Thermal infrared 2 (11.50 – 12.51 µm)
+</span>    <span class="sh">'</span><span class="s">B11</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">thermalir2</span><span class="sh">'</span>
+<span class="p">}</span>
+
+<span class="c1"># HLS Quality Assessment layer bits
+</span><span class="n">bits_to_mask</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">1</span><span class="p">,</span> <span class="c1"># Cloud
+</span>    <span class="mi">2</span><span class="p">,</span> <span class="c1"># Adjacent to cloud/shadow
+</span>    <span class="mi">3</span>  <span class="c1"># Cloud shadow
+</span><span class="p">]</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@cached</span><span class="p">(</span><span class="sh">'</span><span class="s">sf_putah_reflectance_da_df</span><span class="sh">'</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">compute_reflectance_da</span><span class="p">(</span><span class="n">file_df</span><span class="p">,</span> <span class="n">boundary_gdf</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Connect to files over VSI (Virtual Filesystem Interface), 
+    crop, cloud mask, and wrangle data.
+    
+    Returns a reflectance DataArray within file DataFrame.
+    
+    Parameters
+    ==========
+    file_df : pd.DataFrame
+        File connection and metadata 
+    boundary_gdf : gpd.GeoDataFrame
+        Boundary use to crop the data
+    </span><span class="sh">"""</span>
+    <span class="n">granule_da_rows</span><span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># unique dated data granules
+</span>    <span class="n">tile_groups</span> <span class="o">=</span> <span class="n">file_df</span><span class="p">.</span><span class="nf">groupby</span><span class="p">([</span><span class="sh">'</span><span class="s">granule_date</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">tile_id</span><span class="sh">'</span><span class="p">])</span>
+
+    <span class="nf">for </span><span class="p">(</span><span class="n">granule_date</span><span class="p">,</span> <span class="n">tile_id</span><span class="p">),</span> <span class="n">tile_df</span> <span class="ow">in</span> <span class="nf">tqdm</span><span class="p">(</span><span class="n">tile_groups</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">Processing granule </span><span class="si">{</span><span class="n">tile_id</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">granule_date</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+
+        <span class="c1"># Grab Fmask row from tile group
+</span>        <span class="n">Fmask_row</span> <span class="o">=</span> <span class="n">tile_df</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tile_df</span><span class="p">[</span><span class="sh">'</span><span class="s">band_id</span><span class="sh">'</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">Fmask</span><span class="sh">'</span><span class="p">]</span>
+        <span class="c1"># Load cloud path
+</span>        <span class="n">cloud_path</span> <span class="o">=</span> <span class="n">Fmask_row</span><span class="p">.</span><span class="n">uri</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">cloud_da</span> <span class="o">=</span> <span class="nf">process_image</span><span class="p">(</span><span class="n">cloud_path</span><span class="p">,</span> <span class="n">boundary_gdf</span><span class="p">,</span> <span class="n">masked</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="c1"># Compute cloud mask
+</span>        <span class="n">cloud_mask</span> <span class="o">=</span> <span class="nf">process_mask</span><span class="p">(</span><span class="n">cloud_da</span><span class="p">,</span> <span class="n">bits_to_mask</span><span class="p">)</span>
+
+        <span class="c1"># Load spectral bands
+</span>        <span class="n">band_groups</span> <span class="o">=</span> <span class="n">tile_df</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="sh">'</span><span class="s">band_id</span><span class="sh">'</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">band_name</span><span class="p">,</span> <span class="n">band_df</span> <span class="ow">in</span> <span class="n">band_groups</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">band_df</span><span class="p">.</span><span class="nf">iterrows</span><span class="p">():</span>
+                <span class="c1"># Process band and retain band scale
+</span>                <span class="n">cropped_da</span> <span class="o">=</span> <span class="nf">process_image</span><span class="p">(</span><span class="n">row</span><span class="p">.</span><span class="n">uri</span><span class="p">,</span> <span class="n">boundary_gdf</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">)</span>
+                <span class="n">cropped_da</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">band_name</span>
+
+                <span class="c1"># Apply mask on band to remove unwanted cloud data
+</span>                <span class="n">row</span><span class="p">[</span><span class="sh">'</span><span class="s">da</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">cropped_da</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="o">~</span><span class="n">cropped_da</span><span class="p">.</span><span class="nf">isin</span><span class="p">(</span><span class="n">cloud_mask</span><span class="p">))</span>
+
+                <span class="c1"># Store the resulting DataArray
+</span>                <span class="n">granule_da_rows</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">row</span><span class="p">.</span><span class="nf">to_frame</span><span class="p">().</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="c1"># Reassemble the metadata DataFrame
+</span>    <span class="k">return</span> <span class="n">pd</span><span class="p">.</span><span class="nf">concat</span><span class="p">(</span><span class="n">granule_da_rows</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sf_putah_reflectance_da_df</span> <span class="o">=</span> <span class="nf">compute_reflectance_da</span><span class="p">(</span><span class="n">sf_putah_gdf_metadata</span><span class="p">,</span> <span class="n">sf_putah_gdf</span><span class="p">)</span>
+</code></pre></div></div> <p>Create Composite Data</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@cached</span><span class="p">(</span><span class="sh">'</span><span class="s">sf_putah_reflectance_da</span><span class="sh">'</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_composite_da</span><span class="p">(</span><span class="n">granule_da_df</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Create a composite DataArray from a DataFrame containing granule
+    metadata and corresponding DataArrays.
+
+    Args:
+    granule_da_df (pandas.DataFrame): Granule metadata DataFrame. 
+
+    Returns:
+    xarray.DataArray: Composite granule DataArray. 
+    </span><span class="sh">"""</span>
+    <span class="n">composite_das</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">band</span><span class="p">,</span> <span class="n">band_df</span> <span class="ow">in</span> <span class="nf">tqdm</span><span class="p">(</span><span class="n">granule_da_df</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="sh">'</span><span class="s">band_id</span><span class="sh">'</span><span class="p">)):</span>
+        <span class="n">merged_das</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="nf">if </span><span class="p">(</span><span class="n">band</span> <span class="o">!=</span> <span class="sh">'</span><span class="s">Fmask</span><span class="sh">'</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">granule_date</span><span class="p">,</span> <span class="n">date_df</span> <span class="ow">in</span> <span class="nf">tqdm</span><span class="p">(</span><span class="n">band_df</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="sh">'</span><span class="s">granule_date</span><span class="sh">'</span><span class="p">)):</span>
+
+                <span class="c1"># For each date merge granule DataArrays
+</span>                <span class="n">merged_da</span> <span class="o">=</span> <span class="n">rxrmerge</span><span class="p">.</span><span class="nf">merge_arrays</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">date_df</span><span class="p">.</span><span class="n">da</span><span class="p">))</span>
+
+                <span class="c1"># Mask all negative values
+</span>                <span class="n">merged_da</span> <span class="o">=</span> <span class="n">merged_da</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">merged_da</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">merged_das</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">merged_da</span><span class="p">)</span>
+
+            <span class="c1"># Create composite images across dates (by median date) 
+</span>            <span class="c1"># to fill cloud gaps
+</span>            <span class="n">composite_da</span> <span class="o">=</span> <span class="n">xr</span><span class="p">.</span><span class="nf">concat</span><span class="p">(</span>
+                <span class="n">merged_das</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="sh">'</span><span class="s">granule_date</span><span class="sh">'</span><span class="p">).</span><span class="nf">median</span><span class="p">(</span><span class="sh">'</span><span class="s">granule_date</span><span class="sh">'</span><span class="p">)</span>
+
+            <span class="c1"># Add the band as a dimension
+</span>            <span class="n">composite_da</span><span class="p">[</span><span class="sh">'</span><span class="s">band</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">band</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            
+            <span class="c1"># Name the composite DataArray
+</span>            <span class="n">composite_da</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="sh">'</span><span class="s">reflectance</span><span class="sh">'</span>
+
+            <span class="n">composite_das</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">composite_da</span><span class="p">)</span>
+
+    <span class="c1"># Concatenate on the band dimension
+</span>    <span class="k">return</span> <span class="n">xr</span><span class="p">.</span><span class="nf">concat</span><span class="p">(</span><span class="n">composite_das</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="sh">'</span><span class="s">band</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sf_putah_reflectance_da</span> <span class="o">=</span> <span class="nf">create_composite_da</span><span class="p">(</span><span class="n">sf_putah_reflectance_da_df</span><span class="p">)</span>
+
+<span class="c1"># Drop thermal bands
+</span><span class="n">sf_putah_reflectance_da</span> <span class="o">=</span> <span class="n">sf_putah_reflectance_da</span><span class="p">.</span><span class="nf">drop_sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
+</code></pre></div></div> <p>Cluster Data with k-means</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Convert spectral DataArray to a tidy DataFrame
+</span><span class="n">sf_putah_reflectance_df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">sf_putah_reflectance_da</span><span class="p">.</span><span class="nf">to_dataframe</span><span class="p">()</span>
+    <span class="p">.</span><span class="n">reflectance</span> <span class="c1"># select reflectance values
+</span>    <span class="p">.</span><span class="nf">unstack</span><span class="p">(</span><span class="sh">'</span><span class="s">band</span><span class="sh">'</span><span class="p">)</span>
+<span class="p">).</span><span class="nf">dropna</span><span class="p">()</span>
+
+<span class="n">sf_putah_reflectance_df</span>
+</code></pre></div></div> <div> <style scoped="">.dataframe tbody tr th:only-of-type{vertical-align:middle}.dataframe tbody tr th{vertical-align:top}.dataframe thead th{text-align:right}</style> <table border="1" class="dataframe"> <thead> <tr style="text-align: right;"> <th></th> <th>band</th> <th>1</th> <th>2</th> <th>3</th> <th>4</th> <th>5</th> <th>6</th> <th>7</th> <th>9</th> </tr> <tr> <th>y</th> <th>x</th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> </tr> </thead> <tbody> <tr> <th rowspan="5" valign="top">4267125.0</th> <th>589365.0</th> <td>0.02125</td> <td>0.03555</td> <td>0.07470</td> <td>0.07630</td> <td>0.29535</td> <td>0.18025</td> <td>0.09880</td> <td>0.00135</td> </tr> <tr> <th>589395.0</th> <td>0.02010</td> <td>0.03525</td> <td>0.07950</td> <td>0.07975</td> <td>0.29670</td> <td>0.17295</td> <td>0.09595</td> <td>0.00150</td> </tr> <tr> <th>589425.0</th> <td>0.01885</td> <td>0.03175</td> <td>0.08225</td> <td>0.07940</td> <td>0.30055</td> <td>0.16765</td> <td>0.09475</td> <td>0.00160</td> </tr> <tr> <th>589455.0</th> <td>0.01925</td> <td>0.03115</td> <td>0.08100</td> <td>0.07760</td> <td>0.30390</td> <td>0.16615</td> <td>0.09505</td> <td>0.00145</td> </tr> <tr> <th>589485.0</th> <td>0.01835</td> <td>0.03405</td> <td>0.07600</td> <td>0.07630</td> <td>0.30405</td> <td>0.16055</td> <td>0.09225</td> <td>0.00145</td> </tr> <tr> <th>...</th> <th>...</th> <td>...</td> <td>...</td> <td>...</td> <td>...</td> <td>...</td> <td>...</td> <td>...</td> <td>...</td> </tr> <tr> <th rowspan="5" valign="top">4263015.0</th> <th>622875.0</th> <td>0.04760</td> <td>0.05740</td> <td>0.07550</td> <td>0.09130</td> <td>0.12760</td> <td>0.19750</td> <td>0.16850</td> <td>0.00170</td> </tr> <tr> <th>622905.0</th> <td>0.04510</td> <td>0.05390</td> <td>0.07095</td> <td>0.08560</td> <td>0.12115</td> <td>0.18850</td> <td>0.15985</td> <td>0.00160</td> </tr> <tr> <th>622935.0</th> <td>0.04305</td> <td>0.05155</td> <td>0.06880</td> <td>0.08360</td> <td>0.11820</td> <td>0.18400</td> <td>0.15485</td> <td>0.00150</td> </tr> <tr> <th>622965.0</th> <td>0.04380</td> <td>0.05205</td> <td>0.06930</td> <td>0.08570</td> <td>0.11185</td> <td>0.18675</td> <td>0.15790</td> <td>0.00165</td> </tr> <tr> <th>622995.0</th> <td>0.04460</td> <td>0.05350</td> <td>0.07650</td> <td>0.08970</td> <td>0.15845</td> <td>0.19795</td> <td>0.15795</td> <td>0.00185</td> </tr> </tbody> </table> <p>154836 rows × 8 columns</p> </div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Collect the total squared clustering error for each k
+</span><span class="n">k_inertia</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Experiment with different k values 
+</span><span class="n">k_values</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">k_values</span><span class="p">:</span>
+
+    <span class="c1"># Create model with k clusters
+</span>    <span class="n">k_means</span> <span class="o">=</span> <span class="nc">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="n">k</span><span class="p">)</span>
+
+    <span class="n">model_vars</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">sf_putah_reflectance_df</span>
+        <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+
+    <span class="c1"># Fit model 
+</span>    <span class="n">k_means</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">model_vars</span><span class="p">)</span>
+    
+    <span class="c1"># Calculate inertia
+</span>    <span class="n">k_inertia</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">k_means</span><span class="p">.</span><span class="n">inertia_</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">k_values</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">k_inertia</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sh">'</span><span class="s">Cluster Inertia</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">"</span><span class="s">Clusters</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">"</span><span class="s">Total Squared Error</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div> <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;"> <img src="/assets/img/land_classification/cluster_inertia.png" alt="Cluster Inertia" width="70%" height="70%"> </div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># k-means model with k clusters
+</span><span class="n">k_means</span> <span class="o">=</span> <span class="nc">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="n">model_vars</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">sf_putah_reflectance_df</span>
+    <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+
+<span class="c1"># Fit the model to the spectral bands
+</span><span class="n">k_means</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">model_vars</span><span class="p">)</span>
+
+<span class="c1"># Add the cluster labels to the dataframe
+</span><span class="n">sf_putah_reflectance_df</span><span class="p">[</span><span class="sh">'</span><span class="s">cluster</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">k_means</span><span class="p">.</span><span class="n">labels_</span>
+
+<span class="c1"># Inspect labels
+</span><span class="n">sf_putah_reflectance_df</span>
+</code></pre></div></div> <div> <style scoped="">.dataframe tbody tr th:only-of-type{vertical-align:middle}.dataframe tbody tr th{vertical-align:top}.dataframe thead th{text-align:right}</style> <table border="1" class="dataframe"> <thead> <tr style="text-align: right;"> <th></th> <th>band</th> <th>1</th> <th>2</th> <th>3</th> <th>4</th> <th>5</th> <th>6</th> <th>7</th> <th>9</th> <th>cluster</th> </tr> <tr> <th>y</th> <th>x</th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> </tr> </thead> <tbody> <tr> <th rowspan="5" valign="top">4267125.0</th> <th>589365.0</th> <td>0.02125</td> <td>0.03555</td> <td>0.07470</td> <td>0.07630</td> <td>0.29535</td> <td>0.18025</td> <td>0.09880</td> <td>0.00135</td> <td>0</td> </tr> <tr> <th>589395.0</th> <td>0.02010</td> <td>0.03525</td> <td>0.07950</td> <td>0.07975</td> <td>0.29670</td> <td>0.17295</td> <td>0.09595</td> <td>0.00150</td> <td>0</td> </tr> <tr> <th>589425.0</th> <td>0.01885</td> <td>0.03175</td> <td>0.08225</td> <td>0.07940</td> <td>0.30055</td> <td>0.16765</td> <td>0.09475</td> <td>0.00160</td> <td>0</td> </tr> <tr> <th>589455.0</th> <td>0.01925</td> <td>0.03115</td> <td>0.08100</td> <td>0.07760</td> <td>0.30390</td> <td>0.16615</td> <td>0.09505</td> <td>0.00145</td> <td>0</td> </tr> <tr> <th>589485.0</th> <td>0.01835</td> <td>0.03405</td> <td>0.07600</td> <td>0.07630</td> <td>0.30405</td> <td>0.16055</td> <td>0.09225</td> <td>0.00145</td> <td>0</td> </tr> <tr> <th>...</th> <th>...</th> <td>...</td> <td>...</td> <td>...</td> <td>...</td> <td>...</td> <td>...</td> <td>...</td> <td>...</td> <td>...</td> </tr> <tr> <th rowspan="5" valign="top">4263015.0</th> <th>622875.0</th> <td>0.04760</td> <td>0.05740</td> <td>0.07550</td> <td>0.09130</td> <td>0.12760</td> <td>0.19750</td> <td>0.16850</td> <td>0.00170</td> <td>4</td> </tr> <tr> <th>622905.0</th> <td>0.04510</td> <td>0.05390</td> <td>0.07095</td> <td>0.08560</td> <td>0.12115</td> <td>0.18850</td> <td>0.15985</td> <td>0.00160</td> <td>3</td> </tr> <tr> <th>622935.0</th> <td>0.04305</td> <td>0.05155</td> <td>0.06880</td> <td>0.08360</td> <td>0.11820</td> <td>0.18400</td> <td>0.15485</td> <td>0.00150</td> <td>3</td> </tr> <tr> <th>622965.0</th> <td>0.04380</td> <td>0.05205</td> <td>0.06930</td> <td>0.08570</td> <td>0.11185</td> <td>0.18675</td> <td>0.15790</td> <td>0.00165</td> <td>3</td> </tr> <tr> <th>622995.0</th> <td>0.04460</td> <td>0.05350</td> <td>0.07650</td> <td>0.08970</td> <td>0.15845</td> <td>0.19795</td> <td>0.15795</td> <td>0.00185</td> <td>0</td> </tr> </tbody> </table> <p>154836 rows × 9 columns</p> </div> <p>Plot Spectral Clusters</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rgb</span> <span class="o">=</span> <span class="n">sf_putah_reflectance_da</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span> <span class="c1"># blue, green, red
+</span><span class="n">rgb_uint8</span> <span class="o">=</span> <span class="p">(</span><span class="n">rgb</span> <span class="o">*</span> <span class="mi">255</span><span class="p">).</span><span class="nf">astype</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">uint8</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="n">rgb</span><span class="o">!=</span><span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">)</span>
+
+<span class="c1"># Brighten RGB image
+</span><span class="n">rgb_bright</span> <span class="o">=</span> <span class="n">rgb_uint8</span> <span class="o">*</span> <span class="mi">5</span>
+<span class="n">rgb_sat</span> <span class="o">=</span> <span class="n">rgb_bright</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">rgb_bright</span> <span class="o">&lt;</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+
+<span class="n">rgb_sat</span><span class="p">.</span><span class="n">hvplot</span><span class="p">.</span><span class="nf">rgb</span><span class="p">(</span> 
+        <span class="n">x</span><span class="o">=</span><span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="sh">'</span><span class="s">y</span><span class="sh">'</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="sh">'</span><span class="s">band</span><span class="sh">'</span><span class="p">,</span>
+        <span class="n">data_aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">max_height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+        <span class="n">max_width</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+        <span class="n">xaxis</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="n">sf_putah_reflectance_df</span><span class="p">.</span><span class="n">cluster</span><span class="p">.</span><span class="nf">to_xarray</span><span class="p">().</span><span class="nf">sortby</span><span class="p">([</span><span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">y</span><span class="sh">'</span><span class="p">]).</span><span class="nf">hvplot</span><span class="p">(</span>
+        <span class="n">cmap</span><span class="o">=</span><span class="sh">"</span><span class="s">Colorblind</span><span class="sh">"</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="sh">'</span><span class="s">equal</span><span class="sh">'</span><span class="p">,</span> <span class="n">max_height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span> 
+</code></pre></div></div> <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;"> <img src="/assets/img/land_classification/watershed_aerial.png" alt="Lower Putah Creek Watershed" width="100%" height="70%"> </div> <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;"> <img src="/assets/img/land_classification/watershed_spectral_clusters.png" alt="Lower Putah Creek Watershed Spectral Clusters" width="100%" height="70%"> </div> <h4 id="discussion">Discussion</h4> <p>The spectral signatures plot depicts observed clusters in the Lower Putah Creek watershed. With bands ranging across varying wavelengths, cluster inertia was calculated to determine the optimal number of clusters. Five clusters were selected to best represent the scope of the spectral bands (aerosol, red, green, blue, and infrared). The watershed is mostly flat and surrounded by agriculture, with the exception of the Yolo Bypass Wildlife Area (YBWA). The area is composed of an assortment of habitats such as seasonal and permanent wetlands, vernal pools, and riparian forest. This variation is not shown in the clustering however, likely due to managed seasonal flooding for migratory waterfowl.</p> <p>YBWA is managed by the California Department of Fish and Wildlife as part of a larger endeavor to steward habitats in the Yolo Basin, located in the northern area of the Sacramento-San Joaquin River Delta. The <a href="https://www.ppic.org/blog/the-yolo-bypass-its-a-floodplain-its-farmland-its-an-ecosystem" rel="external nofollow noopener" target="_blank">Yolo Bypass</a> maintains 60,000 acres for the Sacramento River during high flood events which drains back into the river and the Delta. Beyond flood management, the bypass supplies key ecological benefits to fish, and the lower Putah Creek plays a role in this function. During the recent <a href="https://californiawaterblog.com/2023/07/08/putah-creeks-rebirth-a-model-for-reconciling-other-degraded-streams" rel="external nofollow noopener" target="_blank">rehabilitation of the creek</a>, native fishes recovered and reversed a dominance of nonnative species in the creek and their growing presence in the bypass. Yolo Bypass provides nursery area for young fish in the north of the Delta as well as good habitat for <a href="https://viewperformance.deltacouncil.ca.gov/pm/yolo-bypass-inundation" rel="external nofollow noopener" target="_blank">migrating salmon</a>. Recognizing the multi-purpose benefits delivered by the bypass in addition to the pressing mandate to build resiliency under climate change, Congress authorized a <a href="https://www.spk.usace.army.mil/Missions/Civil-Works/Yolo-Bypass" rel="external nofollow noopener" target="_blank">comprehensive study</a> of the Yolo Bypass (2020) to be conducted by the US Army Corps of Engineers (2023-2029). The study will engage federal, state, and local stakeholders to create recommendations for bypass project purposes and address multiple public needs in the future of the state’s primary floodplain.</p> <h4 id="references">References</h4> <p>Barrett, A., Battisto, C., J. Bourbeau, J., Fisher, M., Kaufman, D., Kennedy, J., … Steiker, A. (2024). <em>earthaccess</em> (Version 0.12.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.8365009</p> <p>Borchers, J. (2018, November 25). <em>Case Study: Solano County Water Agency.</em> Sierra Institute. https://sierrainstitute.us/new/wp-content/uploads/2021/10/Solano-County-Water-Agency-Summary-Report-11-25-18-NO-RESPONDENT-FOOTNOTES.pdf</p> <p>da Costa-Luis, C., Larroque, S., Altendorf, K., Mary, H., Sheridan, R., Korobov, M., … McCracken, J. (2024). <em>tqdm: A fast, Extensible Progress Bar for Python and CLI</em> (Version 4.67.1) [Computer software]. Zenodo. https://zenodo.org/records/14231923</p> <p>Delta Stewardship Council. (2025, January 28). <em>Yolo Bypass inundation.</em> https://viewperformance.deltacouncil.ca.gov/pm/yolo-bypass-inundation</p> <p>Gillies, S., van der Wel, C., Van den Bossche, J., Taves, M. W., Arnott, J., &amp; Ward, B. C. (2025). <em>Shapely</em> (Version 2.0.7) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.14776272</p> <p>Harris, C. R., Millman, K. J., J. van der Walt, S., Gommers, R., Virtanen, P., Cournapeau, D., … Oliphant, T. E. (2020). Array programming with NumPy. <em>Nature, 585</em>, 357–362. https://doi.org/10.1038/s41586-020-2649-2</p> <p>Hoyer, S. &amp; Hamman, J., (2017). xarray: N-D labeled arrays and datasets in Python. <em>Journal of Open Research Software. 5</em>(1), 10. https://doi.org/10.5334/jors.148</p> <p>Hunter, J. D. (2024). <em>Matplotlib: A 2D graphics environment</em> (Version 3.9.2) [Computer software]. Zenodo. https://zenodo.org/records/13308876</p> <p>Jordahl, K., Van den Bossche, J., Fleischmann, M., Wasserman, J., McBride, J., Gerard, J., … Leblanc, F. (2024). <em>geopandas/geopandas: v1.0.1</em> (Version 1.0.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.12625316</p> <p>Met Office. (2024). <em>Cartopy: a cartographic python library with a Matplotlib interface</em> (Version 0.24.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13905945</p> <p>Pottinger, L. (2019, July 29). <em>The Yolo Bypass: It’s a floodplain! It’s farmland! It’s an ecosystem!</em> Public Policy Institute of California. https://www.ppic.org/blog/the-yolo-bypass-its-a-floodplain-its-farmland-its-an-ecosystem</p> <p>Putah Creek Council. (n.d.). <em>The Putah Creek Watershed.</em> https://putahcreekcouncil.org/who-we-are/putah-creek-watershed</p> <p>Python Software Foundation. (2024). <em>Python</em> (Version 3.12.8) [Computer software]. https://docs.python.org/release/3.12.6</p> <p>Rudiger, P., Hansen, S. H., Bednar, J. A., Steven, J., Liquet, M., Little, B., … Bampton, J. (2024). <em>holoviz/geoviews: Version 1.13.0</em> (Version 1.13.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13782761</p> <p>Rudiger, P., Liquet, M., Signell, J., Hansen, S. H., Bednar, J. A., Madsen, M. S., … Hilton, T. W. (2024). <em>holoviz/hvplot: Version 0.11.0</em> (Version 0.11.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13851295</p> <p>Rypel, A. (2023, July 8). <em>Putah Creek’s rebirth: A model for reconciling other degraded streams?</em> UC Davis Center for Watershed Sciences. https://californiawaterblog.com/2023/07/08/putah-creeks-rebirth-a-model-for-reconciling-other-degraded-streams</p> <p>Sacramento River Watershed Program. (n.d.). <em>Putah Creek Watershed.</em> https://sacriver.org/explore-watersheds/westside-subregion/putah-creek-watershed</p> <p>Snow, A. D., Scott, R., Raspaud, M., Brochart, D., Kouzoubov, K., Henderson, S., … Weidenholzer, L. (2024). <em>corteva/rioxarray: 0.18.1 Release</em> (Version 0.18.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.4570456</p> <p>The pandas development team. (2024). <em>pandas-dev/pandas: Pandas</em> (Version 2.2.2) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.3509134</p> <p>The scikit-learn developers. (2024). scikit-learn (1.5.2). [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13749328</p> <p>US Army Corps of Engineers. (n.d.). <em>Yolo Bypass comprehensive study.</em> https://www.spk.usace.army.mil/Missions/Civil-Works/Yolo-Bypass</p> <p>Wasser, L., Max, J., McGlinchy, J., Palomino, J., Holdgraf, C., &amp; Head, T. (2021). <em>earthlab/earthpy: Soft release of earthpy</em> (Version 0.9.4) [Computer software]. Zenodo. https://zenodo.org/records/5544946</p> <p>Yolo Basin Foundation. (n.d.). <em>About the Yolo Bypass Wildlife Area.</em> https://yolobasin.org/yolobypasswildlifearea</p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2025 Lauren Alexandra. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script src="/assets/js/no_defer.js?2781658a0a2b13ed609542042a859126"></script> <script defer src="/assets/js/common.js?e0514a05c5c95ac1a93a8dfd5249b92e"></script> <script defer src="/assets/js/copy_code.js?12775fdf7f95e901d7119054556e495f" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script type="text/javascript">window.MathJax={tex:{tags:"ams"}};</script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script type="text/javascript">function progressBarSetup(){"max"in document.createElement("progress")?(initializeProgressElement(),$(document).on("scroll",function(){progressBar.attr({value:getCurrentScrollPosition()})}),$(window).on("resize",initializeProgressElement)):(resizeProgressBar(),$(document).on("scroll",resizeProgressBar),$(window).on("resize",resizeProgressBar))}function getCurrentScrollPosition(){return $(window).scrollTop()}function initializeProgressElement(){let e=$("#navbar").outerHeight(!0);$("body").css({"padding-top":e}),$("progress-container").css({"padding-top":e}),progressBar.css({top:e}),progressBar.attr({max:getDistanceToScroll(),value:getCurrentScrollPosition()})}function getDistanceToScroll(){return $(document).height()-$(window).height()}function resizeProgressBar(){progressBar.css({width:getWidthPercentage()+"%"})}function getWidthPercentage(){return getCurrentScrollPosition()/getDistanceToScroll()*100}const progressBar=$("#progress");window.onload=function(){setTimeout(progressBarSetup,50)};</script> <script src="/assets/js/vanilla-back-to-top.min.js?f40d453793ff4f64e238e420181a1d17"></script> <script>addBackToTop();</script> <script type="module" src="/assets/js/search/ninja-keys.min.js?a3446f084dcaecc5f75aa1757d087dcf"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script>let searchTheme=determineComputedTheme();const ninjaKeys=document.querySelector("ninja-keys");"dark"===searchTheme?ninjaKeys.classList.add("dark"):ninjaKeys.classList.remove("dark");const openSearchModal=()=>{const e=$("#navbarNav");e.hasClass("show")&&e.collapse("hide"),ninjaKeys.open()};</script> <script>const ninja=document.querySelector("ninja-keys");ninja.data=[{id:"nav-about",title:"about",section:"Navigation",handler:()=>{window.location.href="/"}},{id:"nav-projects",title:"projects",description:"",section:"Navigation",handler:()=>{window.location.href="/projects/"}},{id:"nav-cv",title:"cv",description:"",section:"Navigation",handler:()=>{window.location.href="/cv/"}},{id:"post-google-gemini-updates-flash-1-5-gemma-2-and-project-astra",title:'Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra <svg width="1.2rem" height="1.2rem" top=".5rem" viewbox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',description:"We\u2019re sharing updates across our Gemini family of models and a glimpse of Project Astra, our vision for the future of AI assistants.",section:"Posts",handler:()=>{window.open("https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/","_blank")}},{id:"post-a-post-with-tabs",title:"a post with tabs",description:"this is what included tabs in a post could look like",section:"Posts",handler:()=>{window.location.href="/blog/2024/tabs/"}},{id:"post-a-post-with-typograms",title:"a post with typograms",description:"this is what included typograms code could look like",section:"Posts",handler:()=>{window.location.href="/blog/2024/typograms/"}},{id:"post-a-post-that-can-be-cited",title:"a post that can be cited",description:"this is what a post that can be cited looks like",section:"Posts",handler:()=>{window.location.href="/blog/2024/post-citation/"}},{id:"post-a-post-with-pseudo-code",title:"a post with pseudo code",description:"this is what included pseudo code could look like",section:"Posts",handler:()=>{window.location.href="/blog/2024/pseudocode/"}},{id:"post-a-post-with-code-diff",title:"a post with code diff",description:"this is how you can display code diffs",section:"Posts",handler:()=>{window.location.href="/blog/2024/code-diff/"}},{id:"post-a-post-with-advanced-image-components",title:"a post with advanced image components",description:"this is what advanced image components could look like",section:"Posts",handler:()=>{window.location.href="/blog/2024/advanced-images/"}},{id:"post-a-post-with-vega-lite",title:"a post with vega lite",description:"this is what included vega lite code could look like",section:"Posts",handler:()=>{window.location.href="/blog/2024/vega-lite/"}},{id:"post-a-post-with-geojson",title:"a post with geojson",description:"this is what included geojson code could look like",section:"Posts",handler:()=>{window.location.href="/blog/2024/geojson-map/"}},{id:"post-a-post-with-echarts",title:"a post with echarts",description:"this is what included echarts code could look like",section:"Posts",handler:()=>{window.location.href="/blog/2024/echarts/"}},{id:"post-a-post-with-chart-js",title:"a post with chart.js",description:"this is what included chart.js code could look like",section:"Posts",handler:()=>{window.location.href="/blog/2024/chartjs/"}},{id:"post-a-post-with-tikzjax",title:"a post with TikZJax",description:"this is what included TikZ code could look like",section:"Posts",handler:()=>{window.location.href="/blog/2023/tikzjax/"}},{id:"post-a-post-with-bibliography",title:"a post with bibliography",description:"an example of a blog post with bibliography",section:"Posts",handler:()=>{window.location.href="/blog/2023/post-bibliography/"}},{id:"post-a-post-with-jupyter-notebook",title:"a post with jupyter notebook",description:"an example of a blog post with jupyter notebook",section:"Posts",handler:()=>{window.location.href="/blog/2023/jupyter-notebook/"}},{id:"post-a-post-with-custom-blockquotes",title:"a post with custom blockquotes",description:"an example of a blog post with custom blockquotes",section:"Posts",handler:()=>{window.location.href="/blog/2023/custom-blockquotes/"}},{id:"post-a-post-with-table-of-contents-on-a-sidebar",title:"a post with table of contents on a sidebar",description:"an example of a blog post with table of contents on a sidebar",section:"Posts",handler:()=>{window.location.href="/blog/2023/sidebar-table-of-contents/"}},{id:"post-a-post-with-audios",title:"a post with audios",description:"this is what included audios could look like",section:"Posts",handler:()=>{window.location.href="/blog/2023/audios/"}},{id:"post-a-post-with-videos",title:"a post with videos",description:"this is what included videos could look like",section:"Posts",handler:()=>{window.location.href="/blog/2023/videos/"}},{id:"post-displaying-beautiful-tables-with-bootstrap-tables",title:"displaying beautiful tables with Bootstrap Tables",description:"an example of how to use Bootstrap Tables",section:"Posts",handler:()=>{window.location.href="/blog/2023/tables/"}},{id:"post-a-post-with-table-of-contents",title:"a post with table of contents",description:"an example of a blog post with table of contents",section:"Posts",handler:()=>{window.location.href="/blog/2023/table-of-contents/"}},{id:"post-a-post-with-giscus-comments",title:"a post with giscus comments",description:"an example of a blog post with giscus comments",section:"Posts",handler:()=>{window.location.href="/blog/2022/giscus-comments/"}},{id:"post-displaying-external-posts-on-your-al-folio-blog",title:'Displaying External Posts on Your al-folio Blog <svg width="1.2rem" height="1.2rem" top=".5rem" viewbox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',description:"",section:"Posts",handler:()=>{window.open("https://medium.com/@al-folio/displaying-external-posts-on-your-al-folio-blog-b60a1d241a0a?source=rss-17feae71c3c4------2","_blank")}},{id:"post-a-post-with-redirect",title:"a post with redirect",description:"you can also redirect to assets like pdf",section:"Posts",handler:()=>{window.location.href="/assets/pdf/example_pdf.pdf"}},{id:"post-a-post-with-diagrams",title:"a post with diagrams",description:"an example of a blog post with diagrams",section:"Posts",handler:()=>{window.location.href="/blog/2021/diagrams/"}},{id:"post-a-distill-style-blog-post",title:"a distill-style blog post",description:"an example of a distill-style blog post and main elements",section:"Posts",handler:()=>{window.location.href="/blog/2021/distill/"}},{id:"post-a-post-with-twitter",title:"a post with twitter",description:"an example of a blog post with twitter",section:"Posts",handler:()=>{window.location.href="/blog/2020/twitter/"}},{id:"post-a-post-with-disqus-comments",title:"a post with disqus comments",description:"an example of a blog post with disqus comments",section:"Posts",handler:()=>{window.location.href="/blog/2015/disqus-comments/"}},{id:"post-a-post-with-math",title:"a post with math",description:"an example of a blog post with some math",section:"Posts",handler:()=>{window.location.href="/blog/2015/math/"}},{id:"post-a-post-with-code",title:"a post with code",description:"an example of a blog post with some code",section:"Posts",handler:()=>{window.location.href="/blog/2015/code/"}},{id:"post-a-post-with-images",title:"a post with images",description:"this is what included images could look like",section:"Posts",handler:()=>{window.location.href="/blog/2015/images/"}},{id:"post-a-post-with-formatting-and-links",title:"a post with formatting and links",description:"march & april, looking forward to summer",section:"Posts",handler:()=>{window.location.href="/blog/2015/formatting-and-links/"}},{id:"news-a-simple-inline-announcement",title:"A simple inline announcement.",description:"",section:"News"},{id:"news-a-long-announcement-with-details",title:"A long announcement with details",description:"",section:"News",handler:()=>{window.location.href="/news/announcement_2/"}},{id:"news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",title:'A simple inline announcement with Markdown emoji! <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png" height="20" width="20"> <img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20">',description:"",section:"News"},{id:"projects-basin-inflow",title:"Basin Inflow",description:"Regional Hydroclimate Deep Neural Network",section:"Projects",handler:()=>{window.location.href="/projects/basin-inflow/"}},{id:"projects-habitat-suitability",title:"Habitat Suitability",description:"Blue Oak",section:"Projects",handler:()=>{window.location.href="/projects/habitat-suitability/"}},{id:"projects-land-classification",title:"Land Classification",description:"Lower Putah Creek Watershed",section:"Projects",handler:()=>{window.location.href="/projects/land-classification/"}},{id:"projects-sacramento-redlining",title:"Sacramento Redlining",description:"Greenspace Analysis",section:"Projects",handler:()=>{window.location.href="/projects/sacramento-redlining/"}},{id:"projects-willow-flycatcher",title:"Willow Flycatcher",description:"Species Distribution",section:"Projects",handler:()=>{window.location.href="/projects/species-distribution/"}},{id:"socials-email",title:"Send email",section:"Socials",handler:()=>{window.open("mailto:%6C%61%75%72%65%6E@%6C%61%75%72%65%6E%61%6C%65%78%61%6E%64%72%61.%69%6F","_blank")}},{id:"socials-github",title:"GitHub",section:"Socials",handler:()=>{window.open("https://github.com/lauren-alexandra","_blank")}},{id:"socials-linkedin",title:"LinkedIn",section:"Socials",handler:()=>{window.open("https://www.linkedin.com/in/lauren-alexandra","_blank")}},{id:"light-theme",title:"Change theme to light",description:"Change the theme of the site to Light",section:"Theme",handler:()=>{setThemeSetting("light")}},{id:"dark-theme",title:"Change theme to dark",description:"Change the theme of the site to Dark",section:"Theme",handler:()=>{setThemeSetting("dark")}},{id:"system-theme",title:"Use system default theme",description:"Change the theme of the site to System Default",section:"Theme",handler:()=>{setThemeSetting("system")}}];</script> <script src="/assets/js/shortcut-key.js?6f508d74becd347268a7f822bca7309d"></script> </body> </html>
