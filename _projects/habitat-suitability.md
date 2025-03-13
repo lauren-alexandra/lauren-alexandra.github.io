@@ -2,7 +2,7 @@
 layout: page
 title: Blue Oak
 description: Habitat Suitability
-img: assets/img/habitat_suitability/bo_card.png
+img: assets/img/habitat_suitability/blue_oak_card.png
 importance: 1
 category: work
 related_publications: true
