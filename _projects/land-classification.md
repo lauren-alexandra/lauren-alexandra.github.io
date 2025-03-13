@@ -2,8 +2,8 @@
 layout: page
 title: Lower Putah Creek Watershed
 description: Land Classification
-img: assets/img/land_classification/lower_putah_creek.png
-importance: 2
+img: assets/img/land_classification/lpc_card.png
+importance: 3
 category: work
 related_publications: true
 ---
