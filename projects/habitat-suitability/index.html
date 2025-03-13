@@ -22,8 +22,6 @@
 <span class="kn">import</span> <span class="n">geoviews</span> <span class="k">as</span> <span class="n">gv</span>
 
 <span class="kn">import</span> <span class="n">earthaccess</span>
-
-<span class="kn">from</span> <span class="n">utils</span> <span class="kn">import</span> <span class="o">*</span>
 </code></pre></div></div> <p>Set Paths</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Plots
 </span><span class="n">plots_dir</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span>
     <span class="c1"># Home directory
@@ -64,6 +62,208 @@
 <span class="n">os</span><span class="p">.</span><span class="nf">makedirs</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">os</span><span class="p">.</span><span class="nf">makedirs</span><span class="p">(</span><span class="n">eldorado_elevation_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">os</span><span class="p">.</span><span class="nf">makedirs</span><span class="p">(</span><span class="n">los_padres_elevation_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div> <p>Load Utility Functions</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### Data Wrangling ###
+</span>
+<span class="k">def</span> <span class="nf">build_da</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="n">bounds</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Build a DataArray from a list of urls.
+    
+    Args:
+    urls (list): Input list of URLs.
+    bounds (tuple): Site boundaries.
+
+    Returns:
+    xarray.DataArray: A merged DataArray.
+    </span><span class="sh">"""</span>
+    
+    <span class="n">all_das</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Add buffer to bounds for plotting
+</span>    <span class="nb">buffer</span> <span class="o">=</span> <span class="p">.</span><span class="mi">025</span>
+    <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">bounds</span>
+    <span class="n">bounds_buffer</span> <span class="o">=</span> <span class="p">(</span><span class="n">xmin</span><span class="o">-</span><span class="nb">buffer</span><span class="p">,</span> <span class="n">ymin</span><span class="o">-</span><span class="nb">buffer</span><span class="p">,</span> <span class="n">xmax</span><span class="o">+</span><span class="nb">buffer</span><span class="p">,</span> <span class="n">ymax</span><span class="o">+</span><span class="nb">buffer</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+        <span class="c1"># Open data granule, mask missing data, scale data, 
+</span>        <span class="c1"># and remove dimensions of length 1
+</span>        <span class="n">tile_da</span> <span class="o">=</span> <span class="n">rxr</span><span class="p">.</span><span class="nf">open_rasterio</span><span class="p">(</span>
+                <span class="n">url</span><span class="p">,</span>
+                <span class="c1"># For the fill/missing value
+</span>                <span class="n">mask_and_scale</span><span class="o">=</span><span class="bp">True</span>
+            <span class="p">).</span><span class="nf">squeeze</span><span class="p">()</span>
+        <span class="c1"># Unpack the bounds and crop tile
+</span>        <span class="n">cropped_da</span> <span class="o">=</span> <span class="n">tile_da</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="nf">clip_box</span><span class="p">(</span><span class="o">*</span><span class="n">bounds_buffer</span><span class="p">)</span>
+        <span class="n">all_das</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">cropped_da</span><span class="p">)</span>
+
+    <span class="n">merged</span> <span class="o">=</span> <span class="nf">merge_arrays</span><span class="p">(</span><span class="n">all_das</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">merged</span>
+
+<span class="k">def</span> <span class="nf">export_raster</span><span class="p">(</span><span class="n">da</span><span class="p">,</span> <span class="n">raster_path</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Export raster DataArray to a raster file.
+    
+    Args:
+    raster (xarray.DataArray): Input raster layer.
+    raster_path (str): Output raster directory.
+    data_dir (str): Path of data directory.
+
+    Returns: None
+    </span><span class="sh">"""</span>
+    
+    <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">basename</span><span class="p">(</span><span class="n">raster_path</span><span class="p">))</span>
+    <span class="n">da</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="nf">to_raster</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">harmonize_raster_layers</span><span class="p">(</span><span class="n">reference_raster</span><span class="p">,</span> <span class="n">input_rasters</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Harmonize raster layers to ensure consistent spatial resolution 
+    and projection.
+
+    Args:
+    reference_raster (str): Path of raster to reference.
+    input_rasters (list): List of rasters to harmonize.
+    data_dir (str): Path of data directory.
+
+    Returns:
+    list: A list of harmonized rasters.
+    </span><span class="sh">"""</span>
+
+    <span class="n">harmonized_files</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">harmonized_files</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">reference_raster</span><span class="p">)</span>
+    <span class="c1"># Load the reference raster
+</span>    <span class="n">ref_raster</span> <span class="o">=</span> <span class="n">rxr</span><span class="p">.</span><span class="nf">open_rasterio</span><span class="p">(</span><span class="n">reference_raster</span><span class="p">,</span> <span class="n">masked</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="c1"># Use projection EPSG:3857 (WGS 84 with x/y coords)
+</span>    <span class="n">ref_raster</span> <span class="o">=</span> <span class="n">ref_raster</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="nf">write_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">raster_path</span> <span class="ow">in</span> <span class="n">input_rasters</span><span class="p">:</span>
+        <span class="c1"># Load the input raster
+</span>        <span class="n">input_raster</span> <span class="o">=</span> <span class="n">rxr</span><span class="p">.</span><span class="nf">open_rasterio</span><span class="p">(</span><span class="n">raster_path</span><span class="p">,</span> <span class="n">masked</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">input_raster</span> <span class="o">=</span> <span class="n">input_raster</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="nf">write_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
+
+        <span class="c1"># Reproject and align the input raster to match the reference raster
+</span>
+        <span class="c1"># Only 2D/3D arrays with dimensions x/y are currently supported
+</span>        <span class="c1"># by reproject_match()
+</span>        <span class="n">harmonized_raster</span> <span class="o">=</span> <span class="n">input_raster</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="nf">reproject_match</span><span class="p">(</span><span class="n">ref_raster</span><span class="p">)</span>
+
+        <span class="c1"># Save the harmonized raster to the output directory
+</span>        <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">basename</span><span class="p">(</span><span class="n">raster_path</span><span class="p">))</span>
+        <span class="n">harmonized_raster</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="nf">to_raster</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span>
+        <span class="n">harmonized_files</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">harmonized_files</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### Calculations ###
+</span>
+<span class="k">def</span> <span class="nf">convert_longitude</span><span class="p">(</span><span class="n">longitude</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Convert longitude values from a range of 0 to 360 to -180 to 180.
+    
+    Args:
+    longitude (float): Input longitude value.
+
+    Returns:
+    float: A value in the specified range.
+    </span><span class="sh">"""</span>
+    
+    <span class="nf">return </span><span class="p">(</span><span class="n">longitude</span> <span class="o">-</span> <span class="mi">360</span><span class="p">)</span> <span class="k">if</span> <span class="n">longitude</span> <span class="o">&gt;</span> <span class="mi">180</span> <span class="k">else</span> <span class="n">longitude</span>
+
+<span class="k">def</span> <span class="nf">convert_temperature</span><span class="p">(</span><span class="n">temp</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Convert temperature from Kelvin to Fahrenheit.
+    
+    Args:
+    temp (float): Input temperature value.
+
+    Returns:
+    float: A value in the Fahrenheit temperature scale.
+    </span><span class="sh">"""</span>
+
+    <span class="k">return</span> <span class="n">temp</span>  <span class="o">*</span> <span class="mf">1.8</span> <span class="o">-</span> <span class="mf">459.67</span>
+
+<span class="k">def</span> <span class="nf">calculate_aspect</span><span class="p">(</span><span class="n">elev_da</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Create aspect DataArray from site elevation.
+    
+    Args:
+    elev_da (xarray.DataArray): Input raster layer.
+
+    Returns:
+    xarray.DataArray: A raster of site aspect. 
+    </span><span class="sh">"""</span>
+
+    <span class="c1"># Calculate aspect (degrees)
+</span>    <span class="n">aspect_da</span> <span class="o">=</span> <span class="n">xrspatial</span><span class="p">.</span><span class="nf">aspect</span><span class="p">(</span><span class="n">elev_da</span><span class="p">)</span>
+    <span class="n">aspect_da</span> <span class="o">=</span> <span class="n">aspect_da</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">aspect_da</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">aspect_da</span>
+
+<span class="k">def</span> <span class="nf">calculate_suitability_score</span><span class="p">(</span><span class="n">raster</span><span class="p">,</span> <span class="n">optimal_value</span><span class="p">,</span> <span class="n">tolerance_range</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s"> 
+    Calculate a fuzzy suitability score (0–1) for each raster cell based on 
+    proximity to the optimal value.
+
+    Args:
+    raster (xarray.DataArray): Input raster layer. 
+    optimal_value (float): Optimal value for the variable.
+    tolerance_range (float): Suitable values range. 
+
+    Returns:
+    xarray.DataArray: A raster of suitability scores (0-1).
+    </span><span class="sh">"""</span>
+
+    <span class="c1"># Calculate using a fuzzy Gaussian function to assign scores 
+</span>    <span class="c1"># between 0 and 1
+</span>    <span class="n">suitability</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">exp</span><span class="p">(</span>
+                    <span class="o">-</span><span class="p">((</span><span class="n">raster</span> <span class="o">-</span> <span class="n">optimal_value</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> 
+                    <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">tolerance_range</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="p">)</span>
+
+    <span class="c1"># Suitability scores (0–1) 
+</span>    <span class="k">return</span> <span class="n">suitability</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### Visualization ###
+</span>
+<span class="k">def</span> <span class="nf">plot_site</span><span class="p">(</span><span class="n">site_da</span><span class="p">,</span> <span class="n">site_gdf</span><span class="p">,</span> <span class="n">plots_dir</span><span class="p">,</span> <span class="n">site_fig_name</span><span class="p">,</span> <span class="n">plot_title</span><span class="p">,</span> 
+              <span class="n">bar_label</span><span class="p">,</span> <span class="n">plot_cmap</span><span class="p">,</span> <span class="n">boundary_clr</span><span class="p">,</span> <span class="n">tif_file</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Create custom site plot.
+    
+    Args:
+    site_da (xarray.DataArray): Input site raster.
+    site_gdf (geopandas.GeoDataFrame): Input site GeoDataFrame.
+    plots_dir (str): Path of plots directory.
+    site_fig_name (str): Site figure name.
+    plot_title (str): Plot title. 
+    bar_label (str): Plot bar variable name.
+    plot_cmap (str): Plot colormap name.
+    boundary_clr (str): Plot site boundary color.
+    tif_file (bool): Indicates a site file.
+
+    Returns:
+    matplotlib.pyplot.plot: A plot of site values.
+    </span><span class="sh">"""</span>
+    
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> 
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">axes</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">tif_file</span><span class="p">:</span>
+        <span class="n">site_da</span> <span class="o">=</span> <span class="n">rxr</span><span class="p">.</span><span class="nf">open_rasterio</span><span class="p">(</span><span class="n">site_da</span><span class="p">,</span> <span class="n">masked</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c1"># Plot DataArray values
+</span>    <span class="n">site_plot</span> <span class="o">=</span> <span class="n">site_da</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span>
+                            <span class="n">cmap</span><span class="o">=</span><span class="n">plot_cmap</span><span class="p">,</span> 
+                            <span class="n">cbar_kwargs</span><span class="o">=</span><span class="p">{</span><span class="sh">'</span><span class="s">label</span><span class="sh">'</span><span class="p">:</span> <span class="n">bar_label</span><span class="p">}</span>
+                        <span class="p">)</span>
+
+    <span class="c1"># Plot site boundary
+</span>    <span class="n">site_gdf</span><span class="p">.</span><span class="n">boundary</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="p">.</span><span class="nf">gca</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="n">boundary_clr</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">plot_title</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">.</span><span class="nf">set_xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Longitude</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">.</span><span class="nf">set_ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Latitude</span><span class="sh">'</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">plots_dir</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">site_fig_name</span><span class="si">}</span><span class="s">.png</span><span class="sh">"</span><span class="p">)</span> 
+
+    <span class="k">return</span> <span class="n">site_plot</span>
 </code></pre></div></div> <p>Load Sites</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Only extract once
 </span><span class="n">usfs_pattern</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">land_units_dir</span><span class="p">,</span> <span class="sh">'</span><span class="s">*.shp</span><span class="sh">'</span><span class="p">)</span>
 
@@ -122,7 +322,93 @@ CMS_AGB_NW_USA_1719 Annual Aboveground Biomass Maps for Forests in the Northwest
 <span class="p">]</span>
 
 <span class="n">eldorado_gdf</span><span class="p">.</span><span class="nf">explore</span><span class="p">()</span>
-</code></pre></div></div> <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;"> <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Boundary.png" alt="Eldorado National Forest" width="70%" height="70%"> </div> <p>Retrieve Soils</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Set site parameters
+</code></pre></div></div> <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;"> <img src="/assets/img/habitat_suitability/Eldorado-National-Forest-Boundary.png" alt="Eldorado National Forest" width="70%" height="70%"> </div> <p>Retrieve Soils</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_polaris_urls</span><span class="p">(</span><span class="n">soil_prop</span><span class="p">,</span> <span class="n">stat</span><span class="p">,</span> <span class="n">soil_depth</span><span class="p">,</span> <span class="n">gdf_bounds</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Create POLARIS dataset URLs using site bounds.
+
+    Args:
+    soil_prop (str): Soil property.
+    stat (str): Summary statistic. 
+    soil_depth (str): Soil depth (cm).
+    gdf_bounds (numpy.ndarray): Array of site boundaries.
+
+    Returns:
+    list: A list of POLARIS datset URLs. 
+    </span><span class="sh">"""</span>
+
+    <span class="c1"># Get latitude and longitude bounds from site
+</span>    <span class="n">min_lon</span><span class="p">,</span> <span class="n">min_lat</span><span class="p">,</span> <span class="n">max_lon</span><span class="p">,</span> <span class="n">max_lat</span> <span class="o">=</span> <span class="n">gdf_bounds</span>
+
+    <span class="n">site_min_lon</span> <span class="o">=</span> <span class="nf">floor</span><span class="p">(</span><span class="n">min_lon</span><span class="p">)</span> 
+    <span class="n">site_min_lat</span> <span class="o">=</span> <span class="nf">floor</span><span class="p">(</span><span class="n">min_lat</span><span class="p">)</span>  
+    <span class="n">site_max_lon</span> <span class="o">=</span> <span class="nf">ceil</span><span class="p">(</span><span class="n">max_lon</span><span class="p">)</span>  
+    <span class="n">site_max_lat</span> <span class="o">=</span> <span class="nf">ceil</span><span class="p">(</span><span class="n">max_lat</span><span class="p">)</span>
+
+    <span class="n">all_soil_urls</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">lon</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">site_min_lon</span><span class="p">,</span> <span class="n">site_max_lon</span><span class="p">):</span> 
+        <span class="k">for</span> <span class="n">lat</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">site_min_lat</span><span class="p">,</span> <span class="n">site_max_lat</span><span class="p">):</span>
+            <span class="n">current_max_lon</span> <span class="o">=</span> <span class="n">lon</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">current_max_lat</span> <span class="o">=</span> <span class="n">lat</span> <span class="o">+</span> <span class="mi">1</span>
+
+            <span class="n">soil_template</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sh">"</span><span class="s">http://hydrology.cee.duke.edu/POLARIS/PROPERTIES/v1.0/</span><span class="sh">"</span>
+                <span class="sh">"</span><span class="s">{soil_prop}/</span><span class="sh">"</span>
+                <span class="sh">"</span><span class="s">{stat}/</span><span class="sh">"</span>
+                <span class="sh">"</span><span class="s">{soil_depth}/</span><span class="sh">"</span>
+                <span class="sh">"</span><span class="s">lat{min_lat}{max_lat}_lon{min_lon}{max_lon}.tif</span><span class="sh">"</span>
+            <span class="p">)</span>
+
+            <span class="n">soil_url</span> <span class="o">=</span> <span class="n">soil_template</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span>
+                <span class="n">soil_prop</span><span class="o">=</span><span class="n">soil_prop</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="n">stat</span><span class="p">,</span> <span class="n">soil_depth</span><span class="o">=</span><span class="n">soil_depth</span><span class="p">,</span>
+                <span class="n">min_lat</span><span class="o">=</span><span class="n">lat</span><span class="p">,</span> <span class="n">max_lat</span><span class="o">=</span><span class="n">current_max_lat</span><span class="p">,</span> 
+                <span class="n">min_lon</span><span class="o">=</span><span class="n">lon</span><span class="p">,</span> <span class="n">max_lon</span><span class="o">=</span><span class="n">current_max_lon</span>
+            <span class="p">)</span>
+
+            <span class="n">all_soil_urls</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">soil_url</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">all_soil_urls</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">download_polaris</span><span class="p">(</span><span class="n">site_name</span><span class="p">,</span> <span class="n">site_gdf</span><span class="p">,</span> <span class="n">soil_prop</span><span class="p">,</span> <span class="n">stat</span><span class="p">,</span> <span class="n">soil_depth</span><span class="p">,</span> 
+                     <span class="n">plot_path</span><span class="p">,</span> <span class="n">plot_title</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">,</span> <span class="n">plots_dir</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Retrieve POLARIS site data, build DataArray, plot site, and export raster.
+
+    Args:
+    site_name (str): Name of site.
+    site_gdf (geopandas.GeoDataFrame): Site GeoDataFrame.
+    soil_prop (str): Soil property.
+    stat (str): Summary statistic. 
+    soil_depth (str): Soil depth (cm).
+    plot_path (str): Path of topographic plot.
+    plot_title (str): Title of topographic plot.
+    data_dir (str): Path of data directory.
+    plots_dir (str): Path of plots directory.
+
+    Returns:
+    xarray.DataArray: A soil DataArray for a given location. 
+    </span><span class="sh">"""</span>
+    
+    <span class="c1"># Collect site urls
+</span>    <span class="n">site_polaris_urls</span> <span class="o">=</span> <span class="nf">create_polaris_urls</span><span class="p">(</span>
+                        <span class="n">soil_prop</span><span class="p">,</span> <span class="n">stat</span><span class="p">,</span> <span class="n">soil_depth</span><span class="p">,</span> 
+                        <span class="n">site_gdf</span><span class="p">.</span><span class="n">total_bounds</span>
+                    <span class="p">)</span>
+    
+    <span class="c1"># Gather site data into a single DataArray
+</span>    <span class="n">site_soil_da</span> <span class="o">=</span> <span class="nf">build_da</span><span class="p">(</span><span class="n">site_polaris_urls</span><span class="p">,</span> <span class="nf">tuple</span><span class="p">(</span><span class="n">site_gdf</span><span class="p">.</span><span class="n">total_bounds</span><span class="p">))</span>
+    
+    <span class="c1"># Export soil data to raster
+</span>    <span class="nf">export_raster</span><span class="p">(</span><span class="n">site_soil_da</span><span class="p">,</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">site_name</span><span class="si">}</span><span class="s">_soil_</span><span class="si">{</span><span class="n">soil_prop</span><span class="si">}</span><span class="s">.tif</span><span class="sh">"</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">)</span>
+
+    <span class="c1"># Create site plot
+</span>    <span class="nf">plot_site</span><span class="p">(</span>
+        <span class="n">site_soil_da</span><span class="p">,</span> <span class="n">site_gdf</span><span class="p">,</span> <span class="n">plots_dir</span><span class="p">,</span>
+        <span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">plot_path</span><span class="si">}</span><span class="s">-Soil</span><span class="sh">'</span><span class="p">,</span> <span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">plot_title</span><span class="si">}</span><span class="s"> Soil</span><span class="sh">'</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">pH</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">viridis</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">lightblue</span><span class="sh">'</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">site_soil_da</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Set site parameters
 </span>
 <span class="n">soil_prop</span> <span class="o">=</span> <span class="sh">'</span><span class="s">ph</span><span class="sh">'</span>
 <span class="n">soil_prop_stat</span> <span class="o">=</span> <span class="sh">'</span><span class="s">mean</span><span class="sh">'</span>
@@ -138,7 +424,76 @@ CMS_AGB_NW_USA_1719 Annual Aboveground Biomass Maps for Forests in the Northwest
                                       <span class="sh">'</span><span class="s">Los-Padres-National-Forest</span><span class="sh">'</span><span class="p">,</span>
                                       <span class="sh">'</span><span class="s">Los Padres National Forest</span><span class="sh">'</span><span class="p">,</span>
                                       <span class="n">data_dir</span><span class="p">,</span> <span class="n">plots_dir</span><span class="p">)</span>
-</code></pre></div></div> <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;"> <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Soil.png" alt="Los Padres National Forest Soil" width="100%" height="100%"> </div> <p>Select Digital Elevation Model and Calculate Aspect</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">eldorado_elev_da</span> <span class="o">=</span> <span class="nf">download_topography</span><span class="p">(</span>
+</code></pre></div></div> <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;"> <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Soil.png" alt="Los Padres National Forest Soil" width="100%" height="100%"> </div> <p>Select Digital Elevation Model and Calculate Aspect</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">select_dem</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">site_gdf</span><span class="p">,</span> <span class="n">download_dir</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Create elevation DataArray from NASA Shuttle Radar Topography Mission data.
+
+    Args:
+    bounds (tuple): Input site boundaries.
+    site_gdf (geopandas.GeoDataFrame): Land unit GeoDataFrame.
+    download_dir (str): Path of download directory.
+
+    Returns:
+    xarray.DataArray: A site elevation raster.
+    </span><span class="sh">"""</span>
+
+    <span class="c1"># Returns data granules for given bounds
+</span>    <span class="n">strm_granules</span> <span class="o">=</span> <span class="n">earthaccess</span><span class="p">.</span><span class="nf">search_data</span><span class="p">(</span>
+        <span class="c1"># SRTMGL1: NASA Shuttle Radar Topography Mission 
+</span>        <span class="c1"># Global 1 arc second V003
+</span>        <span class="n">short_name</span><span class="o">=</span><span class="sh">"</span><span class="s">SRTMGL1</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">bounding_box</span><span class="o">=</span><span class="n">bounds</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Download data granules
+</span>    <span class="n">earthaccess</span><span class="p">.</span><span class="nf">download</span><span class="p">(</span><span class="n">strm_granules</span><span class="p">,</span> <span class="n">download_dir</span><span class="p">)</span>
+
+    <span class="c1"># Set SRTM data dir. hgt = height 
+</span>    <span class="n">strm_pattern</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">download_dir</span><span class="p">,</span> <span class="sh">'</span><span class="s">*.hgt.zip</span><span class="sh">'</span><span class="p">)</span>
+
+    <span class="c1"># Build merged elevation DataArray
+</span>    <span class="n">strm_da</span> <span class="o">=</span> <span class="nf">build_da</span><span class="p">(</span><span class="nf">glob</span><span class="p">(</span><span class="n">strm_pattern</span><span class="p">),</span> <span class="nf">tuple</span><span class="p">(</span><span class="n">site_gdf</span><span class="p">.</span><span class="n">total_bounds</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">strm_da</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">download_topography</span><span class="p">(</span><span class="n">site_name</span><span class="p">,</span> <span class="n">site_gdf</span><span class="p">,</span> <span class="n">plot_path</span><span class="p">,</span> <span class="n">plot_title</span><span class="p">,</span> 
+                        <span class="n">elevation_dir</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">,</span> <span class="n">plots_dir</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Retrieve topographic data, build DataArray, plot site, and export raster.
+
+    Args:
+    site_name (str): Name of site.
+    site_gdf (geopandas.GeoDataFrame): Site GeoDataFrame.
+    plot_path (str): Path of topographic plot.
+    plot_title (str): Title of topographic plot.
+    elevation_dir (str): Path of site elevation directory.
+    data_dir (str): Path of data directory.
+    plots_dir (str): Path of plots directory.
+
+    Returns:
+    xarray.DataArray: An elevation DataArray for a given location. 
+    </span><span class="sh">"""</span>
+    
+    <span class="c1"># Produce Digital Elevation Model DataArray
+</span>
+    <span class="n">elev_da</span> <span class="o">=</span> <span class="nf">select_dem</span><span class="p">(</span><span class="nf">tuple</span><span class="p">(</span><span class="n">site_gdf</span><span class="p">.</span><span class="n">total_bounds</span><span class="p">),</span> <span class="n">site_gdf</span><span class="p">,</span> 
+                        <span class="n">elevation_dir</span><span class="p">)</span>
+    <span class="nf">export_raster</span><span class="p">(</span><span class="n">elev_da</span><span class="p">,</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">site_name</span><span class="si">}</span><span class="s">_elevation.tif</span><span class="sh">"</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">)</span>
+    <span class="nf">plot_site</span><span class="p">(</span>
+        <span class="n">elev_da</span><span class="p">,</span> <span class="n">site_gdf</span><span class="p">,</span> <span class="n">plots_dir</span><span class="p">,</span> <span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">plot_path</span><span class="si">}</span><span class="s">-Elevation</span><span class="sh">'</span><span class="p">,</span> 
+        <span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">plot_title</span><span class="si">}</span><span class="s"> Elevation</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Meters</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">terrain</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">black</span><span class="sh">'</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Calculate aspect from elevation 
+</span>
+    <span class="n">aspect_da</span> <span class="o">=</span> <span class="nf">calculate_aspect</span><span class="p">(</span><span class="n">elev_da</span><span class="p">)</span>
+    <span class="nf">export_raster</span><span class="p">(</span><span class="n">aspect_da</span><span class="p">,</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">site_name</span><span class="si">}</span><span class="s">_aspect.tif</span><span class="sh">"</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">)</span>
+    <span class="nf">plot_site</span><span class="p">(</span>
+        <span class="n">aspect_da</span><span class="p">,</span> <span class="n">site_gdf</span><span class="p">,</span> <span class="n">plots_dir</span><span class="p">,</span> <span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">plot_path</span><span class="si">}</span><span class="s">-Aspect</span><span class="sh">'</span><span class="p">,</span> 
+        <span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">plot_title</span><span class="si">}</span><span class="s"> Aspect</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Degrees</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">terrain</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">black</span><span class="sh">'</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">elev_da</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">eldorado_elev_da</span> <span class="o">=</span> <span class="nf">download_topography</span><span class="p">(</span>
                         <span class="sh">'</span><span class="s">eldorado</span><span class="sh">'</span><span class="p">,</span> <span class="n">eldorado_gdf</span><span class="p">,</span>
                         <span class="sh">'</span><span class="s">Eldorado-National-Forest</span><span class="sh">'</span><span class="p">,</span> 
                         <span class="sh">'</span><span class="s">Eldorado National Forest</span><span class="sh">'</span><span class="p">,</span>
@@ -150,7 +505,98 @@ CMS_AGB_NW_USA_1719 Annual Aboveground Biomass Maps for Forests in the Northwest
                         <span class="sh">'</span><span class="s">Los Padres National Forest</span><span class="sh">'</span><span class="p">,</span>
                         <span class="n">los_padres_elevation_dir</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">,</span> <span class="n">plots_dir</span>
                     <span class="p">)</span>
-</code></pre></div></div> <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;"> <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Elevation.png" alt="Los Padres National Forest Elevation" width="100%" height="100%"> </div> <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;"> <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Aspect-Degrees.png" alt="Los Padres National Forest Aspect" width="100%" height="100%"> </div> <p>Projected Climate</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Set climate parameters
+</code></pre></div></div> <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;"> <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Elevation.png" alt="Los Padres National Forest Elevation" width="100%" height="100%"> </div> <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;"> <img src="/assets/img/habitat_suitability/Los-Padres-National-Forest-Aspect-Degrees.png" alt="Los Padres National Forest Aspect" width="100%" height="100%"> </div> <p>Projected Climate</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_projected_climate</span><span class="p">(</span><span class="n">site_name</span><span class="p">,</span> <span class="n">site_gdf</span><span class="p">,</span>
+                          <span class="n">emissions_scenario</span><span class="p">,</span> <span class="n">gcm</span><span class="p">,</span> <span class="n">time_slices</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Create DataFrame of projected site climate for a given time period.
+    
+    Args:
+    site_name (str): Site name.
+    site_gdf (dict): Site GeoDataFrame.
+    emissions_scenario (str): Climate scenario. 
+    gcm (str): Global Climate Model. 
+    time_slices (list): List of years indicating a time slice.
+
+    Returns:
+    pandas.DataFrame: A DataFrame of projected average max temperatures.
+    </span><span class="sh">"""</span>
+
+    <span class="n">maca_das</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">start_year</span> <span class="ow">in</span> <span class="n">time_slices</span><span class="p">:</span>
+        <span class="n">end_year</span> <span class="o">=</span> <span class="n">start_year</span> <span class="o">+</span> <span class="mi">4</span>
+
+        <span class="c1"># Multivariate Adaptive Constructed Analogs (MACA)
+</span>        <span class="n">MACA_URL</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sh">'</span><span class="s">http://thredds.northwestknowledge.net:8080/thredds/fileServer/</span><span class="sh">'</span> 
+            <span class="sa">f</span><span class="sh">'</span><span class="s">MACAV2/</span><span class="si">{</span><span class="n">gcm</span><span class="si">}</span><span class="s">/macav2metdata_tasmax_</span><span class="si">{</span><span class="n">gcm</span><span class="si">}</span><span class="s">_r1i1p1_</span><span class="sh">'</span>
+            <span class="sa">f</span><span class="sh">'</span><span class="si">{</span><span class="n">emissions_scenario</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">start_year</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">end_year</span><span class="si">}</span><span class="s">_CONUS_monthly.nc</span><span class="sh">'</span>
+        <span class="p">)</span>
+
+        <span class="n">maca_da</span> <span class="o">=</span> <span class="n">xr</span><span class="p">.</span><span class="nf">open_dataset</span><span class="p">(</span><span class="n">MACA_URL</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="sh">'</span><span class="s">h5netcdf</span><span class="sh">'</span><span class="p">).</span><span class="nf">squeeze</span><span class="p">()</span>
+
+        <span class="n">bounds</span> <span class="o">=</span> <span class="n">site_gdf</span><span class="p">.</span><span class="nf">to_crs</span><span class="p">(</span><span class="n">maca_da</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="n">crs</span><span class="p">).</span><span class="n">total_bounds</span>
+
+        <span class="c1"># update coordinate range
+</span>        <span class="n">maca_da</span> <span class="o">=</span> <span class="n">maca_da</span><span class="p">.</span><span class="nf">assign_coords</span><span class="p">(</span>
+            <span class="n">lon</span><span class="o">=</span><span class="p">(</span><span class="sh">"</span><span class="s">lon</span><span class="sh">"</span><span class="p">,</span> <span class="p">[</span><span class="nf">convert_longitude</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">maca_da</span><span class="p">.</span><span class="n">lon</span><span class="p">.</span><span class="n">values</span><span class="p">])</span>
+        <span class="p">)</span>
+
+        <span class="n">maca_da</span> <span class="o">=</span> <span class="n">maca_da</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="nf">set_spatial_dims</span><span class="p">(</span><span class="n">x_dim</span><span class="o">=</span><span class="sh">'</span><span class="s">lon</span><span class="sh">'</span><span class="p">,</span> <span class="n">y_dim</span><span class="o">=</span><span class="sh">'</span><span class="s">lat</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">maca_da</span> <span class="o">=</span> <span class="n">maca_da</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="nf">clip_box</span><span class="p">(</span><span class="o">*</span><span class="n">bounds</span><span class="p">)</span>
+
+        <span class="n">maca_das</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">dict</span><span class="p">(</span>
+                            <span class="n">site_name</span><span class="o">=</span><span class="n">site_name</span><span class="p">,</span>
+                            <span class="n">gcm</span><span class="o">=</span><span class="n">gcm</span><span class="p">,</span>
+                            <span class="n">start_year</span><span class="o">=</span><span class="n">start_year</span><span class="p">,</span>
+                            <span class="n">end_year</span><span class="o">=</span><span class="n">end_year</span><span class="p">,</span>
+                            <span class="n">da</span><span class="o">=</span><span class="n">maca_da</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">maca_das</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">download_climate</span><span class="p">(</span><span class="n">site_name</span><span class="p">,</span> <span class="n">site_gdf</span><span class="p">,</span> <span class="n">emissions_scenario</span><span class="p">,</span> 
+                     <span class="n">climate_models</span><span class="p">,</span> <span class="n">time_slices</span><span class="p">,</span> <span class="n">raster_path</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Retrieve projected site climate for a given time period, 
+    build composite DataArray, and export raster.
+    
+    Args:
+    site_name (str): Site name.
+    site_gdf (dict): Site GeoDataFrame.
+    emissions_scenario (str): Climate scenario. 
+    climate_models (list): Climate model names.
+    time_slices (list): List of years indicating a time slice.
+    raster_path (str): Path of site climate raster.
+    data_dir (str): Path of data directory.
+
+    Returns: None
+    </span><span class="sh">"""</span>
+
+    <span class="k">for</span> <span class="n">gcm</span> <span class="ow">in</span> <span class="n">climate_models</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">Downloading climate data for </span><span class="si">{</span><span class="n">gcm</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+
+        <span class="c1"># Retrieve MACA climate data
+</span>        <span class="n">site_proj_temp</span> <span class="o">=</span> <span class="nf">get_projected_climate</span><span class="p">(</span>
+                                        <span class="n">site_name</span><span class="p">,</span> <span class="n">site_gdf</span><span class="p">,</span> 
+                                        <span class="n">emissions_scenario</span><span class="p">,</span> <span class="n">gcm</span><span class="p">,</span> 
+                                        <span class="n">time_slices</span>
+                                    <span class="p">)</span>
+        
+        <span class="c1"># Convert temperature to fahrenheit 
+</span>        <span class="n">projected_climates_df</span> <span class="o">=</span> <span class="n">site_proj_temp</span><span class="p">.</span><span class="nf">assign</span><span class="p">(</span>
+                                    <span class="n">fahrenheit</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">.</span><span class="n">da</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span>
+                                        <span class="n">convert_temperature</span><span class="p">))</span>
+
+        <span class="c1"># Create composite site projected climate
+</span>        <span class="n">site_clim_composite_ds</span> <span class="o">=</span> <span class="n">xr</span><span class="p">.</span><span class="nf">concat</span><span class="p">(</span>
+            <span class="n">projected_climates_df</span><span class="p">.</span><span class="n">fahrenheit</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">).</span><span class="nf">mean</span><span class="p">(</span><span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">)</span>
+
+        <span class="n">site_clim_composite_da</span> <span class="o">=</span> <span class="n">site_clim_composite_ds</span><span class="p">.</span><span class="nf">to_dataarray</span><span class="p">(</span>
+                                    <span class="n">dim</span><span class="o">=</span><span class="sh">'</span><span class="s">air_temperature</span><span class="sh">'</span><span class="p">,</span> 
+                                    <span class="n">name</span><span class="o">=</span><span class="sh">'</span><span class="s">air_temperature</span><span class="sh">'</span><span class="p">)</span>
+
+        <span class="nf">export_raster</span><span class="p">(</span><span class="n">site_clim_composite_da</span><span class="p">,</span> 
+                    <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">raster_path</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">gcm</span><span class="si">}</span><span class="s">_max_temp.tif</span><span class="sh">"</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">)</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Set climate parameters
 </span>
 <span class="n">emissions_scenario</span> <span class="o">=</span> <span class="sh">'</span><span class="s">rcp45</span><span class="sh">'</span>
 <span class="n">climate_models</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">CanESM2</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">MIROC-ESM-CHEM</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CNRM-CM5</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">GFDL-ESM2M</span><span class="sh">'</span><span class="p">]</span>
@@ -179,7 +625,59 @@ CMS_AGB_NW_USA_1719 Annual Aboveground Biomass Maps for Forests in the Northwest
 <span class="nf">download_climate</span><span class="p">(</span><span class="sh">'</span><span class="s">los padres</span><span class="sh">'</span><span class="p">,</span> <span class="n">los_padres_gdf</span><span class="p">,</span>
                 <span class="n">emissions_scenario</span><span class="p">,</span> <span class="n">climate_models</span><span class="p">,</span> <span class="n">late_century</span><span class="p">,</span>
                 <span class="sh">'</span><span class="s">los_padres_late_century</span><span class="sh">'</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">)</span>
-</code></pre></div></div> <p>Identify Suitability</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Optimal values for species for each variable
+</code></pre></div></div> <p>Identify Suitability</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">build_habitat_suitability_model</span><span class="p">(</span><span class="n">site_name</span><span class="p">,</span> <span class="n">time_period</span><span class="p">,</span> <span class="n">gcm</span><span class="p">,</span>
+                                    <span class="n">optimal_values</span><span class="p">,</span> <span class="n">tolerance_ranges</span><span class="p">,</span> 
+                                    <span class="n">data_dir</span><span class="p">,</span> <span class="n">raster_name</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Build a habitat suitability model by combining fuzzy suitability scores 
+    for each variable. 
+
+    Args:
+    site_name (str): Name of site.
+    time_period (str): Name of time period. 
+    gcm (str): Global Climate Model.    
+    optimal_values (list): List of optimal values for variables.
+    tolerance_ranges (list): List of tolerance values for variables.
+    data_dir (str): Path of data directory.
+    raster_name (str): The name of model raster.
+
+    Returns:
+    str: The path of the suitability raster.
+    </span><span class="sh">"""</span>
+    <span class="n">reference_raster</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">site_name</span><span class="si">}</span><span class="s">_elevation.tif</span><span class="sh">"</span> 
+
+    <span class="n">input_rasters</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">site_name</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">time_period</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">gcm</span><span class="si">}</span><span class="s">_max_temp.tif</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">site_name</span><span class="si">}</span><span class="s">_aspect.tif</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">site_name</span><span class="si">}</span><span class="s">_soil_ph.tif</span><span class="sh">"</span>
+    <span class="p">]</span>
+
+    <span class="n">harmonized_rasters</span> <span class="o">=</span> <span class="nf">harmonize_raster_layers</span><span class="p">(</span><span class="n">reference_raster</span><span class="p">,</span> 
+                                                 <span class="n">input_rasters</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">)</span>
+
+    <span class="c1"># Load and calculate suitability scores for each raster
+</span>    <span class="n">suitability_layers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">suit_zip</span> <span class="o">=</span> <span class="nf">zip</span><span class="p">(</span><span class="n">harmonized_rasters</span><span class="p">,</span> <span class="n">optimal_values</span><span class="p">,</span> <span class="n">tolerance_ranges</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">raster_path</span><span class="p">,</span> <span class="n">optimal_value</span><span class="p">,</span> <span class="n">tolerance_range</span> <span class="ow">in</span> <span class="n">suit_zip</span><span class="p">:</span>
+        <span class="n">raster</span> <span class="o">=</span> <span class="n">rxr</span><span class="p">.</span><span class="nf">open_rasterio</span><span class="p">(</span><span class="n">raster_path</span><span class="p">,</span> <span class="n">masked</span><span class="o">=</span><span class="bp">True</span><span class="p">).</span><span class="nf">squeeze</span><span class="p">()</span>
+        <span class="n">suitability_layer</span> <span class="o">=</span> <span class="nf">calculate_suitability_score</span><span class="p">(</span>
+                                <span class="n">raster</span><span class="p">,</span> <span class="n">optimal_value</span><span class="p">,</span> <span class="n">tolerance_range</span>
+                            <span class="p">)</span>
+        <span class="n">suitability_layers</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">suitability_layer</span><span class="p">)</span>
+
+    <span class="c1"># Combine suitability scores by multiplying across all layers
+</span>    <span class="n">combined_suitability</span> <span class="o">=</span> <span class="n">suitability_layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">suitability_layers</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">combined_suitability</span> <span class="o">*=</span> <span class="n">layer</span>
+
+    <span class="c1"># Save the combined suitability raster
+</span>    <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">raster_name</span><span class="si">}</span><span class="s">.tif</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">combined_suitability</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="nf">to_raster</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Combined suitability raster saved to: </span><span class="si">{</span><span class="n">raster_name</span><span class="si">}</span><span class="s">.tif</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="c1"># Path to the final combined suitability raster
+</span>    <span class="k">return</span> <span class="n">output_file</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Optimal values for species for each variable
 # Variables: elevation, temperature, aspect, soil pH
 </span><span class="n">optimal_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1500.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">6.75</span><span class="p">]</span>
 
