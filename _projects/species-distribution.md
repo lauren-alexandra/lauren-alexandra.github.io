@@ -2,7 +2,7 @@
 layout: page
 title: Willow Flycatcher
 description: Species Distribution
-img: assets/img/species_distribution/willow-flycatcher-project.png
+img: assets/img/species_distribution/wf_card.png
 importance: 2
 category: work
 related_publications: true
