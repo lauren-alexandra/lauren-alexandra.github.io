@@ -3,7 +3,7 @@ layout: page
 title: Sacramento Redlining
 description: Greenspace Analysis
 img: /assets/img/sac_redlining/sr_card.png
-importance: 4
+importance: 5
 category: work
 related_publications: true
 ---

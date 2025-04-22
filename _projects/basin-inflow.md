@@ -3,7 +3,7 @@ layout: page
 title: Basin Inflow
 description: Regional Hydroclimate Deep Neural Network
 img: assets/img/basin_inflow/sr_card.png
-importance: 5
+importance: 6
 category: work
 related_publications: true
 ---
