@@ -408,29 +408,152 @@ HOSTS = {
 }
 ```
 
+Snow Goose
 ```python
+gbif_snow_goose_csv = utils.download_gbif('Snow Goose', credentials, HOSTS,
+                             "2024-10-20,2025-01-31",
+                             yolo_bypass_gdf.total_bounds)
 
+gbif_snow_goose_df = utils.load_gbif(gbif_snow_goose_csv)
+```
+
+Mallard
+```python
+gbif_mallard_csv = utils.download_gbif('Mallard', credentials, HOSTS,
+                             "2024-10-20,2025-01-31",
+                             yolo_bypass_gdf.total_bounds)
+
+gbif_mallard_df = utils.load_gbif(gbif_mallard_csv)
+```
+
+Red-winged Blackbird
+```python
+gbif_red_winged_blackbird_csv = utils.download_gbif(
+                                        'Red-winged Blackbird', 
+                                        credentials, HOSTS,
+                                        "2024-10-20,2025-01-31",
+                                        yolo_bypass_gdf.total_bounds)
+
+gbif_red_winged_blackbird_df = utils.load_gbif(gbif_red_winged_blackbird_csv)
+```
+
+Savannah Sparrow
+```python
+gbif_savannah_sparrow_csv = utils.download_gbif(
+                                        'Savannah Sparrow', 
+                                        credentials, HOSTS,
+                                        "2024-10-20,2025-01-31",
+                                        yolo_bypass_gdf.total_bounds)
+
+gbif_savannah_sparrow_df = utils.load_gbif(gbif_savannah_sparrow_csv)
+```
+
+House Sparrow
+```python
+gbif_house_sparrow_csv = utils.download_gbif(
+                                        'House Sparrow', 
+                                        credentials, HOSTS,
+                                        "2024-10-20,2025-01-31",
+                                        yolo_bypass_gdf.total_bounds)
+
+gbif_house_sparrow_df = utils.load_gbif(gbif_house_sparrow_csv)
+```
+
+Killdeer
+```python
+gbif_killdeer_csv = utils.download_gbif(
+                                        'Killdeer', 
+                                        credentials, HOSTS,
+                                        "2024-10-20,2025-01-31",
+                                        yolo_bypass_gdf.total_bounds)
+
+gbif_killdeer_df = utils.load_gbif(gbif_killdeer_csv)
+```
+
+Rock Pigeon
+```python
+gbif_rock_pigeon_csv = utils.download_gbif(
+                                        'Rock Pigeon', 
+                                        credentials, HOSTS,
+                                        "2024-10-20,2025-01-31",
+                                        yolo_bypass_gdf.total_bounds)
+
+gbif_rock_pigeon_df = utils.load_gbif(gbif_rock_pigeon_csv)
+```
+
+Normalize by time for the sampling effort
+
+```python
+# Concatenate all species occurrences
+host_species_df = pd.concat([gbif_snow_goose_df, gbif_mallard_df,
+                             gbif_red_winged_blackbird_df, 
+                             gbif_savannah_sparrow_df,
+                             gbif_house_sparrow_df, gbif_killdeer_df,
+                             gbif_rock_pigeon_df]).reset_index()
+
+# Include host names
+HOST_NAMES = {
+    'Anser caerulescens': 'Snow Goose',
+    'Agelaius phoeniceus': 'Red-winged Blackbird',
+    'Anas platyrhynchos': 'Mallard',
+    'Charadrius vociferus': 'Killdeer',
+    'Columba livia': 'Rock Pigeon',
+    'Passer domesticus': 'House Sparrow',
+    'Passerculus sandwichensis': 'Savannah Sparrow'
+}
+
+host_species_df['host_name'] = host_species_df['species'].apply(
+                                    lambda species: HOST_NAMES[species])
 ```
 
 ```python
-
+host_species_norm_occ_df = normalize_occurrences(host_species_df)
+host_species_norm_occ_df = host_species_norm_occ_df.reset_index()
 ```
 
 ```python
+host_species_norm_occ_df.hvplot.violin(
+    label='Host Species Occurrence (Wintering Period 2024-2025)',
+    y='occurrences', by='host_name', c='host_name',
+    xlabel='Species', ylabel='Occurrences',
+    ylim=(-20, 50),
+    cmap=['#ADE8F4', '#0096C7', '#74C365', '#478800'], legend='top_left', 
+    group_label='Species', width=800, height=800, padding=0.4)
+```
 
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img src="/assets/img/zoonosis_risk/hosts_wintering_period_2024_2025.png" alt="Yolo Bypass Wildlife Area Host Occurrence Wintering Period 2024-2025" width="70%" height="70%" /> 
+</div>
+
+```python
+# Monthly Occurrences
+
+MONTHS = {1: 'January', 10: 'October', 11: 'November', 12: 'December'}
+
+host_species_norm_occ_df['month_name'] = (host_species_norm_occ_df
+                                          ['month'].apply(
+                                          lambda month: MONTHS[month]))
+
+monthly_occ_df = host_species_norm_occ_df.sort_values(by='month')
+
+all_host_occ = pd.merge(host_species_df, monthly_occ_df, 
+                        on=['host_name', 'month'], how='inner')
+all_host_occ.rename(columns={'host_name': 'Host'}, inplace=True)
 ```
 
 ```python
-
+all_host_occ.hvplot.scatter(
+    title="Yolo Bypass Daily Species Occurrence (Winter 2024-2025)",
+    x='day', y='month_name', s='norm_occurrences', 
+    by='Host', legend='top_left',
+    scale=10, xlabel='Day', ylabel='Month',
+    height=600, width=700)
 ```
 
-```python
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img src="/assets/img/zoonosis_risk/daily_species_occurrence_winter_2024_2025.png" alt="Yolo Bypass Wildlife Area Daily Host Occurrence Wintering Period 2024-2025" width="70%" height="70%" /> 
+</div>
 
-```
-
-```python
-
-```
 
 #### Discussion
 
