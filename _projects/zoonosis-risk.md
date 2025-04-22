@@ -138,6 +138,130 @@ os.makedirs(gbif_killdeer_dir, exist_ok=True)
 os.makedirs(gbif_rock_pigeon_dir, exist_ok=True)
 ```
 
+Load Utility Functions
+
+```python
+def normalize_occurrences(df):
+    """
+    Normalize occurrence data for given species.
+
+    Args:
+    occ_df (pandas.DataFrame): DataFrame of species occurrence.
+
+    Returns:
+    norm_occ_df (pandas.DataFrame): DataFrame of normalized species occurrence.
+    """
+    
+    occ_df = (
+        df
+        # For each month
+        .groupby(['host_name', 'month'])
+        # count the number of occurrences
+        .agg(occurrences=('host_name', 'count'))
+    )
+
+    # Drop rare observations (possible misidentification)
+    occ_df = occ_df[occ_df["occurrences"] > 1]
+
+    # Take the mean by month
+    mean_occurrences_by_month = (
+        occ_df
+        .groupby(['month'])
+        .mean()
+    )
+
+    occ_df['norm_occurrences'] = (
+        occ_df
+        / mean_occurrences_by_month
+    )
+
+    return occ_df 
+```
+```python
+def load_gbif(gbif_csv):
+    """
+    Load occurrence data from GBIF CSV.
+
+    Args:
+    gbif_csv (str): A path to downloaded species CSV.
+
+    Returns:
+    (pandas.DataFrame): A species occurrence DataFrame.
+    """
+    return pd.read_csv(
+        gbif_csv, 
+        delimiter='\t',
+        index_col='gbifID',
+        on_bad_lines='skip',
+        usecols=['gbifID', 'order', 'species', 'month', 'day', 'year', 
+                 'decimalLatitude', 'decimalLongitude']
+    )
+```
+```python
+def download_gbif(species, gbif_credentials, species_dict, 
+                  period, site_bounds):
+    """
+    Download occurrence data for given species.
+
+    Args:
+    species (str): Input host species name. 
+    gbif_credentials (dict): GBIF API credentials.
+    species_dict (dict): Host species GBIF metadata.
+    period (str): Temporal range of observations.
+    site_bounds (list): Site boundary coordinates.
+
+    Returns:
+    gbif_path (str): A path to downloaded species CSV.
+    """
+    
+    gbif_dir = species_dict[species]['DATA PATH']
+    species_key = species_dict[species]['GBIF SPECIES']
+    species_download_key = species_dict[species]['GBIF DOWNLOAD']
+    site_latitude = f'{site_bounds[1]},{site_bounds[3]}'
+    site_longitude = f'{site_bounds[0]},{site_bounds[2]}'
+    
+    # Only download once
+    gbif_pattern = os.path.join(gbif_dir, '*.csv')
+    if not glob(gbif_pattern):
+        # Submit query to GBIF
+        gbif_query = occ.download([
+            f"speciesKey = {species_key}",
+            f"eventDate = {period}",
+            f"decimalLatitude = {site_latitude}",
+            f"decimalLongitude = {site_longitude}",
+            "hasCoordinate = TRUE",
+        ],
+        user=gbif_credentials['GBIF_USER'][1], 
+        pwd=gbif_credentials['GBIF_PWD'][1], 
+        email=gbif_credentials['GBIF_EMAIL'][1])
+
+        # Only download once
+        if not species_download_key in os.environ:
+            os.environ[species_download_key] = gbif_query[0]
+
+            # Wait for the download to build
+            wait = occ.download_meta(
+                    os.environ[species_download_key])['status'] 
+            while not wait=='SUCCEEDED':
+                wait = occ.download_meta(
+                        os.environ[species_download_key])['status'] 
+                time.sleep(5)
+
+            # Download GBIF data
+            download_info = occ.download_get(
+                os.environ[species_download_key], 
+                path=gbif_dir)
+
+            # Unzip GBIF data
+            with zipfile.ZipFile(download_info['path']) as download_zip:
+                download_zip.extractall(path=gbif_dir)
+
+    # Find the extracted .csv file path
+    gbif_path = glob(gbif_pattern)[0]
+    
+    return gbif_path
+```
+
 Sites
 
 ```python
@@ -241,6 +365,64 @@ daily_water_temps.hvplot.line(
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
     <img src="/assets/img/zoonosis_risk/YBWA_inlet_daily_surface_water_temperature.png" alt="Yolo Bypass Wildlife Area Inlet Daily Surface Water Temperature" width="80%" height="70%" /> 
 </div>
+
+Hosts
+
+```python
+HOSTS = {
+    'Snow Goose': {
+        'DATA PATH': gbif_snow_goose_dir,
+        'GBIF SPECIES': '2498167',
+        'GBIF DOWNLOAD': 'GBIF_DOWNLOAD_KEY_2498167'
+    },
+    'Mallard': {
+        'DATA PATH': gbif_mallard_dir,
+        'GBIF SPECIES': '9761484',
+        'GBIF DOWNLOAD': 'GBIF_DOWNLOAD_KEY_9761484'
+    },
+    'Red-winged Blackbird': {
+        'DATA PATH': gbif_red_winged_blackbird_dir,
+        'GBIF SPECIES': '9409198',
+        'GBIF DOWNLOAD': 'GBIF_DOWNLOAD_KEY_9409198'
+    },
+    'Savannah Sparrow': {
+        'DATA PATH': gbif_savannah_sparrow_dir,
+        'GBIF SPECIES': '5231142',
+        'GBIF DOWNLOAD': 'GBIF_DOWNLOAD_KEY_5231142'
+    },
+    'House Sparrow': {
+        'DATA PATH': gbif_house_sparrow_dir,
+        'GBIF SPECIES': '5231190',
+        'GBIF DOWNLOAD': 'GBIF_DOWNLOAD_KEY_5231190'
+    },
+    'Killdeer': {
+        'DATA PATH': gbif_killdeer_dir,
+        'GBIF SPECIES': '2480320',
+        'GBIF DOWNLOAD': 'GBIF_DOWNLOAD_KEY_2480320'
+    },
+    'Rock Pigeon': {
+        'DATA PATH': gbif_rock_pigeon_dir,
+        'GBIF SPECIES': '2495414',
+        'GBIF DOWNLOAD': 'GBIF_DOWNLOAD_KEY_2495414'
+    }
+}
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
 
 ```python
 
