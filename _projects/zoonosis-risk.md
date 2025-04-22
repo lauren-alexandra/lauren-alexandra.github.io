@@ -183,16 +183,64 @@ yolo_bypass_gdf = gpd.read_file(pub_land_path)
 Surface Water Temperature (Habitat Inlet)
 
 ```python
+"""
+USGS Daily Values Service
+Station: Cache C Outflow From Settling Basin NR Woodland CA - 11452900 
+About: Inlet to Yolo Bypass Wildlife Area
+Time period: 10-20-2024 to 01-31-2025
+Metric: Temperature, water, degrees Celsius
+"""
 
+USGS_DAILY_URL = (
+    'https://nwis.waterservices.usgs.gov/nwis/iv/?'
+    'sites=11452900&agencyCd=USGS&'
+    'startDT=2024-10-20T00:00:00.000-07:00&'
+    'endDT=2025-01-30T23:59:59.999-08:00&'
+    'parameterCd=00010&format=json'
+)
+
+usgs_daily_water = pd.read_json(USGS_DAILY_URL)
 ```
 
 ```python
+# Transform dates
 
+usgs_daily_water_time_series = usgs_daily_water.iloc[1]
+dwts_values = usgs_daily_water_time_series.value[0]['values'][0]['value']
+dwts_df = pd.DataFrame(dwts_values)
+
+dwts_df = dwts_df.assign(
+    datetime_date=lambda x: pd.to_datetime(x['dateTime']))
+
+dwts_df['date'] = dwts_df.datetime_date.apply(lambda x: pd.to_datetime(
+                                                x.strftime('%Y-%m-%d')))
 ```
 
 ```python
+# Plot daily surface water temperatures
 
+dwts_df_subset = dwts_df[['date', 'value']]
+dwts_df_subset['water_temperature'] = dwts_df_subset[
+                                        'value'].astype(float)
+dwts_df_subset.drop('value', axis=1, inplace=True)
+
+daily_water_temps = dwts_df_subset.groupby('date').agg(
+    Minimum=('water_temperature', 'min'),
+    Maximum=('water_temperature', 'max'),
+    Average=('water_temperature', 'mean')
+)
+
+daily_water_temps.hvplot.line(
+    label='Daily Surface Water Temperature (Yolo Bypass Wildlife Area Inlet)',
+    xlabel='Date', ylabel='Temperature',
+    height=500, width=900,
+    legend='top_right', group_label='Temperature (°C)'
+)
 ```
+
+<div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
+    <img src="/assets/img/zoonosis_risk/YBWA_inlet_daily_surface_water_temperature.png" alt="Yolo Bypass Wildlife Area Inlet Daily Surface Water Temperature" width="80%" height="70%" /> 
+</div>
 
 ```python
 
