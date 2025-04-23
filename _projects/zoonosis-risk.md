@@ -22,15 +22,32 @@ This project will explore the county in the valley with the highest HPAI detecti
 
 #### Data Description
 
+[U.S. Geological Survey Daily Values Service](https://waterservices.usgs.gov/docs/dv-service/daily-values-service-details/) maintains current and historical data from time-series equipment at monitoring water sites. [CACHE C OUTFLOW FROM SETTLING BASIN NR WOODLAND CA](https://waterdata.usgs.gov/monitoring-location/11452900) site was selected to obtain daily water temperature (°C) values provided in 30 minute intervals. 
 
+[GBIF Occurrence](https://doi.org/10.15468/dl.jqrwjf) data was retrived from the Global Biodiversity Information Facility Occurrence Store and scoped to the wintering period and habitat. There are 105 occurrences across seven species.
 
 #### Data Citation
 
+Global Biodiversity Information Facility. (2025). *GBIF Occurrence Download: House Sparrow* [Data set]. https://doi.org/10.15468/dl.m5wyf6
 
+Global Biodiversity Information Facility. (2025). *GBIF Occurrence Download: Killdeer* [Data set]. https://doi.org/10.15468/dl.ju8c56
+
+Global Biodiversity Information Facility. (2025). *GBIF Occurrence Download: Mallard* [Data set]. https://doi.org/10.15468/dl.zu2sa4
+
+Global Biodiversity Information Facility. (2025). *GBIF Occurrence Download: Red-winged Blackbird* [Data set]. https://doi.org/10.15468/dl.nmukt7
+
+Global Biodiversity Information Facility. (2025). *GBIF Occurrence Download: Rock Pigeon* [Data set]. https://doi.org/10.15468/dl.ac99st
+
+Global Biodiversity Information Facility. (2025). *GBIF Occurrence Download: Savannah Sparrow* [Data set]. https://doi.org/10.15468/dl.hekvd4
+
+Global Biodiversity Information Facility. (2025). *GBIF Occurrence Download: Snow Goose* [Data set]. https://doi.org/10.15468/dl.kdaytc
+
+USGS Daily Values Service. (2025). *CACHE C OUTFLOW FROM SETTLING BASIN NR WOODLAND CA* [Data set]. https://waterdata.usgs.gov/monitoring-location/11452900
 
 #### Methods
 
-
+Surface water values: 
+During the wintering period (10/20/2024-01/31/2025). You calculated daily mean, minimum, and maximum values. 
 
 #### Analysis
 
