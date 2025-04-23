@@ -22,7 +22,7 @@ This project will explore the county in the valley with the highest HPAI detecti
 
 #### Data Description
 
-[U.S. Geological Survey Daily Values Service](https://waterservices.usgs.gov/docs/dv-service/daily-values-service-details/) maintains current and historical data from time-series equipment at monitoring water sites. [CACHE C OUTFLOW FROM SETTLING BASIN NR WOODLAND CA](https://waterdata.usgs.gov/monitoring-location/11452900) site was selected to obtain daily water temperature (°C) values provided in 30 minute intervals. 
+[U.S. Geological Survey Daily Values Service](https://waterservices.usgs.gov/docs/dv-service/daily-values-service-details) maintains current and historical data from time-series equipment at monitoring water sites. [CACHE C OUTFLOW FROM SETTLING BASIN NR WOODLAND CA](https://waterdata.usgs.gov/monitoring-location/11452900) site was selected to obtain daily water temperature (°C) values provided in 30 minute intervals. 
 
 [GBIF Occurrence](https://doi.org/10.15468/dl.jqrwjf) data was retrived from the Global Biodiversity Information Facility Occurrence Store and scoped to the wintering period and habitat. There are 105 occurrences across seven species.
 
@@ -46,8 +46,9 @@ USGS Daily Values Service. (2025). *CACHE C OUTFLOW FROM SETTLING BASIN NR WOODL
 
 #### Methods
 
-Surface water values: 
-During the wintering period (10/20/2024-01/31/2025). You calculated daily mean, minimum, and maximum values. 
+The most recent wintering period for migratory waterfowl (10/20/2024-01/31/2025) was studied using the [USGS Daily Values Service](https://waterservices.usgs.gov/docs/dv-service/daily-values-service-details), querying for surface water temperature from a [main habitat inlet](https://waterdata.usgs.gov/monitoring-location/11452900). Daily mean, minimum, and maxium temperature values were calculated and displayed concurrently with holoviews. 
+
+Synanthropic species associated with agricultural environments in North America (Owen et al., 2021) and [observed in Yolo Bypass Wildlife Area](https://ebird.org/hotspot/L443535/bird-list), encompassing species in the orders Charadriiformes (shorebirds), Anseriformes (ducks and geese), Columbiformes (pigeons and doves), and Passeriformes (perching birds), were targeted for the county. The species occurrences data was accessed by the Python client for the [GBIF API](https://techdocs.gbif.org/en/openapi/v1/occurrence#/) and subset for the temporal scope, species of interest, and habitat coordinates. Each occurrences CSV file was ingested using the [pandas](https://pandas.pydata.org/) library. Species occurrence was normalized by month for the sampling effort and reduced to four species: *Agelaius phoeniceus*, *Anser caerulescens*, *Charadrius vociferus*, and *Passerculus sandwichensis*. Both daily and monthly observations for the four species were plotted over the winter period.
 
 #### Analysis
 
@@ -585,3 +586,9 @@ Python Software Foundation. (2024). *Python* (Version 3.13.2) [Computer software
 Rudiger, P., Liquet, M., Signell, J., Hansen, S. H., Bednar, J. A., Madsen, M. S., … Hilton, T. W. (2024). *holoviz/hvplot: Version 0.11.2* (Version 0.11.2) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13851295 
 
 The pandas development team. (2024). *pandas-dev/pandas: Pandas* (Version 2.2.3) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.3509134
+
+Need to cite: 
+
+https://ebird.org/hotspot/L443535/bird-list 
+
+Infectious Disease Ecology in Wild Birds 
