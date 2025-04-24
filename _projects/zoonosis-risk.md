@@ -393,6 +393,8 @@ daily_water_temps.hvplot.line(
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
     <img src="/assets/img/zoonosis_risk/YBWA_inlet_daily_surface_water_temperature.png" alt="Yolo Bypass Wildlife Area Inlet Daily Surface Water Temperature" width="80%" height="70%" /> 
 </div>
+Duration of HPAI infectivity in water is associated with low water temperatures under 17 °C (Brown et al., 2009). At the daily average, from late October onward the virus would remain stable in the habitat. Twenty days later and thereafter at the daily maximum, the pathogen would likely exhibit its highest infectivity rate.
+
 
 Hosts
 
@@ -602,3 +604,5 @@ Need to cite:
 https://ebird.org/hotspot/L443535/bird-list 
 
 Infectious Disease Ecology in Wild Birds 
+
+(Brown et al., 2009)
