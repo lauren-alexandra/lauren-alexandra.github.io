@@ -591,18 +591,16 @@ all_host_occ.hvplot.scatter(
 
 #### References
 
+Brown, J. D., Goekjian, G., Poulson, R., Valeika, S., & Stallknecht, D. E. (2008). Avian influenza virus in water: Infectivity is dependent on pH, salinity and temperature. *Veterinary Microbiology, 136*(1-2), 20-26. https://doi.org/10.1016/j.vetmic.2008.10.027
+
+Cornell Lab of Ornithology (n.d.). *Yolo Bypass Wildlife Area*. eBird. https://ebird.org/hotspot/L443535/bird-list 
+
 Jordahl, K., Van den Bossche, J., Fleischmann, M., Wasserman, J., McBride, J., Gerard, J., … Leblanc, F. (2024). *geopandas/geopandas: v1.0.1* (Version 1.0.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.12625316 
+
+Owen, J. C., Hawley, D. M., & Huyvaert, K. P. (Eds.). (2021). *Infectious disease ecology in wild birds.* Oxford University Press.
 
 Python Software Foundation. (2024). *Python* (Version 3.13.2) [Computer software]. https://docs.python.org/release/3.12.6 
 
 Rudiger, P., Liquet, M., Signell, J., Hansen, S. H., Bednar, J. A., Madsen, M. S., … Hilton, T. W. (2024). *holoviz/hvplot: Version 0.11.2* (Version 0.11.2) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13851295 
 
 The pandas development team. (2024). *pandas-dev/pandas: Pandas* (Version 2.2.3) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.3509134
-
-Need to cite: 
-
-https://ebird.org/hotspot/L443535/bird-list 
-
-Infectious Disease Ecology in Wild Birds 
-
-(Brown et al., 2009)
