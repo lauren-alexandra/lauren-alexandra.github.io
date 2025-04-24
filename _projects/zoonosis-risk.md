@@ -14,7 +14,7 @@ related_publications: true
 </div>
 
 
-How do natural sources of highly pathogenic avian influenza (HPAI) at the wildlife–agriculture interface influence spillover risk in California's Central Valley?
+**How do natural sources of highly pathogenic avian influenza (HPAI) at the wildlife–agriculture interface influence spillover risk in California's Central Valley?**
 
 With each animal that is infected by avian influenza, there is another chance for the virus to evolve into a pathogen fit for human-to-human transmission. Creating early warning systems built on a One Health framework–integrating human, animal, and environmental health–are a wise investment to support state biosecurity. 
 
