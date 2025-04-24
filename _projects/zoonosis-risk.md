@@ -329,6 +329,8 @@ yolo_bypass_gdf = gpd.read_file(pub_land_path)
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
     <img src="/assets/img/zoonosis_risk/yolo_county_and_bypass.png" alt="Yolo County and Bypass Wildlife Area" width="70%" height="70%" /> 
 </div>
+Yolo County spans 1,014 square miles with substantial water resources such as the Sacramento River, Putah Creek, and Cache Creek. Yolo Bypass Wildlife Area contains 16,000 acres with seasonal and year round ponds, grasslands, and riparian forest [nested habitats](https://yolorcd.org/wp-content/uploads/YBWA-Map_new.png). The area covers 0.025% of the greater county and is vital for the farmers, hunters, and wild birds in the Central Valley.
+
 
 Surface Water Temperature (Habitat Inlet)
 
