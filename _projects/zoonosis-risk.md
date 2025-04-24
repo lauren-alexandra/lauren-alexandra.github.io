@@ -28,7 +28,13 @@ This project will explore the county in Central Valley with the highest HPAI det
 
 [GBIF Occurrence](https://doi.org/10.15468/dl.jqrwjf) data was retrived from the Global Biodiversity Information Facility Occurrence Store and scoped to the wintering period and habitat. There are 105 occurrences across seven species.
 
+Yolo County and Yolo Bypass Wildlife Area boundaries were retrieved from the California State Geoportal. [California County Boundaries](https://gis.data.ca.gov/datasets/8713ced9b78a4abb97dc130a691a8695_0/explore?location=36.651235%2C-119.002032%2C6.22) is a GIS layer hosted by the California Department of Forestry and Fire Protection. [CDFW Public Access Lands](https://gis.data.ca.gov/datasets/b3b6dd29b34247dbb2dd773ea17cc82d_0/explore?location=38.549943%2C-121.691363%2C11.00) dataset offers locations which are publicly accessible lands owned or operated by the California Department of Fish and Wildlife.
+
 #### Data Citation
+
+California State Geoportal. (2024). *California County Boundaries* [Data set]. https://gis.data.ca.gov/datasets/CALFIRE-Forestry::california-county-boundaries
+
+California State Geoportal. (2025). *CDFW Public Access Lands* [Data set]. https://gis.data.ca.gov/datasets/CDFW::cdfw-public-access-lands-ds3077
 
 Global Biodiversity Information Facility. (2025). *GBIF Occurrence Download: House Sparrow* [Data set]. https://doi.org/10.15468/dl.m5wyf6
 
