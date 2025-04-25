@@ -591,16 +591,36 @@ all_host_occ.hvplot.scatter(
 
 #### References
 
+Bianchini, E. A., Bogiatto, R. J., Donatello, R. A., Casazza, M. L., Ackerman, J. T., De La Cruz, S. E. W., … Cline, T. D. (2021). Host correlates of avian influenza virus infection in wild waterfowl of the Sacramento Valley, California. *Avian Diseases, 66*(1), 20-28. https://doi.org/10.1637/aviandiseases-D-21-00071
+
 Brown, J. D., Goekjian, G., Poulson, R., Valeika, S., & Stallknecht, D. E. (2008). Avian influenza virus in water: Infectivity is dependent on pH, salinity and temperature. *Veterinary Microbiology, 136*(1-2), 20-26. https://doi.org/10.1016/j.vetmic.2008.10.027
+
+California Department of Food and Agriculture. (n.d.). *Wildlife Services Program*. https://www.cdfa.ca.gov/AHFSS/animal_health/Wildlife_Services.html
+
+California Department of Public Health. (n.d.). *Bird flu*. https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Bird-Flu.aspx
 
 Cornell Lab of Ornithology (n.d.). *Yolo Bypass Wildlife Area*. eBird. https://ebird.org/hotspot/L443535/bird-list 
 
+Executive Department State of California. (2024, December 18). *Proclamation of a State of Emergency*. Governor Gavin Newsom. https://www.gov.ca.gov/wp-content/uploads/2024/12/CORRECT-ATTESTED.pdf 
+
+Garone, P. (2020). *The fall and rise of the wetlands of California's great Central Valley*. University of California Press.
+
 Jordahl, K., Van den Bossche, J., Fleischmann, M., Wasserman, J., McBride, J., Gerard, J., … Leblanc, F. (2024). *geopandas/geopandas: v1.0.1* (Version 1.0.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.12625316 
+
+Morin, C. W.., Stoner-Duncan, B., Winker, K., Scotch, M., Hess, J. J., Meschke, J. S., … Rabinowitz, P. M. (2018). Avian influenza virus ecology and evolution through a climatic lens. *Environment International, 119*, 241-249. https://doi.org/10.1016/j.envint.2018.06.018
 
 Owen, J. C., Hawley, D. M., & Huyvaert, K. P. (Eds.). (2021). *Infectious disease ecology in wild birds.* Oxford University Press.
 
 Python Software Foundation. (2024). *Python* (Version 3.13.2) [Computer software]. https://docs.python.org/release/3.12.6 
 
+Shriner, S. A., Root, J. J., Lutman, M. W., Kloft, J. M., VanDalen, K. K., Sullivan, H. J., … DeLiberto, T. J. (2016). Surveillance for highly pathogenic  H5 avian influenza virus in  synanthropic wildlife associated  with poultry farms during an acute  outbreak. *Scientific Reports, 6*, 1-11. https://doi.org/10.1038/srep36237
+
 Rudiger, P., Liquet, M., Signell, J., Hansen, S. H., Bednar, J. A., Madsen, M. S., … Hilton, T. W. (2024). *holoviz/hvplot: Version 0.11.2* (Version 0.11.2) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13851295 
 
 The pandas development team. (2024). *pandas-dev/pandas: Pandas* (Version 2.2.3) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.3509134
+
+White, L. (2025, March 18). *Winter 2025 update on highly pathogenic avian influenza H5*. USGS. https://www.usgs.gov/media/files/nwhc-wildlife-health-bulletin-avian-influenza-update
+
+Yolo County Resource Conservation District. (n.d.). *Yolo Bypass Wildlife Area*. https://yolorcd.org/what-we-do/yolo-bypass-wildlife-area 
+
+Zhu, S., Harriman, K., Liu, C., Kraushaar, V., Hoover, C., Shim, K., … California Department of Public Health H5 Laboratory Response Team (2025). Human cases of highly pathogenic avian influenza A(H5N1) — California, September–December 2024. *MMWR and Morbidity and Mortality Weekly Report, 74*, 127-133. http://dx.doi.org/10.15585/mmwr.mm7408a1
