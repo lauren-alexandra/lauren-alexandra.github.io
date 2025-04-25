@@ -80,7 +80,6 @@ import cartopy.crs as ccrs
 import holoviews as hv
 import hvplot.pandas
 hvplot.extension('bokeh')
-import cartopy.crs as ccrs
 import pygbif.occurrences as occ
 ```
 
@@ -599,6 +598,8 @@ California Department of Food and Agriculture. (n.d.). *Wildlife Services Progra
 
 California Department of Public Health. (n.d.). *Bird flu*. https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Bird-Flu.aspx
 
+Chamberlain, S. (2024). *pygbif* (Version 0.6.4) [Computer software]. GitHub. https://github.com/gbif/pygbif/releases/tag/v0.6.4
+
 Cornell Lab of Ornithology (n.d.). *Yolo Bypass Wildlife Area*. eBird. https://ebird.org/hotspot/L443535/bird-list 
 
 Executive Department State of California. (2024, December 18). *Proclamation of a State of Emergency*. Governor Gavin Newsom. https://www.gov.ca.gov/wp-content/uploads/2024/12/CORRECT-ATTESTED.pdf 
@@ -606,6 +607,8 @@ Executive Department State of California. (2024, December 18). *Proclamation of 
 Garone, P. (2020). *The fall and rise of the wetlands of California's great Central Valley*. University of California Press.
 
 Jordahl, K., Van den Bossche, J., Fleischmann, M., Wasserman, J., McBride, J., Gerard, J., … Leblanc, F. (2024). *geopandas/geopandas: v1.0.1* (Version 1.0.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.12625316 
+
+Met Office. (2024). *Cartopy: a cartographic python library with a Matplotlib interface* (Version 0.24.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.13905945
 
 Morin, C. W.., Stoner-Duncan, B., Winker, K., Scotch, M., Hess, J. J., Meschke, J. S., … Rabinowitz, P. M. (2018). Avian influenza virus ecology and evolution through a climatic lens. *Environment International, 119*, 241-249. https://doi.org/10.1016/j.envint.2018.06.018
 
