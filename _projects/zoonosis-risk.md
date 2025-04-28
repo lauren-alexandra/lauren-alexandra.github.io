@@ -338,7 +338,7 @@ yolo_bypass_gdf = gpd.read_file(pub_land_path)
 ```
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/zoonosis_risk/yolo_county_and_bypass.png" alt="Yolo County and Bypass Wildlife Area" width="70%" height="70%" /> 
+    <img src="/assets/img/zoonosis_risk/yolo_county_and_bypass.png" alt="Yolo County and Bypass Wildlife Area" width="80%" height="80%" /> 
 </div>
 Yolo County spans 1,014 square miles with substantial water resources such as the Sacramento River, Putah Creek, and Cache Creek. Yolo Bypass Wildlife Area contains 16,000 acres with seasonal and year round ponds, grasslands, and riparian forest [nested habitats](https://yolorcd.org/wp-content/uploads/YBWA-Map_new.png). The area covers 0.025% of the greater county and is vital for the farmers, hunters, and wild birds in the Central Valley.
 
@@ -402,7 +402,7 @@ daily_water_temps.hvplot.line(
 ```
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/zoonosis_risk/YBWA_inlet_daily_surface_water_temperature.png" alt="Yolo Bypass Wildlife Area Inlet Daily Surface Water Temperature" width="80%" height="70%" /> 
+    <img src="/assets/img/zoonosis_risk/YBWA_inlet_daily_surface_water_temperature.png" alt="Yolo Bypass Wildlife Area Inlet Daily Surface Water Temperature" width="100%" height="100%" /> 
 </div>
 Duration of HPAI infectivity in water is associated with low water temperatures between 4-17 °C (Brown et al., 2009). At the daily average, from late October onward the virus would likely remain stable in the habitat. About 20 days later and thereafter the daily maximum and minimum temperatures would continue to be conducive to a higher infectivity rate than the preceding period.
 
@@ -563,7 +563,7 @@ host_species_norm_occ_df.hvplot.violin(
 ```
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/zoonosis_risk/hosts_wintering_period_2024_2025.png" alt="Yolo Bypass Wildlife Area Host Occurrence Wintering Period 2024-2025" width="70%" height="70%" /> 
+    <img src="/assets/img/zoonosis_risk/hosts_wintering_period_2024_2025.png" alt="Yolo Bypass Wildlife Area Host Occurrence Wintering Period 2024-2025" width="80%" height="80%" /> 
 </div>
 The Savannah Sparrow followed by the Snow Goose exhibited the widest data distribution and highest probability of large observations (~10+) during the wintering period.
 
@@ -593,7 +593,7 @@ all_host_occ.hvplot.scatter(
 ```
 
 <div class="row" style="margin-top: 20px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;">
-    <img src="/assets/img/zoonosis_risk/daily_species_occurrence_winter_2024_2025.png" alt="Yolo Bypass Wildlife Area Daily Host Occurrence Wintering Period 2024-2025" width="70%" height="70%" /> 
+    <img src="/assets/img/zoonosis_risk/daily_species_occurrence_winter_2024_2025.png" alt="Yolo Bypass Wildlife Area Daily Host Occurrence Wintering Period 2024-2025" width="90%" height="90%" /> 
 </div>
 Snow Goose occurrence coincides with a greater accumulation of waterfowl at the end of the non-breeding season. Although there are fewer observations of Killdeer and Red-winged Blackbird, they remain throughout the period.
 
